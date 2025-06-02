@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,10 +22,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit'); /
 // Route untuk logout (POST lebih aman)
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
-    // ... rute lain
-    Route::get('/profile-anda', [ProfilController::class, 'show'])->name('profile.show');
-});
+Route::get('/show', [ProfileController::class, 'show'])->name('profile.show');
 
 
 // Jika nanti ada dashboard, bisa diaktifkan kembali bagian ini:

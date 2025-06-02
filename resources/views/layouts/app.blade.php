@@ -44,12 +44,7 @@
         @yield('content')
     </main>
 
-    {{-- Include Footer --}}
-    @include('layouts.partials.footer')
 
-    {{-- Script untuk header menu (dari jawaban sebelumnya) --}}
-    <script src="{{ asset('js/header-menu.js') }}" defer></script>
 
-    @stack('scripts') {{-- Untuk JavaScript spesifik per halaman --}}
 </body>
 </html>
