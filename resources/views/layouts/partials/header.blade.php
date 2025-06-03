@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AntiNganggur - Temukan Pekerjaan Impian Anda</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* Custom scrollbar untuk testimoni jika menggunakan overflow (tidak bisa di-inline dengan Tailwind) */
         .testimonial-scrollbar::-webkit-scrollbar {
@@ -44,9 +44,9 @@
                 <nav class="hidden md:flex items-center space-x-1 lg:space-x-3">
                     <a href="{{ url('/') }}" class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Home</a>
                     <a href="#" class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Lowongan</a>
-                    <a href="#" class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Tentang</a>
+                    <a href="{{ url('/aboutus')}}" class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Tentang</a>
                     <a href="#" class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Portfolio</a>
-                    <a href="#" class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Kontak</a>
+                    <a href="{{ url('/contact')}}" class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Kontak</a>
                 </nav>
 
                 @guest
@@ -113,9 +113,9 @@
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="{{ url('/') }}" class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                 <a href="#" class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Lowongan</a>
-                <a href="#" class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Tentang</a>
+                <a href="{{ url('/aboutus')}}" class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Tentang</a>
                 <a href="#" class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
-                <a href="#" class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Kontak</a>
+                <a href="{{ url('/contact')}}" class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Kontak</a>
             </div>
             @guest
             <div class="pt-4 pb-3 border-t border-gray-200">
@@ -131,6 +131,8 @@
                 <div class="flex items-center px-4 mb-3">
                     <div class="flex-shrink-0">
                         <div class="h-10 w-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-semibold overflow-hidden">
+
+                            {{-- Untuk Ngatur Foto Profil Nanti --}}
                             @if(Auth::user()->profile_photo_path)
                                 <img class="h-10 w-10 rounded-full object-cover" src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}" alt="{{ Auth::user()->name }}">
                             @else
@@ -167,8 +169,9 @@
         </div>
     </header>
 
-
-    <script src="{{ asset('js/header-menu.js') }}" defer></script>
+{{-- Skrip yang dibutuhkan secara global (misalnya header-menu.js) --}}
+    <script src="{{ asset('js/header-menu.js') }}" defer></script> {{-- Ini mungkin sudah ada di header.blade.php Anda --}}
+    {{-- <script src="{{ asset('js/header-menu.js') }}" defer></script> --}}
 
 </body>
 </html>

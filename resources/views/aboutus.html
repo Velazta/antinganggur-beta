@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tentang Kami - AntiNganggur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #fff7f5;
+            /* Warna latar belakang utama halaman (soft peach/pink) */
+            color: #374151;
+            /* Default text color (gray-700) */
+        }
+
+        .bg-orange-custom {
+            background-color: #FF6B35;
+            /* Main orange color */
+        }
+
+        /* This wrapper ensures all content inside the section is above the ::after pseudo-element */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive adjustments for the curve */
+        @media (max-width: 1024px) {
+
+            /* lg breakpoint */
+            .custom-curved-container {
+                border-bottom-right-radius: 150px;
+            }
+
+            .custom-curved-container::after {
+                width: 280px;
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* md breakpoint */
+            .custom-curved-container {
+                border-bottom-right-radius: 100px;
+            }
+
+            .custom-curved-container::after {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        .title-what-we-do {
+            background-color: #FF7144;
+            /* [#FF7144] */
+            color: white;
+            padding: 0.5rem 2.5rem 0.5rem 1.5rem;
+            /* Tambah padding kanan agar teks tidak terlalu dekat */
+            display: inline-block;
+            position: relative;
+            border-radius: 0.375rem 0 0 0.375rem;
+            /* rounded kiri */
+        }
+
+        /* Membuat panah lancip miring ke kanan */
+        .title-what-we-do {
+            position: relative;
+            display: inline-block;
+            background-color: #FF7144;
+            /* Warna oranye */
+            color: white;
+            font-weight: 800;
+            /* sesuaikan dengan bold/extrabold */
+            font-size: 2.5rem;
+            /* contoh ukuran, sesuaikan */
+            padding: 0.75rem 2rem 0.75rem 2rem;
+            /* ruang dalam teks */
+            border-radius: 8px;
+            /* sudut membulat pada kotak */
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Ekor lancip di bawah */
+        .title-what-we-do::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            /* sesuaikan jarak ke bawah */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            /* lebar sisi miring kiri */
+            border-right: 20px solid transparent;
+            /* lebar sisi miring kanan */
+            border-top: 20px solid #FF7144;
+            /* warna panah */
+            filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.15));
+            /* shadow lembut */
+        }
+
+        /* Garis bawah dekoratif untuk Visi & Misi */
+        .underline-decorator {
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #FF7144;
+            /* [#FF7144] */
+            margin-top: 0.75rem;
+            /* mb-3 */
+            margin-left: auto;
+            /* Untuk Visi jika teksnya rata kanan */
+            margin-right: auto;
+            /* Untuk Visi jika teksnya rata tengah */
+        }
+
+        .visi-card .underline-decorator {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        /* Rata kiri untuk Visi */
+        .misi-card .underline-decorator {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        /* Header Left */
+        .team-header-left {
+            font-weight: 900;
+            font-size: 2.25rem;
+            /* text-4xl */
+            background-color: #FF7144;
+            color: white;
+            padding: 0 0.5rem 0 0.25rem;
+            width: max-content;
+            user-select: none;
+        }
+
+        /* Header Right */
+        .team-header-right {
+            background-color: #FF7144;
+            color: white;
+            font-size: 0.875rem;
+            /* text-sm */
+            padding: 0.5rem 0.75rem;
+            line-height: 1.2;
+            user-select: none;
+            max-width: 260px;
+            text-align: right;
+        }
+
+        /* Overlay untuk background */
+        .overlay-dark {
+            background-color: rgba(20, 20, 40, 0.7);
+        }
+
+        /* Animasi fadeIn saat scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Number box diper kecilkan */
+        .number-box {
+            width: 2.5rem;
+            /* lebih kecil */
+            height: 2.5rem;
+            font-size: 1rem;
+            /* teks lebih kecil */
+        }
+
+        .content-item .number-box,
+        .content-item .title-left {
+            transition: transform 0.5s ease;
+            /* slow 1 detik */
+        }
+
+        .content-item:hover .number-box,
+        .content-item:hover .title-left {
+            transform: translateX(200px);
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- ===== Header Mulai ===== -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="flex items-center">
+                        <!-- Pastikan path ke logo benar -->
+                        <img class="h-8 sm:h-9 w-auto" src="../../assets/Vector.png" alt="AntiNganggur Logo" />
+                        <div class="ml-2">
+                            <span class="font-bold text-lg sm:text-xl text-slate-800">Anti</span><span
+                                class="font-bold text-lg sm:text-xl text-[#FF7144]">Nganggur</span>
+                        </div>
+                    </a>
+                </div>
+                <nav class="hidden md:flex items-center space-x-2 lg:space-x-4">
+                    <a href="index.html"
+                        class="text-slate-700 hover:text-[#FF7144] px-3 py-2 rounded-md text-[15px] font-medium transition-colors duration-150">Home</a>
+                    <a href="#"
+                        class="text-slate-700 hover:text-[#FF7144] px-3 py-2 rounded-md text-[15px] font-medium transition-colors duration-150">Lowongan</a>
+                    <a href="aboutus.html"
+                        class="text-slate-700 hover:text-[#FF7144] px-3 py-2 rounded-md text-[15px] font-medium transition-colors duration-150">Tentang</a>
+                    <a href="#"
+                        class="text-slate-700 hover:text-[#FF7144] px-3 py-2 rounded-md text-[15px] font-medium transition-colors duration-150">Portfolio</a>
+                    <a href="contact.html"
+                        class="text-slate-700 hover:text-[#FF7144] px-3 py-2 rounded-md text-[15px] font-medium transition-colors duration-150">Kontak</a>
+                </nav>
+                <div class="hidden md:flex items-center">
+                    <a href="login.html"
+                        class="ml-6 inline-flex items-center justify-center px-5 lg:px-6 py-2.5 border-2 border-[#FF7144] text-[15px] font-semibold rounded-lg text-[#FF7144] bg-white hover:bg-[#FF7144] hover:text-white transition-colors duration-200 ease-in-out shadow-sm">
+                        Masuk
+                    </a>
+                </div>
+                <!-- Tombol Mobile Menu -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-[#FF7144] hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#FF7144]"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Buka menu utama</span>
+                        <svg id="menu-icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg id="menu-icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#"
+                    class="text-slate-700 hover:bg-orange-50 hover:text-[#FF7144] block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#"
+                    class="text-slate-700 hover:bg-orange-50 hover:text-[#FF7144] block px-3 py-2 rounded-md text-base font-medium">Lowongan</a>
+                <a href="#"
+                    class="text-slate-700 hover:bg-orange-50 hover:text-[#FF7144] block px-3 py-2 rounded-md text-base font-medium">Tentang</a>
+                <a href="#"
+                    class="text-slate-700 hover:bg-orange-50 hover:text-[#FF7144] block px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
+                <a href="contact.html"
+                    class="text-slate-700 hover:bg-orange-50 hover:text-[#FF7144] block px-3 py-2 rounded-md text-base font-medium">Kontak</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-200">
+                <div class="px-5">
+                    <a href="login.html"
+                        class="block w-full text-center px-5 py-2.5 border-2 border-[#FF7144] text-base font-semibold rounded-lg text-[#FF7144] bg-white hover:bg-[#FF7144] hover:text-white transition-colors duration-200 ease-in-out">
+                        Masuk
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ===== Header Selesai ===== -->
+    <main>
+        <!-- Add a wrapper div to provide padding around the section, revealing the page background -->
+        <div class="p-4 sm:pt-6 sm:pb-6 md:px-8 md:pt-0">
+            <section class="bg-orange-custom pt-16 md:pt-20 lg:pt-24 pb-20 overflow-hidden rounded-3xl">
+                <!-- This inner div ensures content is stacked above the ::after pseudo-element -->
+                <div class="content-wrapper max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+                    <div class="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:items-start">
+                        <div class="lg:col-span-7 xl:col-span-6 flex flex-col justify-start py-10">
+                            <h1
+                                class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-8 tracking-tight">
+                                <span class="block">Selamat</span>
+                                <span class="block">Datang Di</span>
+                                <span class="block">Perusahaan</span>
+                                <span class="block">Kami</span>
+                            </h1>
+                            <div class="mt-8 lg:mt-12 max-w-[420px] relative">
+                                <!-- Make sure your image path is correct -->
+                                <img src="../../assets/IlusLatarBelakang.png" alt="Tim Perusahaan AntiNganggur"
+                                    class="w-full h-auto rounded-lg shadow-xl" />
+                            </div>
+                        </div>
+                        <div
+                            class="lg:col-span-5 xl:col-span-6 text-white text-base sm:text-lg leading-relaxed space-y-6 mt-12 lg:mt-0 py-10">
+                            <p>
+                                AntiNganggur didirikan pada tahun 2020 oleh sekelompok profesional IT yang melihat
+                                adanya
+                                kesenjangan antara kebutuhan industri dan keterampilan lulusan teknologi di Indonesia.
+                            </p>
+                            <p>
+                                Berawal dari komunitas kecil yang berbagi pengetahuan secara online, kami berkembang
+                                menjadi
+                                platform komprehensif yang menghubungkan talenta IT dengan peluang karir dan
+                                pembelajaran
+                                yang relevan dengan kebutuhan industri.
+                            </p>
+                            <p>
+                                Saat ini, AntiNganggur telah membantu lebih dari 5.000 profesional IT menemukan
+                                pekerjaan
+                                impian mereka dan membekali lebih dari 15.000 pembelajar dengan keterampilan digital
+                                yang
+                                dibutuhkan di era modern.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- Section 2 What We Do -->
+        <section class="py-16 md:py-20 lg:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16 items-start">
+                    <div class="lg:col-span-6 xl:col-span-5 mb-10 lg:mb-0 flex flex-col">
+                        <div class="mb-6 md:mb-8">
+                            <h2 class="title-what-we-do text-2xl sm:text-3xl lg:text-4xl !leading-tight">
+                                What We Do
+                            </h2>
+                        </div>
+                        <p class="text-base md:text-lg text-slate-600 leading-relaxed text-justify flex-grow">
+                            AntiNganggur.id didirikan untuk menjadi solusi digital dalam mengatasi permasalahan
+                            pengangguran di sektor IT.
+                            Kami menyediakan platform yang menghubungkan perusahaan dengan kandidat berkualitas,
+                            menawarkan informasi yang akurat dan relevan tentang lowongan pekerjaan serta profil
+                            perusahaan.
+                            Dengan pendekatan yang proaktif, kami berkomitmen untuk memberdayakan pencari kerja dan
+                            membantu mereka menemukan peluang karir yang tepat.
+                            Hingga saat ini, AntiNganggur.id telah menjembatani ribuan profesional IT dengan peluang
+                            kerja yang sesuai, berkontribusi pada pertumbuhan industri teknologi informasi di Indonesia.
+                        </p>
+                    </div>
+                    <div class="lg:col-span-6 xl:col-span-7">
+                        <div class="w-full rounded-lg overflow-hidden shadow-xl">
+                            <img src="../../assets/WhatWeDoIlus.png" alt="Proses Bisnis AntiNganggur"
+                                class="w-100 h-100 object-cover" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3 Visi Misi -->
+        <section class="pt-16 pb-20 md:pt-24 md:pb-32 lg:pb-40 lg:pt-40">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 md:mb-16">
+                    <div class="inline-block bg-[#FF7144] px-8 py-3 shadow-md mb-4">
+                        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-wide">
+                            VISI MISI
+                        </h2>
+                    </div>
+                    <p class="max-w-2xl mx-auto text-base md:text-lg text-slate-600 leading-relaxed">
+                        Kami berkomitmen untuk menciptakan dampak positif
+                        dalam ekosistem teknologi Indonesia
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                    <!-- Visi Card -->
+                    <div
+                        class="visi-card bg-white p-6 py-8 md:p-8 rounded-xl shadow-xl border border-orange-100 flex flex-col">
+                        <div class="mb-4">
+                            <div class="inline-flex items-center justify-center h-16 w-16 rounded-lg mb-10">
+                                <img src="../../assets/BulbIcon.png" alt="Visi Icon" class="h-auto w-auto">
+                            </div>
+                            <h3 class="text-3xl font-bold text-[#FF7144]">
+                                VISI
+                            </h3>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed text-justify ">
+                            Menjadi katalisator utama dalam menciptakan
+                            ekosistem teknologi Indonesia yang inklusif,
+                            inovatif, dan berkelanjutan, di mana setiap
+                            talenta digital dapat berkembang dan
+                            berkontribusi pada kemajuan bangsa.
+                        </p>
+                        <span class="underline-decorator mt-4"></span>
+                    </div>
+
+                    <!-- Misi Card -->
+                    <div
+                        class="misi-card bg-white p-6 py-8 md:p-8 rounded-xl shadow-xl border border-orange-100 flex flex-col">
+                        <div class="mb-4">
+                            <div class="inline-flex items-center justify-center h-16 w-16 rounded-lg mb-10">
+                                <img src="../../assets/BoltIcon.png" alt="Misi Icon" class="h-auto w-auto">
+                            </div>
+                            <h3 class="text-3xl font-bold text-[#FF7144]">
+                                MISI
+                            </h3>
+                        </div>
+                        <ul class="space-y-3 text-slate-600 leading-relaxed">
+                            <li class="flex items-start text-justify">
+                                <img src="../../assets/FowardSign.png" alt="Checklist"
+                                    class="flex-shrink-0 h-5 w-5 text-[#FF7144] mt-1 mr-2.5">
+                                Menyediakan platform pembelajaran yang
+                                relevan dengan kebutuhan industri teknologi
+                                terkini.
+                            </li>
+                            <li class="flex items-start text-justify">
+                                <img src="../../assets/FowardSign.png" alt="Checklist"
+                                    class="flex-shrink-0 h-5 w-5 text-[#FF7144] mt-1 mr-2.5">
+                                Menghubungkan talenta IT dengan perusahaan
+                                melalui platform karir yang inovatif.
+                            </li>
+                            <li class="flex items-start text-justify">
+                                <img src="../../assets/FowardSign.png" alt="Checklist"
+                                    class="flex-shrink-0 h-5 w-5 text-[#FF7144] mt-1 mr-2.5">
+                                Membangun komunitas IT yang kuat untuk
+                                berbagi pengetahuan dan peluang.
+                            </li>
+                            <li class="flex items-start text-justify">
+                                <img src="../../assets/FowardSign.png" alt="Checklist"
+                                    class="flex-shrink-0 h-5 w-5 text-[#FF7144] mt-1 mr-2.5">
+                                Berkontribusi aktif dalam pengembangan
+                                ekosistem digital Indonesia.
+                            </li>
+                        </ul>
+                        <span class="underline-decorator mt-4"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4 kapabilitas -->
+        <section class="py-16 md:py-20 lg:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16 lg:items-stretch">
+
+                    <!-- Kolom gambar: buat flex agar tinggi mengikuti konten sebelah -->
+                    <div class="lg:col-span-5 mb-10 lg:mb-0 flex items-stretch">
+                        <div class="w-full rounded-lg overflow-hidden shadow-xl max-w-[650px]">
+                            <img src="../../assets/CapabilityIlus.png" alt="Kemampuan Kami" class="w-full object-cover"
+                                style="height: 100%;" />
+                        </div>
+                    </div>
+
+                    <!-- Kolom teks -->
+                    <div class="lg:col-span-7 flex flex-col">
+                        <div class="flex items-center mb-6 md:mb-8">
+                            <span class="block h-10 md:h-[100px] w-3 bg-slate-900 mr-4"></span>
+                            <h2
+                                class="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-extrabold !leading-tight">
+                                <span class="block text-[#FF7144]">Our Capabilities</span>
+                                <span class="block text-slate-900 mt-1">We Provide</span>
+                            </h2>
+                        </div>
+                        <dl class="space-y-8 flex-grow">
+                            <div>
+                                <dt class="flex items-center">
+                                    <span
+                                        class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[#FF7144]">
+                                        <img src="../../assets/Service.png" alt="Deskripsi Ikon Anda"
+                                            class="h-8 w-8 object-contain" />
+                                    </span>
+                                    <p
+                                        class="ml-4 text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-semibold text-[#FF7144]">
+                                        Pengembangan Solusi IT Kustom
+                                    </p>
+                                </dt>
+                                <dd class="mt-2 ml-14 text-base text-slate-600 leading-relaxed">
+                                    Mengembangkan solusi perangkat lunak yang disesuaikan dengan kebutuhan spesifik
+                                    klien, mulai dari aplikasi mobile hingga sistem manajemen data.
+                                </dd>
+                            </div>
+                            <div>
+                                <dt class="flex items-center">
+                                    <span
+                                        class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[#FF7144]">
+                                        <img src="../../assets/CloudComputing.png" alt="Deskripsi Ikon Anda"
+                                            class="h-8 w-8 object-contain" />
+                                    </span>
+                                    <p
+                                        class="ml-4 text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-semibold text-[#FF7144]">
+                                        Integrasi Teknologi Modern
+                                    </p>
+                                </dt>
+                                <dd class="mt-2 ml-14 text-base text-slate-600 leading-relaxed">
+                                    Kami mengintegrasikan teknologi modern seperti AI, Big Data, dan Cloud Computing
+                                    untuk memberikan solusi yang efisien dan inovatif.
+                                </dd>
+                            </div>
+                            <div>
+                                <dt class="flex items-center">
+                                    <span
+                                        class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[#FF7144]">
+                                        <img src="../../assets/SecurityShield.png" alt="Deskripsi Ikon Anda"
+                                            class="h-8 w-8 object-contain" />
+                                    </span>
+                                    <p
+                                        class="ml-4 text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-semibold text-[#FF7144]">
+                                        Keamanan Cyber
+                                    </p>
+                                </dt>
+                                <dd class="mt-2 ml-14 text-base text-slate-600 leading-relaxed">
+                                    Kami menawarkan layanan keamanan siber yang komprehensif untuk melindungi data dan
+                                    sistem informasi klien dari berbagai ancaman dan serangan digital.
+                                </dd>
+                            </div>
+                            <div>
+                                <dt class="flex items-center">
+                                    <span
+                                        class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-[#FF7144]">
+                                        <img src="../../assets/Maintenance.png" alt="Deskripsi Ikon Anda"
+                                            class="h-8 w-8 object-contain" />
+                                    </span>
+                                    <p
+                                        class="ml-4 text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-semibold text-[#FF7144]">
+                                        Dukungan dan Pemeliharaan IT
+                                    </p>
+                                </dt>
+                                <dd class="mt-2 ml-14 text-base text-slate-600 leading-relaxed">
+                                    Kami menyediakan layanan dukungan teknis dan pemeliharaan sistem berkelanjutan,
+                                    memastikan infrastruktur IT klien berfungsi optimal.
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5 Team Member -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-8">
+
+                <!-- Header -->
+                <header class="flex justify-between items-start mb-12 flex-wrap gap-6">
+                    <h1 class="team-header-left">
+                        OUR TEAM
+                    </h1>
+                    <p class="team-header-right max-w-xs text-right">
+                        Inspiring Change With Motivational Keynotes, Workshop, And Seminar For
+                    </p>
+                </header>
+
+                <!-- Grid Card -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-16 mt-[100px]">
+
+                    <!-- Card Example -->
+                    <div class="flex flex-col items-center">
+                        <!-- Card Container (background orange, rounded, shadow) -->
+                        <div class="relative w-[240px] h-[260px]">
+                            <!-- Background container orange -->
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+
+                            <!-- Image dengan posisi absolute agak ke tengah dan ke atas supaya keluar dari container -->
+                            <img src="../../assets/FotoMember.png" alt="Team Member"
+                                class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
+
+                            <!-- Overlay Text, juga absolute di bawah container dan di atas gambar -->
+                            <div
+                                class="absolute left-4  bottom-4 bg-black bg-opacity-60 px-3 py-1 rounded-md shadow-md inline-block text-white text-sm font-semibold leading-snug">
+                                <p>Ravelin Lutfhan</p>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mt-6 max-w-[240px] text-center sm:text-left">
+                            <!-- Row icon & title -->
+                            <div class="flex items-center justify-center sm:justify-start mb-2">
+                                <img src="../../assets/Star.png" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
+                                <span class="text-[30px] font-medium text-black">Manager</span>
+                            </div>
+                            <!-- Description text -->
+                            <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
+                                Improve well being, grow future leader, become the greatness human
+                            </p>
+                            <!-- Link -->
+                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
+                                Find out more &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card Example -->
+                    <div class="flex flex-col items-center">
+                        <!-- Card Container (background orange, rounded, shadow) -->
+                        <div class="relative w-[240px] h-[260px]">
+                            <!-- Background container orange -->
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+
+                            <!-- Image dengan posisi absolute agak ke tengah dan ke atas supaya keluar dari container -->
+                            <img src="../../assets/FotoMember.png" alt="Team Member"
+                                class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
+
+                            <!-- Overlay Text, juga absolute di bawah container dan di atas gambar -->
+                            <div
+                                class="absolute left-4 bottom-4 bg-black bg-opacity-60 px-3 py-1 rounded-md shadow-md inline-block text-white text-sm font-semibold leading-snug">
+                                <p>Rizky Amalia</p>
+                                <!-- <p class="mt-1">Lutfhan</p> -->
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mt-6 max-w-[240px] text-center sm:text-left">
+                            <!-- Row icon & title -->
+                            <div class="flex items-center justify-center sm:justify-start mb-2">
+                                <img src="../../assets/Star.png" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
+                                <span class="text-[30px] font-medium text-black">Manager</span>
+                            </div>
+                            <!-- Description text -->
+                            <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
+                                Improve well being, grow future leader, become the greatness human
+                            </p>
+                            <!-- Link -->
+                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
+                                Find out more &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card Example -->
+                    <div class="flex flex-col items-center">
+                        <!-- Card Container (background orange, rounded, shadow) -->
+                        <div class="relative w-[240px] h-[260px]">
+                            <!-- Background container orange -->
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+
+                            <!-- Image dengan posisi absolute agak ke tengah dan ke atas supaya keluar dari container -->
+                            <img src="../../assets/FotoMember.png" alt="Team Member"
+                                class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
+
+                            <!-- Overlay Text, juga absolute di bawah container dan di atas gambar -->
+                            <div
+                                class="absolute left-4 bottom-4 bg-black bg-opacity-60 px-3 py-1 rounded-md shadow-md inline-block text-white text-sm font-semibold leading-snug">
+                                <p>Growing Future</p>
+                                <p class="mt-1">Leader</p>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mt-6 max-w-[240px] text-center sm:text-left">
+                            <!-- Row icon & title -->
+                            <div class="flex items-center justify-center sm:justify-start mb-2">
+                                <img src="../../assets/Star.png" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
+                                <span class="text-[30px] font-medium text-black">Manager</span>
+                            </div>
+                            <!-- Description text -->
+                            <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
+                                Improve well being, grow future leader, become the greatness human
+                            </p>
+                            <!-- Link -->
+                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
+                                Find out more &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card Example -->
+                    <div class="flex flex-col items-center">
+                        <!-- Card Container (background orange, rounded, shadow) -->
+                        <div class="relative w-[240px] h-[260px]">
+                            <!-- Background container orange -->
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+
+                            <!-- Image dengan posisi absolute agak ke tengah dan ke atas supaya keluar dari container -->
+                            <img src="../../assets/FotoMember.png" alt="Team Member"
+                                class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
+
+                            <!-- Overlay Text, juga absolute di bawah container dan di atas gambar -->
+                            <div
+                                class="absolute left-4 bottom-4 bg-black bg-opacity-60 px-3 py-1 rounded-md shadow-md inline-block text-white text-sm font-semibold leading-snug">
+                                <p>Growing Future</p>
+                                <p class="mt-1">Leader</p>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mt-6 max-w-[240px] text-center sm:text-left">
+                            <!-- Row icon & title -->
+                            <div class="flex items-center justify-center sm:justify-start mb-2">
+                                <img src="../../assets/Star.png" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
+                                <span class="text-[30px] font-medium text-black">Manager</span>
+                            </div>
+                            <!-- Description text -->
+                            <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
+                                Improve well being, grow future leader, become the greatness human
+                            </p>
+                            <!-- Link -->
+                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
+                                Find out more &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6 Why Choose Us -->
+        <section class="relative min-h-screen bg-center bg-cover flex items-center justify-center text-white"
+            style="background-image: url('../../assets/BackgroundOffer.png');">
+            <div class="absolute inset-0 bg-black bg-opacity-40 z-0"></div>
+
+            <div class="relative z-10 w-full max-w-full px-4 sm:px-8 md:px-20 lg:px-60 py-20">
+
+                <div class="mb-16">
+                    <div class="-ml-6">
+                        <p class="text-gray-400 uppercase tracking-wider mb-2 text-sm sm:text-base">
+                            (What We Offer)
+                        </p>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            WHY CHOOSE US
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="space-y-10">
+                    <!-- Item 1 -->
+                    <div
+                        class="content-item grid grid-cols-1 sm:grid-cols-12 items-center fade-in border-b border-white pb-8 gap-x-1 cursor-pointer">
+                        <!-- Number box -->
+                        <div class="number-box col-span-1 flex items-center justify-center border border-gray-500 rounded-lg p-1 sm:p-2 font-bold tracking-wide -ml-1 sm:-ml-2 transition-transform duration-300 ease-in-out"
+                            style="min-width: 2rem; min-height: 2rem; font-size: 0.85rem;">
+                            01
+                        </div>
+                        <!-- title left -->
+                        <div
+                            class="title-left col-span-11 sm:col-span-5 mt-2 sm:mt-0 text-2xl sm:text-5xl font-extralight tracking-wide pl-0 text-center sm:text-left transition-transform duration-300 ease-in-out">
+                            INOVATION
+                        </div>
+                        <!-- Description -->
+                        <div
+                            class="col-span-11 sm:col-span-6 mt-2 sm:mt-0 text-gray-300 text-sm sm:text-base leading-relaxed pl-20 text-justify">
+                            Kami berkomitmen untuk terus berinovasi dalam menyediakan solusi teknologi yang mutakhir.
+                            Dengan memanfaatkan teknologi terbaru,
+                            kami menciptakan produk dan layanan yang tidak hanya memenuhi kebutuhan klien tetapi juga
+                            mendorong pertumbuhan dan efisiensi dalam industri IT
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div
+                        class="content-item grid grid-cols-1 sm:grid-cols-12 items-center fade-in border-b border-white pb-8 gap-x-1 cursor-pointer">
+                        <div class="number-box col-span-1 flex items-center justify-center border border-gray-500 rounded-lg p-1 sm:p-2 font-bold tracking-wide -ml-1 sm:-ml-2 transition-transform duration-300 ease-in-out"
+                            style="min-width: 2rem; min-height: 2rem; font-size: 0.85rem;">
+                            02
+                        </div>
+                        <div
+                            class="title-left col-span-11 sm:col-span-5 mt-2 sm:mt-0 text-2xl sm:text-5xl font-extralight tracking-wide pl-0 text-center sm:text-left transition-transform duration-300 ease-in-out">
+                            COLABORATION
+                        </div>
+                        <div
+                            class="col-span-11 sm:col-span-6 mt-2 sm:mt-0 text-gray-300 text-sm sm:text-base leading-relaxed pl-20 text-justify">
+                            Kami percaya bahwa kolaborasi adalah kunci untuk mencapai hasil yang luar biasa.
+                            Dengan menjalin kemitraan yang kuat antara perusahaan dan kandidat,
+                            kami menciptakan sinergi yang saling menguntungkan dan memastikan bahwa setiap pihak
+                            mendapatkan manfaat maksimal.
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div
+                        class="content-item grid grid-cols-1 sm:grid-cols-12 items-center fade-in border-b border-white pb-8 gap-x-1 cursor-pointer">
+                        <div class="number-box col-span-1 flex items-center justify-center border border-gray-500 rounded-lg p-1 sm:p-2 font-bold tracking-wide -ml-1 sm:-ml-2 transition-transform duration-300 ease-in-out"
+                            style="min-width: 2rem; min-height: 2rem; font-size: 0.85rem;">
+                            03
+                        </div>
+                        <div
+                            class="title-left col-span-11 sm:col-span-5 mt-2 sm:mt-0 text-2xl sm:text-5xl font-extralight tracking-wide pl-0 text-center sm:text-left transition-transform duration-300 ease-in-out">
+                            INTEGRITY
+                        </div>
+                        <div
+                            class="col-span-11 sm:col-span-6 mt-2 sm:mt-0 text-gray-300 text-sm sm:text-base leading-relaxed pl-20 text-justify">
+                            Integritas adalah fondasi dari semua yang kami lakukan.
+                            Kami berkomitmen untuk memberikan informasi yang akurat dan transparan,
+                            serta menjaga kepercayaan klien dan kandidat kami. Dengan pendekatan yang etis,
+                            kami memastikan bahwa setiap interaksi didasarkan pada kejujuran dan tanggung jawab.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+
+        // Fade in saat scroll
+const faders = document.querySelectorAll('.fade-in');
+
+const appearOptions = {
+    threshold: 0.1, // Persentase elemen yang harus terlihat sebelum callback dipicu
+    // rootMargin: "0px 0px -50px 0px" // Anda bisa sesuaikan ini jika perlu
+};
+
+const appearOnScroll = new IntersectionObserver(function (entries, observer) { // Ganti nama parameter kedua
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Elemen masuk ke viewport atau sudah di viewport
+            entry.target.classList.add('visible');
+        } else {
+            // Elemen keluar dari viewport
+            entry.target.classList.remove('visible');
+            // Tidak perlu unobserve jika ingin animasi berulang
+        }
+    });
+}, appearOptions);
+
+faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+});
+    </script>
+</body>
+
+</html>

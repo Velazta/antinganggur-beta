@@ -1,6 +1,6 @@
 @extends('layouts.app') {{-- Menggunakan layout utama --}}
 
-@section('title', 'AntiNganggur - Halaman Utama') {{-- Mengganti title default jika perlu --}}
+@section('title', 'AntiNganggur - Beranda') {{-- Mengganti title default jika perlu --}}
 
 @section('content')
     <!-- ===== Section 1: Selamat Datang (Hero) Mulai ===== -->

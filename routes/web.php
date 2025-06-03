@@ -24,6 +24,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/show', [ProfileController::class, 'show'])->name('profile.show');
 
+Route::get('/aboutus', function() {
+    return view('aboutus');
+});
+
+Route::get('/contact', function() {
+    return view('contact');
+});
+
 
 // Jika nanti ada dashboard, bisa diaktifkan kembali bagian ini:
 // Route::middleware(['auth'])->group(function () {
