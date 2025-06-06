@@ -53,17 +53,25 @@ class User extends Authenticatable
 
 
     // Mendefinisikan relasi 1 to 1 ke model profile
-    public function profile(): HasOne {
+    public function profile(): HasOne
+    {
         return $this->hasOne(Profile::class); // <--- PERBAIKI DI SINI
     }
 
     // Mendefinisikan relasi 1 to many kke model experience
-    public function experiences(): HasMany {
+    public function experiences(): HasMany
+    {
         return $this->hasMany(Experience::class)->orderBy('start_year', 'desc');
     }
 
     // Mendefinisikan relasi 1 to many ke model education
-    public function educations(): HasMany {
+    public function educations(): HasMany
+    {
         return $this->hasMany(Education::class)->orderBy('start_year', 'desc');
+    }
+
+    public function cvs()
+    {
+        return $this->hasMany(Cv::class);
     }
 }

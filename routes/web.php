@@ -42,6 +42,9 @@ Route::put('/profile/education/{education}', [ProfileController::class, 'updateE
 Route::delete('/profile/education/{education}', [ProfileController::class, 'deleteEducation'])->name('profile.education.delete');
 
 Route::get('/profile/cv', [ProfileController::class, 'cv'])->name('profile.cv'); // Anda perlu membuat method 'cv'
+Route::post('/profile/cv', [ProfileController::class, 'storeCv'])->name('profile.cv.store');
+Route::get('/profile/cv/download/{cv}', [ProfileController::class, 'downloadCv'])->name('profile.cv.download');
+Route::delete('/profile/cv/{cv}', [ProfileController::class, 'deleteCv'])->name('profile.cv.delete');
 
 // Untuk mengupdate info experience, education, cv
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Experience;
 use App\Models\Education;
+use App\Models\Cv;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -211,13 +212,65 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $profile = $user->profile ?? new Profile();
+        $cvs = $user->cvs()->latest()->get();
 
         // Menggunakan array asosiatif untuk mengirim data
         return view('profile.cv', [
             'user' => $user,
             'profile' => $profile,
+            'cvs' => $cvs
         ]);
     }
+
+    public function storeCv(Request $request) {
+        $request->validate([
+            'cv_file' => 'required|file|mimes:pdf,doc,docx|max:2048'
+        ]);
+
+        $file = $request->file('cv_file');
+
+        $path = $file->store('cvs', 'public');
+
+        $request->user()->cvs()->create([
+            'file_path' => $path,
+            'original_name' => $file->getClientOriginalName(),
+            'file_size' => $file->getSize(),
+            'mime_type' => $file->getMimeType(),
+        ]);
+
+        return redirect()->route('profile.cv')->with('success_cv', 'CV berhasil diunggah');
+    }
+
+    public function deleteCv(Cv $cv) {
+        if (Auth::id() !== $cv->user_id) {
+            abort(403, 'Akses Ditolak');
+        }
+
+        Storage::disk('public')->delete($cv->file_path);
+        $cv->delete();
+
+        return redirect()->route('profile.cv')->with('success_cv', 'CV berhasil dihapus!');
+    }
+
+    public function downloadCv(Cv $cv) {
+        if(Auth::id() !== $cv->user_id) {
+            abort(403, 'Akses Ditolak');
+        }
+
+        return Storage::disk('public')->download($cv->file_path, $cv->original_name);
+    }
+
+    // public function deleteEducation(Education $education)
+    // {
+    //     if (Auth::id() !== $education->user_id) {
+    //         abort(403, 'Akses Ditolak');
+    //     }
+
+    //     $education->delete();
+
+    //     return redirect()->route('profile.education')
+    //                      ->with('success_education', 'Riwayat pendidikan berhasil dihapus!');
+    // }
 
     public function update(Request $request)
     {
