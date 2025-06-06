@@ -48,12 +48,13 @@ class ProfileController extends Controller
         return redirect()->route('profile.experience')->with('success_experience', 'Pengalaman kerja berhasil ditambahkan!');
     }
 
+    // METHOD UNTUK MENGHAPUS DATA
     public function deleteExperience(Experience $experience)
     {
-        // Otorisasi: Pastikan pengguna yang login adalah pemilik data ini.
-        // Akan kita perbaiki dengan Policy nanti, untuk sekarang kita cek manual.
-         if (Auth::id() !== $experience->user_id) { // Menggunakan Auth::id()
-        abort(403, 'Anda tidak memiliki izin untuk melakukan aksi ini.');
+
+        // Pemeriksaan kepemilikan
+        if (auth()->id() !== $experience->user_id) {
+            abort(403, 'Akses Ditolak');
         }
 
         $experience->delete();
@@ -62,22 +63,29 @@ class ProfileController extends Controller
                          ->with('success_experience', 'Pengalaman kerja berhasil dihapus!');
     }
 
-    public function editExperience(Experience $experience) {
-        if (Auth::id() !== $experience->user_id) {
-            abort(403);
+     public function editExperience(Experience $experience)
+    {
+        // Pemeriksaan kepemilikan
+        if (auth()->id() !== $experience->user_id) {
+            abort(403, 'Akses Ditolak');
         }
 
-        $user = Auth::user();
-        $profile = $user->profile ?? new Profile();
-
-        return view('profile.experience.edit', compact('experience', 'user', 'profile'));
+        return view('profile.experience.edit', [
+            'user' => auth()->user(), // Cara benar mengambil user
+            'profile' => auth()->user()->profile ?? new Profile(),
+            'experience' => $experience,
+        ]);
     }
 
-    public function updateExperience(Request $request, Experience $experience) {
-        if(Auth::id() !== $experience->user_id()) {
-            abort(403);
+    // METHOD UNTUK MENYIMPAN PERUBAHAN
+    public function updateExperience(Request $request, Experience $experience)
+    {
+        // Pemeriksaan kepemilikan
+        if (auth()->id() !== $experience->user_id) {
+            abort(403, 'Akses Ditolak');
         }
 
+        // Validasi sama seperti saat membuat data baru
         $validated = $request->validate([
             'job_title' => 'required|string|max:255',
             'company_name' => 'required|string|max:255',
@@ -90,6 +98,9 @@ class ProfileController extends Controller
             'end_year' => 'required_unless:current_job,1|nullable|integer|digits:4|gte:start_year',
             'job_description' => 'nullable|string',
         ]);
+
+        // Tangani checkbox 'current_job'
+        $validated['current_job'] = $request->has('current_job');
 
         $experience->update($validated);
 

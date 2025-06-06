@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @mixin IdeHelperProfile
+ */
 class Profile extends Model {
     use HasFactory;
 

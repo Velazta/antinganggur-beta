@@ -79,8 +79,7 @@
                                     @endif
                                 </div>
                                 <div class="flex gap-2 flex-shrink-0 ml-4">
-                                    {{-- TODO: Buat route dan fungsi untuk Edit & Delete --}}
-                                    <a href="#" title="Edit"
+                                    <a href="{{ route('profile.experience.edit', $exp->id) }}" title="Edit"
                                         class="text-gray-400 hover:text-blue-500 p-1 rounded-full hover:bg-blue-50">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                             fill="currentColor">

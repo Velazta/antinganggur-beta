@@ -48,11 +48,3 @@ Route::get('/aboutus', function() {
 Route::get('/contact', function() {
     return view('contact');
 });
-
-
-// Jika nanti ada dashboard, bisa diaktifkan kembali bagian ini:
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return "Selamat datang di Dashboard, " . Auth::user()->name;
-//     })->name('dashboard');
-// });

@@ -10,6 +10,9 @@ use App\Models\Profile; // Ini sudah benar
 use Illuminate\Database\Eloquent\Relations\HasOne; // Ini sudah benar
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @mixin IdeHelperUser
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;

@@ -153,11 +153,11 @@
 
                         {{-- Deskripsi Pekerjaan --}}
                         <div class="md:col-span-2">
-                            <label for="job_description" class="block text-sm font-medium text-gray-600 mb-1">Deskripsi Pekerjaan</label>
-                            <textarea name="job_description" id="job_description" rows="5"
+                            <label for="description" class="block text-sm font-medium text-gray-600 mb-1">Deskripsi Pekerjaan</label>
+                            <textarea name="description" id="description" rows="5"
                                 class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all resize-y"
-                                placeholder="Jelaskan tanggung jawab dan pencapaian Anda">{{ old('job_description', $experience->job_description) }}</textarea>
-                            @error('job_description')
+                                placeholder="Jelaskan tanggung jawab dan pencapaian Anda">{{ old('description', $experience->description) }}</textarea>
+                            @error('description')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
