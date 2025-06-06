@@ -117,7 +117,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $profile = $user->profile ?? new Profile();
-        $educations = $user->education;
+        $educations = $user->educations;
 
         // Menggunakan array asosiatif untuk mengirim data
         return view('profile.education', [
@@ -150,6 +150,62 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.education')->with('success_education', 'Riwayat pendidikan berhasil ditambahkan!');
     }
+
+     public function deleteEducation(Education $education)
+    {
+        if (Auth::id() !== $education->user_id) {
+            abort(403, 'Akses Ditolak');
+        }
+
+        $education->delete();
+
+        return redirect()->route('profile.education')
+                         ->with('success_education', 'Riwayat pendidikan berhasil dihapus!');
+    }
+
+    public function editEducation(Education $education)
+    {
+        if (Auth::id() !== $education->user_id) {
+            abort(403, 'Akses Ditolak');
+        }
+
+        // Menggunakan array asosiatif untuk mengirim data
+        return view('profile.education.edit', [
+            'user' => Auth::user(),
+            'profile' => Auth::user()->profile ?? new Profile(),
+            'education' => $education,
+        ]);
+    }
+
+    public function updateEducation(Request $request, Education $education)
+    {
+        if (Auth::id() !== $education->user_id) {
+            abort(403, 'Akses Ditolak');
+        }
+
+        // PERBAIKAN: Mengganti 'job_description' menjadi 'description' agar sesuai dengan form
+        $validated = $request->validate([
+            'university_name' => 'required|string|max:255',
+            'degree' => 'required|string|max:255',
+            'major' => 'required|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'start_month' => 'required|integer|between:1,12',
+            'start_year' => 'required|integer|digits:4',
+            'currently_studying' => 'nullable|boolean',
+            'end_month' => 'required_unless:currently_studying,1|nullable|integer|between:1,12',
+            'end_year' => 'required_unless:currently_studying,1|nullable|integer|digits:4|gte:start_year',
+            'ipk' => 'nullable|numeric|between:0,4.00',
+            'description' => 'nullable|string',
+        ]);
+
+        $validated['currently_studying'] = $request->has('currently_studying');
+
+        $education->update($validated);
+
+        return redirect()->route('profile.education')->with('success_education', 'Riwayat pendidikan berhasil diperbarui!');
+    }
+
 
     public function cv()
     {

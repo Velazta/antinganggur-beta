@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 Class Experience extends Model {
     use HasFactory;
 
+     protected $table = 'experiences';
+
     protected $fillable = [
         'user_id',
         'job_title',
