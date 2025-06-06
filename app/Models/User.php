@@ -61,4 +61,9 @@ class User extends Authenticatable
     public function experiences(): HasMany {
         return $this->hasMany(Experience::class)->orderBy('start_year', 'desc');
     }
+
+    // Mendefinisikan relasi 1 to many ke model education
+    public function educations(): HasMany {
+        return $this->hasMany(Education::class)->orderBy('start_year', 'desc');
+    }
 }

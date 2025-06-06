@@ -35,8 +35,12 @@ Route::put('/profile/experience/{experience}', [ProfileController::class, 'updat
 // Route untuk menghapus data experience job seeker
 Route::delete('/profile/experience/{experience}', [ProfileController::class, 'deleteExperience'])->name('profile.experience.delete');
 
-
 Route::get('/profile/education', [ProfileController::class, 'education'])->name('profile.education'); // Anda perlu membuat method 'education'
+Route::post('/profile/education', [ProfileController::class, 'storeEducation'])->name('profile.education.store');
+Route::get('/profile/education/{education}/edit', [ProfileController::class, 'editEducation'])->name('profile.education.edit');
+Route::put('/profile/education/{education}', [ProfileController::class, 'updateEducation'])->name('profile.education.update');
+Route::delete('/profile/education/{education}', [ProfileController::class, 'deleteEducation'])->name('profile.education.delete');
+
 Route::get('/profile/cv', [ProfileController::class, 'cv'])->name('profile.cv'); // Anda perlu membuat method 'cv'
 
 // Untuk mengupdate info experience, education, cv

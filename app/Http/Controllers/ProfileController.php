@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Experience;
+use App\Models\Education;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -116,12 +117,38 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $profile = $user->profile ?? new Profile();
+        $educations = $user->education;
 
         // Menggunakan array asosiatif untuk mengirim data
         return view('profile.education', [
             'user' => $user,
             'profile' => $profile,
+            'educations' => $educations
         ]);
+    }
+
+    public function storeEducation(Request $request)
+    {
+        $validated = $request->validate([
+            'university_name' => 'required|string|max:255',
+            'degree' => 'required|string|max:255',
+            'major' => 'required|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'start_month' => 'required|integer|between:1,12',
+            'start_year' => 'required|integer|digits:4',
+            'currently_studying' => 'nullable|boolean',
+            'end_month' => 'required_unless:currently_studying,1|nullable|integer|between:1,12',
+            'end_year' => 'required_unless:currently_studying,1|nullable|integer|digits:4|gte:start_year',
+            'ipk' => 'nullable|numeric|between:0,4.00',
+            'description' => 'nullable|string',
+        ]);
+
+        $validated['currently_studying'] = $request->has('currently_studying');
+
+        $request->user()->educations()->create($validated);
+
+        return redirect()->route('profile.education')->with('success_education', 'Riwayat pendidikan berhasil ditambahkan!');
     }
 
     public function cv()
