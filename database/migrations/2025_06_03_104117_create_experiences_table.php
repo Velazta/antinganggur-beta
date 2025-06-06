@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('company_name');
             $table->string('country')->nullable();
             $table->string('city')->nullable();
-            $table->string('start_month')->nullable();
-            $table->string('start_year')->nullable();
-            $table->string('end_month')->nullable();
-            $table->string('end_year')->nullable();
+            $table->smallInteger('start_month')->nullable();
+            $table->year('start_year')->nullable();
+            $table->smallInteger('end_month')->nullable();
+            $table->year('end_year')->nullable();
             $table->boolean('current_job')->default(false);
             $table->text('description')->nullable();
             $table->timestamps();

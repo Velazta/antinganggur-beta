@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Experience;
 use Illuminate\Support\Facades\Storage; //untuk mengelola file
 use Illuminate\Validation\Rule; // untuk validasi gender
 class ProfileController extends Controller
@@ -18,6 +19,96 @@ class ProfileController extends Controller
         $profile = $user->profile ?? new Profile();
 
         return view('profile.show', compact('user', 'profile'));
+    }
+
+    public function experience() {
+        $user = Auth::user();
+        $profile = $user->profile ?? new Profile();
+        $experiences = $user->experiences;
+
+        return view('profile.experience', compact('user', 'profile', 'experiences'));
+    }
+
+    public function storeExperience(Request $request) {
+        $validated = $request->validate([
+            'job_title' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'country'=> 'nullable|string|max:255',
+            'city'=> 'nullable|string|max:255',
+            'start_month' => 'required|integer|between:1,12',
+            'start_year' => 'required|integer|digits:4',
+            'end_month' => 'required_unless:current_job,1|nullable|integer|between:1,12',
+            'end_year' => 'required_unless:current_job,1|nullable|integer|digits:4|gte:start_year',
+            'current_job' => 'nullable|boolean',
+            'description' => 'nullable|string',
+        ]);
+
+        $request->user()->experiences()->create($validated);
+
+        return redirect()->route('profile.experience')->with('success_experience', 'Pengalaman kerja berhasil ditambahkan!');
+    }
+
+    public function deleteExperience(Experience $experience)
+    {
+        // Otorisasi: Pastikan pengguna yang login adalah pemilik data ini.
+        // Akan kita perbaiki dengan Policy nanti, untuk sekarang kita cek manual.
+         if (Auth::id() !== $experience->user_id) { // Menggunakan Auth::id()
+        abort(403, 'Anda tidak memiliki izin untuk melakukan aksi ini.');
+        }
+
+        $experience->delete();
+
+        return redirect()->route('profile.experience')
+                         ->with('success_experience', 'Pengalaman kerja berhasil dihapus!');
+    }
+
+    public function editExperience(Experience $experience) {
+        if (Auth::id() !== $experience->user_id) {
+            abort(403);
+        }
+
+        $user = Auth::user();
+        $profile = $user->profile ?? new Profile();
+
+        return view('profile.experience.edit', compact('experience', 'user', 'profile'));
+    }
+
+    public function updateExperience(Request $request, Experience $experience) {
+        if(Auth::id() !== $experience->user_id()) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'job_title' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'start_month' => 'required|integer|between:1,12',
+            'start_year' => 'required|integer|digits:4',
+            'current_job' => 'nullable|boolean',
+            'end_month' => 'required_unless:current_job,1|nullable|integer|between:1,12',
+            'end_year' => 'required_unless:current_job,1|nullable|integer|digits:4|gte:start_year',
+            'job_description' => 'nullable|string',
+        ]);
+
+        $experience->update($validated);
+
+        return redirect()->route('profile.experience')->with('success_experience', 'Pengalaman kerja berhasil diperbarui!');
+    }
+
+
+    public function education() {
+        $user = Auth::user();
+        $profile = $user->profile ?? new Profile();
+
+        return view('profile.education', compact('user', 'profile'));
+    }
+
+    public function cv() {
+        $user = Auth::user();
+        $profile = $user->profile ?? new Profile();
+
+        return view('profile.cv', compact('user', 'profile'));
     }
 
     public function update(Request $request)

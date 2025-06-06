@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Profile; // Ini sudah benar
 use Illuminate\Database\Eloquent\Relations\HasOne; // Ini sudah benar
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -47,7 +48,14 @@ class User extends Authenticatable
         ];
     }
 
+
+    // Mendefinisikan relasi 1 to 1 ke model profile
     public function profile(): HasOne {
         return $this->hasOne(Profile::class); // <--- PERBAIKI DI SINI
+    }
+
+    // Mendefinisikan relasi 1 to many kke model experience
+    public function experiences(): HasMany {
+        return $this->hasMany(Experience::class)->orderBy('start_year', 'desc');
     }
 }
