@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- Menetapkan judul khusus untuk halaman ini --}}
-@section('title', 'Profil - Ravelin Lutfhan')
+@section('title', 'Profil - Rafi Amirudin')
 
 {{-- Mendorong style khusus ke dalam stack 'styles' di layout utama --}}
 @push('styles')
@@ -34,7 +34,7 @@
 
             <div class="relative w-full max-w-xs lg:w-2/5 flex-shrink-0">
                 <div class="bg-gradient-to-t from-blue-600 to-blue-400 h-96 w-full rounded-2xl shadow-lg"></div>
-                <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Foto Ravelin Lutfhan"
+                <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Rafi Amirudin"
                     class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[26rem] w-auto object-contain filter grayscale">
             </div>
 
@@ -42,15 +42,17 @@
 
                 <div>
                     <div class="w-16 h-1 bg-blue-500 mb-4 rounded"></div>
-                    <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-800 tracking-tight">Ravelin Lutfhan</h1>
-                    <p class="text-lg font-medium text-gray-500 mt-1">CEO</p>
+                    <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-800 tracking-tight">Rafi Amirudin</h1>
+                    <p class="text-lg font-medium text-gray-500 mt-1">HR Manager</p>
                 </div>
 
-                <div class="relative mt-6 overflow-hidden h-64">
+                <div class="relative mt-6 overflow-hidden h-72">
 
                     <div id="desc-panel-1" class="absolute top-0 left-0 w-full transition-transform duration-500 ease-in-out">
                         <p class="text-gray-600 leading-relaxed text-justify">
-                            Sebagai CEO AntiNganggur, Ravelin Lutfhan memimpin visi dan strategi perusahaan dalam memperkuat posisi di industri teknologi informasi. Dengan pengalaman luas di bidang IT dan manajemen, Ravelin berkomitmen untuk menciptakan platform yang tidak hanya menghubungkan perusahaan dengan pencari kerja, tetapi juga memberdayakan individu untuk mencapai potensi terbaik mereka.
+                            Sebagai HR Manager AntiNganggur, Rafi Amirudin bertanggung jawab untuk mengelola seluruh aspek sumber daya manusia perusahaan.
+                            Dengan pengalaman luas di bidang manajemen SDM, Rafi berfokus pada pengembangan dan penerapan strategi perekrutan yang efektif untuk menarik kandidat berkualitas.
+                            Dia juga berperan dalam menciptakan lingkungan kerja yang positif dan mendukung pertumbuhan karyawan.
                         </p>
                     </div>
 
@@ -59,19 +61,19 @@
                             <div class="flex items-start gap-4">
                                 <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full border-2 border-gray-400 text-gray-500 font-bold text-sm mt-1">01</span>
                                 <p class="text-gray-600 leading-relaxed text-justify">
-                                    Mengembangkan dan mengimplementasikan strategi bisnis jangka panjang untuk memastikan pertumbuhan dan keberlanjutan perusahaan.
+                                    Mengelola proses perekrutan, penyusunan deskripsi pekerjaan hingga wawancara dan seleksi kandidat.
                                 </p>
                             </div>
                             <div class="flex items-start gap-4">
                                 <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full border-2 border-gray-400 text-gray-500 font-bold text-sm mt-1">02</span>
                                 <p class="text-gray-600 leading-relaxed text-justify">
-                                    Memimpin tim manajemen dan memastikan kolaborasi yang efektif di seluruh departemen.
+                                    Mengembangkan dan menerapkan kebijakan sumber daya manusia yang mendukung visi dan misi perusahaan.
                                 </p>
                             </div>
                             <div class="flex items-start gap-4">
                                 <span class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full border-2 border-gray-400 text-gray-500 font-bold text-sm mt-1">03</span>
                                 <p class="text-gray-600 leading-relaxed text-justify">
-                                    Mengawasi pengembangan produk dan layanan baru, memastikan bahwa mereka memenuhi kebutuhan pasar dan standar kualitas yang tinggi.
+                                    Mengawasi kinerja pegawai dan memberikan umpan balik untuk mendukung perkembangan individu.
                                 </p>
                             </div>
                         </div>

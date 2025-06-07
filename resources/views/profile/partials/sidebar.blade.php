@@ -1,6 +1,6 @@
 {{-- Sidebar untuk halaman profil --}}
 <aside class="w-full max-w-[280px] bg-white p-6 rounded-2xl shadow-lg flex-shrink-0 self-start hidden lg:block">
-    <div class="w-full text-center p-4 rounded-2xl bg-[#FFDAB9]">
+    <div class="w-full text-center p-4 rounded-2xl bg-[#FFBDA9]">
         {{-- Pastikan variabel $user dan $profile tersedia saat @include file ini --}}
         <img src="{{ $profile->profile_photo_path ? asset('storage/' . $profile->profile_photo_path) : 'https://i.pinimg.com/564x/2b/0c/53/2b0c53a6539c3319f34a179339e87555.jpg' }}"
             alt="Foto Profil {{ $user->name }}"

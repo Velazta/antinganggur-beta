@@ -57,7 +57,7 @@
                                     <img id="photoPreview"
                                         src="{{ $profile->profile_photo_path ? asset('storage/' . $profile->profile_photo_path) : 'https://via.placeholder.com/150/E0E0E0/BDBDBD?text=+' }}"
                                         alt="Pratinjau Foto Profil"
-                                        class="w-40 h-40 rounded-full object-cover bg-gray-200 transition-all duration-300 group-hover:ring-4 ring-orange-200">
+                                        class="w-40 h-40 rounded-full object-cover bg-gray-200 transition-all duration-300 group-hover:ring-4 ring-[#FFBDA9]">
                                 </div>
                             </label>
                             <input type="file" id="photoUpload" name="profile_photo" accept="image/*" class="hidden">

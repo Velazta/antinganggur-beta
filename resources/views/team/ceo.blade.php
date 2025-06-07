@@ -18,12 +18,6 @@
 
 
 @section('content')
-    {{--
-      PENGINGAT SETUP:
-      Pastikan semua path gambar di dalam fungsi asset() sudah benar.
-      Contoh: 'asset/page/FotoMember.png' berarti gambar ada di folder public/asset/page/FotoMember.png
-    --}}
-
     <div class="w-full bg-gradient-to-br from-slate-50 to-gray-200 px-4 py-16 sm:py-40">
 
         <div id="profile-card"
