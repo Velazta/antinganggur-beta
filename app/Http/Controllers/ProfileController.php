@@ -214,7 +214,6 @@ class ProfileController extends Controller
         $profile = $user->profile ?? new Profile();
         $cvs = $user->cvs()->latest()->get();
 
-        // Menggunakan array asosiatif untuk mengirim data
         return view('profile.cv', [
             'user' => $user,
             'profile' => $profile,

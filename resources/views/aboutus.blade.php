@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami - AntiNganggur')
+@section('title', 'Tentang Kami')
 
 @push('styles') {{-- Ganti @section('styles') menjadi @push('styles') --}}
     {{-- CSS Kustom Khusus Halaman Tentang Kami --}}
@@ -469,12 +469,12 @@
                         <div class="mt-6 max-w-[240px] text-center sm:text-left">
                             <div class="flex items-center justify-center sm:justify-start mb-2">
                                 <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
-                                <span class="text-[30px] font-medium text-black">Manager</span>
+                                <span class="text-[30px] font-medium text-black">CEO</span>
                             </div>
                             <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
                                 Improve well being, grow future leader, become the greatness human
                             </p>
-                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
+                            <a href="{{ route('team.ceo')}}" class="text-blue-600 font-semibold hover:underline text-sm">
                                 Find out more &rarr;
                             </a>
                         </div>
@@ -496,12 +496,12 @@
                         <div class="mt-6 max-w-[240px] text-center sm:text-left">
                             <div class="flex items-center justify-center sm:justify-start mb-2">
                                 <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
-                                <span class="text-[30px] font-medium text-black">Manager</span>
+                                <span class="text-[30px] font-medium text-black">CTO</span>
                             </div>
                             <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
                                 Improve well being, grow future leader, become the greatness human
                             </p>
-                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
+                            <a href="{{ route('team.cto')}}" class="text-blue-600 font-semibold hover:underline text-sm">
                                 Find out more &rarr;
                             </a>
                         </div>
@@ -524,12 +524,12 @@
                         <div class="mt-6 max-w-[240px] text-center sm:text-left">
                             <div class="flex items-center justify-center sm:justify-start mb-2">
                                 <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
-                                <span class="text-[30px] font-medium text-black">Manager</span>
+                                <span class="text-[30px] font-medium text-black">Hr Manager</span>
                             </div>
                             <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
                                 Improve well being, grow future leader, become the greatness human
                             </p>
-                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
+                            <a href="{{ route('team.hrmanager')}}" class="text-blue-600 font-semibold hover:underline text-sm">
                                 Find out more &rarr;
                             </a>
                         </div>
@@ -552,7 +552,7 @@
                         <div class="mt-6 max-w-[240px] text-center sm:text-left">
                             <div class="flex items-center justify-center sm:justify-start mb-2">
                                 <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
-                                <span class="text-[30px] font-medium text-black">Manager</span>
+                                <span class="text-[30px] font-medium text-black">Specialist</span>
                             </div>
                             <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
                                 Improve well being, grow future leader, become the greatness human

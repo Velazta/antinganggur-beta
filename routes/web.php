@@ -48,9 +48,14 @@ Route::delete('/profile/cv/{cv}', [ProfileController::class, 'deleteCv'])->name(
 
 // Untuk mengupdate info experience, education, cv
 
-Route::get('/aboutus', function() {
-    return view('aboutus');
-});
+// Route::get('/aboutus', function() {
+//     return view('aboutus');
+// });
+
+Route::view('/aboutus','aboutus')->name('aboutus');
+Route::view('/team/ravelin-lutfhan','team.ceo')->name('team.ceo');
+Route::view('/team/rizky-amalia','team.cto')->name('team.cto');
+Route::view('/team/rafi-amirudin','team.hrmanager')->name('team.hrmanager');
 
 Route::get('/contact', function() {
     return view('contact');

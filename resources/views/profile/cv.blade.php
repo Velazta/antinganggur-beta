@@ -45,7 +45,7 @@
                 </form>
             </div>
 
-            {{-- Daftar CV yang Sudah Diunggah --}}
+           {{-- list cv --}}
             <div class="space-y-4">
                 <h2 class="text-xl font-bold text-gray-800 mb-4 border-t pt-8">CV Tersimpan</h2>
                 @forelse ($cvs as $cv)

@@ -84,8 +84,8 @@
                         </a>
                         <a href="https://github.com/username" target="_blank" rel="noopener"
                             class="flex items-center gap-2 border border-gray-400 rounded-lg py-2.5 px-4 text-gray-700 hover:bg-orange-100 hover:border-[#FF7144] hover:text-orange-600 transition duration-300 text-sm">
-                            <img src="{{ asset('asset/page/GitHub.png') }}" alt="GitHub" class="w-5 h-5" />
-                            <span class="font-semibold uppercase tracking-wider">GitHub</span>
+                            <img src="{{ asset('asset/page/Gmailgray.png') }}" alt="Gmail" class="w-5 h-5" />
+                            <span class="font-semibold uppercase tracking-wider">Gmail</span>
                         </a>
                     </div>
                 </div>
