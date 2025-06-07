@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,6 +41,9 @@ Route::get('/aboutus', function() {
 Route::get('/contact', function() {
     return view('contact');
 });
+
+//Route untuk mengirim pesan kontak
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
 // Jika nanti ada dashboard, bisa diaktifkan kembali bagian ini:

@@ -46,6 +46,10 @@
         @yield('content')
     </main>
 
+    @include('layouts.partials.footer') {{-- Pastikan path ini benar jika footer di dalam folder partials --}}
+
+    {{-- JavaScript --}}
+
     @stack('scripts') {{-- Tambahkan ini untuk JavaScript spesifik per halaman --}}
 
 </body>
