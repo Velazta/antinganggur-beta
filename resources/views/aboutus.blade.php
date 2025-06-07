@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami - AntiNganggur')
+@section('title', 'Tentang Kami')
 
 @push('styles') {{-- Ganti @section('styles') menjadi @push('styles') --}}
     {{-- CSS Kustom Khusus Halaman Tentang Kami --}}
@@ -469,12 +469,12 @@
                         <div class="mt-6 max-w-[240px] text-center sm:text-left">
                             <div class="flex items-center justify-center sm:justify-start mb-2">
                                 <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
-                                <span class="text-[30px] font-medium text-black">Manager</span>
+                                <span class="text-[30px] font-medium text-black">CEO</span>
                             </div>
                             <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
                                 Improve well being, grow future leader, become the greatness human
                             </p>
-                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
+                            <a href="{{ route('team.ceo')}}" class="text-blue-600 font-semibold hover:underline text-sm">
                                 Find out more &rarr;
                             </a>
                         </div>
@@ -496,12 +496,40 @@
                         <div class="mt-6 max-w-[240px] text-center sm:text-left">
                             <div class="flex items-center justify-center sm:justify-start mb-2">
                                 <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
-                                <span class="text-[30px] font-medium text-black">Manager</span>
+                                <span class="text-[30px] font-medium text-black">CTO</span>
                             </div>
                             <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
                                 Improve well being, grow future leader, become the greatness human
                             </p>
-                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
+                            <a href="{{ route('team.cto')}}" class="text-blue-600 font-semibold hover:underline text-sm">
+                                Find out more &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <div class="relative w-[240px] h-[260px]">
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+
+                            <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
+                                class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
+
+                            <div
+                                class="absolute left-4 bottom-4 bg-black bg-opacity-60 px-3 py-1 rounded-md shadow-md inline-block text-white text-sm font-semibold leading-snug">
+                                <p>Rafi Amirudin</p>
+                                {{-- <p class="mt-1">Leader</p> --}}
+                            </div>
+                        </div>
+
+                        <div class="mt-6 max-w-[240px] text-center sm:text-left">
+                            <div class="flex items-center justify-center sm:justify-start mb-2">
+                                <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
+                                <span class="text-[30px] font-medium text-black">HR Manager</span>
+                            </div>
+                            <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
+                                Improve well being, grow future leader, become the greatness human
+                            </p>
+                            <a href="{{ route('team.hrmanager')}}" class="text-blue-600 font-semibold hover:underline text-sm">
                                 Find out more &rarr;
                             </a>
                         </div>
@@ -524,35 +552,7 @@
                         <div class="mt-6 max-w-[240px] text-center sm:text-left">
                             <div class="flex items-center justify-center sm:justify-start mb-2">
                                 <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
-                                <span class="text-[30px] font-medium text-black">Manager</span>
-                            </div>
-                            <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
-                                Improve well being, grow future leader, become the greatness human
-                            </p>
-                            <a href="#" class="text-blue-600 font-semibold hover:underline text-sm">
-                                Find out more &rarr;
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col items-center">
-                        <div class="relative w-[240px] h-[260px]">
-                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
-
-                            <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
-                                class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
-
-                            <div
-                                class="absolute left-4 bottom-4 bg-black bg-opacity-60 px-3 py-1 rounded-md shadow-md inline-block text-white text-sm font-semibold leading-snug">
-                                <p>Growing Future</p>
-                                <p class="mt-1">Leader</p>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 max-w-[240px] text-center sm:text-left">
-                            <div class="flex items-center justify-center sm:justify-start mb-2">
-                                <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
-                                <span class="text-[30px] font-medium text-black">Manager</span>
+                                <span class="text-[30px] font-medium text-black">Specialist</span>
                             </div>
                             <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
                                 Improve well being, grow future leader, become the greatness human

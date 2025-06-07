@@ -13,7 +13,49 @@
 
 namespace App\Models{
 /**
+ * 
  *
+ * @property int $id
+ * @property int $user_id
+ * @property string $job_title
+ * @property string $company_name
+ * @property string|null $country
+ * @property string|null $city
+ * @property int|null $start_month
+ * @property string|null $start_year
+ * @property int|null $end_month
+ * @property string|null $end_year
+ * @property int $current_job
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereCompanyName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereCurrentJob($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereEndMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereEndYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereJobTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereStartMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereStartYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Experience whereUserId($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperExperience {}
+}
+
+namespace App\Models{
+/**
+ * 
  *
  * @property int $id
  * @property int $user_id
@@ -45,13 +87,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereProvince($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereUserId($value)
+ * @mixin \Eloquent
  */
-	class Profile extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperProfile {}
 }
 
 namespace App\Models{
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -61,8 +105,11 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Experience> $experiences
+ * @property-read int|null $experiences_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \App\Models\Profile|null $profile
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
@@ -75,7 +122,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class User extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperUser {}
 }
 

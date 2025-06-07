@@ -1,33 +1,32 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @mixin IdeHelperProfile
- */
-class Profile extends Model {
+class Education extends Model {
     use HasFactory;
+
+    protected $table = 'educations';
 
     protected $fillable = [
         'user_id',
-        'phone_number',
+        'university_name',
+        'degree',
+        'major',
         'country',
-        'province',
         'city',
-        'date_of_birth',
-        'gender',
-        'address',
-        'bio',
-        'profile_photo_path',
+        'start_month',
+        'start_year',
+        'end_month',
+        'end_year',
+        'currently_studying',
+        'ipk',
+        'description',
     ];
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 }
-?>
