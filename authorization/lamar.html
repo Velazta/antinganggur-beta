@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamar Pekerjaan - AntiNganggur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #F5F5F5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #FFA98F;
+            padding: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Mengubah ini dari flex-start ke center */
+            gap: 15px;
+        }
+
+        .header img {
+            width: 80px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .header-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .header-text h2 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .form-container {
+            padding: 25px 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: #333;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .form-label::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #DDD;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #DDD;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .form-control::placeholder {
+            color: #999;
+            font-weight: 400;
+        }
+
+        .upload-btn {
+            display: flex;
+            align-items: center;
+            background-color: #F8F8F8;
+            border: 1px solid #DDD;
+            border-radius: 8px;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: #EEE;
+        }
+
+        .upload-icon {
+            background-color: #FFA98F;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .upload-text {
+            color: #666;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .submit-btn {
+            background-color: #FF7F50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            float: right;
+            transition: background-color 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #FF6B3D;
+        }
+
+        .form-container::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="../public/asset/page/lamar.png" alt="Illustrasi Orang Bergabung">
+            <div class="header-text">
+                <h1>Lamar Pekerjaan</h1>
+                <h2>Ke AntiNganggur</h2>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <form id="jobApplicationForm">
+                <div class="form-group">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control" placeholder="Masukkan Nama Lengkap" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nomor</label>
+                    <input type="tel" class="form-control" placeholder="Mulai Dengan Kode Negara" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" placeholder="Masukkan Email Mu" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Lokasi</label>
+                    <input type="text" class="form-control" placeholder="Input Nama Kabupaten/Kota" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Pendidikan Terakhir</label>
+                    <input type="text" class="form-control" placeholder="Cth: Universitas Sebelas Maret" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Jurusan</label>
+                    <input type="text" class="form-control" placeholder="Cth: Informatika" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tingkat Pengalaman</label>
+                    <input type="text" class="form-control" placeholder="Cth: Fresh Graduate" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">CV</label>
+                    <label for="cv-upload" class="upload-btn">
+                        <div class="upload-icon">+</div>
+                        <span class="upload-text">Unggah CV Dalam Bentuk Pdf</span>
+                    </label>
+                    <input type="file" id="cv-upload" accept=".pdf" style="display: none;" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Portfolio</label>
+                    <label for="portfolio-upload" class="upload-btn">
+                        <div class="upload-icon">+</div>
+                        <span class="upload-text">Unggah Portfolio Dalam Bentuk Pdf</span>
+                    </label>
+                    <input type="file" id="portfolio-upload" accept=".pdf" style="display: none;">
+                </div>
+
+                <button type="submit" class="submit-btn">Lamar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Formulir telah dikirim! Terima kasih telah melamar.');
+        });
+
+        document.getElementById('cv-upload').addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const fileName = this.files[0].name;
+                this.previousElementSibling.querySelector('.upload-text').textContent = fileName;
+            } else {
+                this.previousElementSibling.querySelector('.upload-text').textContent = 'Unggah CV Dalam Bentuk Pdf';
+            }
+        });
+
+        document.getElementById('portfolio-upload').addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const fileName = this.files[0].name;
+                this.previousElementSibling.querySelector('.upload-text').textContent = fileName;
+            } else {
+                this.previousElementSibling.querySelector('.upload-text').textContent = 'Unggah Portfolio Dalam Bentuk Pdf';
+            }
+        });
+    </script>
+</body>
+</html>
