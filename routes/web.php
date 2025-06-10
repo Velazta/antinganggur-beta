@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -60,3 +61,17 @@ Route::view('/team/rafi-amirudin','team.hrmanager')->name('team.hrmanager');
 Route::get('/contact', function() {
     return view('contact');
 });
+<<<<<<< HEAD
+
+//Route untuk mengirim pesan kontak
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+
+// Jika nanti ada dashboard, bisa diaktifkan kembali bagian ini:
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return "Selamat datang di Dashboard, " . Auth::user()->name;
+//     })->name('dashboard');
+// });
+=======
+>>>>>>> af6ef8c1cccccc91cfb87cbcd5ba9ab31b4a3dc8
