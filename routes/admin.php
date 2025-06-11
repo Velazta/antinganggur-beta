@@ -18,8 +18,14 @@ Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('logi
 Route::post('/login', [AdminLoginController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
 
+
 // Rute yang memerlukan login admin
 Route::middleware(['auth.admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
     // Tambahkan rute admin lainnya di sini...
+
+    Route::get('/manajemen-lowongan', function() {
+        return view('admin.manajemen_lowongan.manajemenlowongan');
+    })->name('manajemen.lowongan');
 });

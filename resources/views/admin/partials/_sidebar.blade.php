@@ -19,14 +19,14 @@
             <ul class="space-y-8">
                 <li>
                     {{-- PERBAIKAN: Padding horizontal (px-10) sekarang ada di sini --}}
-                    <a href="#" class="sidebar-link flex items-center gap-8 py-3 px-10" data-order="0">
+                    <a href="{{ route('admin.dashboard') }}" class="sidebar-link flex items-center gap-8 py-3 px-10" data-order="0">
                         <img src="{{ asset('asset/admin/Dashboardwhite.png') }}" alt="Icon Dashboard" class="w-6 h-6 icon-inactive">
                         <img src="{{ asset('asset/admin/Dashboardblue.png') }}" alt="Icon Dashboard Active" class="w-6 h-6 icon-active">
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="sidebar-link flex items-center gap-8 py-3 px-10" data-order="1">
+                    <a href="{{ route('admin.manajemen.lowongan') }}" class="sidebar-link flex items-center gap-8 py-3 px-10" data-order="1">
                         <img src="{{ asset('asset/admin/Briefcasewhite.png') }}" alt="Icon Lowongan" class="w-6 h-6 icon-inactive">
                         <img src="{{ asset('asset/admin/Briefcaseblue.png') }}" alt="Icon Lowongan Active" class="w-6 h-6 icon-active">
                         <span>Lowongan</span>
