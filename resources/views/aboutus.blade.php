@@ -516,15 +516,15 @@
 
                             <div
                                 class="absolute left-4 bottom-4 bg-black bg-opacity-60 px-3 py-1 rounded-md shadow-md inline-block text-white text-sm font-semibold leading-snug">
-                                <p>Growing Future</p>
-                                <p class="mt-1">Leader</p>
+                                <p>Rafi Amirudin</p>
+                                {{-- <p class="mt-1">Leader</p> --}}
                             </div>
                         </div>
 
                         <div class="mt-6 max-w-[240px] text-center sm:text-left">
                             <div class="flex items-center justify-center sm:justify-start mb-2">
                                 <img src="{{ asset('asset/page/Star.png') }}" alt="Star Icon" class="w-5 h-5 mr-2 flex-shrink-0" />
-                                <span class="text-[30px] font-medium text-black">Hr Manager</span>
+                                <span class="text-[30px] font-medium text-black">HR Manager</span>
                             </div>
                             <p class="text-[#FF7144] leading-relaxed mb-4 text-justify text-[20px]">
                                 Improve well being, grow future leader, become the greatness human

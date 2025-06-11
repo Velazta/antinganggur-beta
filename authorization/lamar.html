@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamar Pekerjaan - AntiNganggur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'coral': {
+                            400: '#FFA98F',
+                            500: '#FF7F50',
+                            600: '#FF6B3D',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .floating-label-input {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Styling for ALL inputs (text, tel, email, etc.) */
+        .floating-label-input input {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            border: 1px solid #DDD;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.2s ease;
+            box-sizing: border-box; /* Pastikan padding tidak menambah lebar/tinggi */
+        }
+
+        /* Styling for SELECT elements only */
+        .floating-label-input select {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            border: 1px solid #DDD;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.2s ease;
+            -webkit-appearance: none; /* Untuk menyembunyikan panah default select */
+            -moz-appearance: none;    /* Untuk menyembunyikan panah default select */
+            appearance: none;         /* Untuk menyembunyikan panah default select */
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23999999" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom panah */
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            background-color: white;
+            box-sizing: border-box;
+            overflow: hidden; /* NEW: Sembunyikan overflow teks */
+            text-overflow: ellipsis; /* NEW: Tambahkan ellipsis jika teks terpotong */
+            white-space: nowrap; /* NEW: Pastikan teks tidak wrap */
+        }
+
+        /* NEW: Aturan untuk menyembunyikan teks opsi default (placeholder) */
+        .floating-label-input select option[disabled][selected] {
+            color: transparent; /* Membuat teks transparan */
+        }
+        .floating-label-input select:focus option[disabled][selected] {
+            color: transparent; /* Pastikan tetap transparan saat fokus */
+        }
+
+
+        .floating-label-input label {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #999;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            background-color: white;
+            padding: 0 5px;
+            z-index: 2; /* Tingkatkan z-index agar label selalu di atas */
+        }
+
+        .floating-label-input input:focus,
+        .floating-label-input select:focus {
+            border-color: #FFA98F;
+        }
+
+        .floating-label-input input:focus + label,
+        .floating-label-input input:not(:placeholder-shown) + label,
+        .floating-label-input select:focus + label,
+        .floating-label-input select:valid + label {
+            top: 0;
+            font-size: 12px;
+            color: #FFA98F;
+            font-weight: 500;
+            z-index: 3; /* Pastikan label tetap di atas saat floating */
+        }
+
+        .floating-label-input input::placeholder {
+            color: transparent;
+        }
+
+        .floating-label-input select:invalid {
+            color: #999; /* Warna teks placeholder (opsi default) */
+        }
+        .floating-label-input select:valid {
+            color: #333; /* Warna teks setelah dipilih */
+        }
+
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: #333;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .form-label::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #DDD;
+        }
+
+        .upload-btn {
+            display: flex;
+            align-items: center;
+            background-color: #F8F8F8;
+            border: 1px solid #DDD;
+            border-radius: 8px;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: #EEE;
+        }
+
+        .upload-icon {
+            background-color: #FFA98F;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .upload-text {
+            color: #666;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .submit-btn {
+            background-color: #FF7F50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            float: right;
+            transition: background-color 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #FF6B3D;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-poppins min-h-screen flex justify-center items-start p-5">
+    <div class="w-full max-w-md bg-white rounded-lg overflow-hidden shadow-lg">
+        <div class="bg-[#FFA98F] p-5 text-white flex items-center justify-center gap-4">
+            <img src="../public/asset/page/lamar.png" alt="Illustrasi Orang Bergabung" class="w-20 h-auto object-contain">
+            <div class="text-center">
+                <h1 class="text-2xl font-bold mb-1">Lamar Pekerjaan</h1>
+                <h2 class="text-lg font-medium">Ke AntiNganggur</h2>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <form id="jobApplicationForm">
+                <div class="floating-label-input">
+                    <input type="text" id="nama" placeholder="Nama Lengkap" required>
+                    <label for="nama">Nama Lengkap</label>
+                </div>
+
+                <div class="floating-label-input">
+                    <input type="tel" id="nomor" placeholder="Nomor" required>
+                    <label for="nomor">Nomor</label>
+                </div>
+
+                <div class="floating-label-input">
+                    <input type="email" id="email" placeholder="Email" required>
+                    <label for="email">Email</label>
+                </div>
+
+                <div class="floating-label-input">
+                    <select id="provinsi" required>
+                        <option value="" disabled selected></option>
+                    </select>
+                    <label for="provinsi">Pilih Provinsi</label>
+                </div>
+
+                <div class="floating-label-input">
+                    <select id="lokasi" required disabled>
+                        <option value="" disabled selected></option></select>
+                    <label for="lokasi">Pilih Kabupaten/Kota</label> </div>
+
+                <div class="floating-label-input">
+                    <input type="text" id="pendidikan" placeholder="Pendidikan Terakhir" required>
+                    <label for="pendidikan">Pendidikan Terakhir</label>
+                </div>
+
+                <div class="floating-label-input">
+                    <input type="text" id="jurusan" placeholder="Jurusan" required>
+                    <label for="jurusan">Jurusan</label>
+                </div>
+
+                <div class="floating-label-input">
+                    <input type="text" id="pengalaman" placeholder="Tingkat Pengalaman" required>
+                    <label for="pengalaman">Tingkat Pengalaman</label>
+                </div>
+
+                <div class="mb-5">
+                    <label class="form-label">CV</label>
+                    <label for="cv-upload" class="upload-btn">
+                        <div class="upload-icon">+</div>
+                        <span class="upload-text" id="cv-text">Unggah CV Dalam Bentuk Pdf</span>
+                    </label>
+                    <input type="file" id="cv-upload" accept=".pdf" style="display: none;" required>
+                </div>
+
+                <div class="mb-5">
+                    <label class="form-label">Portfolio</label>
+                    <label for="portfolio-upload" class="upload-btn">
+                        <div class="upload-icon">+</div>
+                        <span class="upload-text" id="portfolio-text">Unggah Portfolio Dalam Bentuk Pdf (Opsional)</span>
+                    </label>
+                    <input type="file" id="portfolio-upload" accept=".pdf" style="display: none;">
+                </div>
+
+                <div class="clearfix">
+                    <button type="submit" class="submit-btn">Lamar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const provinsiSelect = document.getElementById('provinsi');
+        const lokasiSelect = document.getElementById('lokasi');
+
+        // Fungsi untuk mengisi dropdown
+        function populateDropdown(selectElement, data, placeholderText) {
+            selectElement.innerHTML = `<option value="" disabled selected>${placeholderText}</option>`;
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id; // API Emsifa menggunakan ID untuk nilai
+                option.textContent = item.name;
+                selectElement.appendChild(option);
+            });
+            // Reset floating label state
+            selectElement.classList.remove('valid');
+        }
+
+        // Fungsi untuk mengambil data Provinsi
+        async function fetchProvinces() {
+            try {
+                const response = await fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const provinces = await response.json();
+                provinces.sort((a, b) => a.name.localeCompare(b.name));
+                populateDropdown(provinsiSelect, provinces, "Provinsi"); // Placeholder diisi di sini
+            } catch (error) {
+                console.error('Gagal mengambil data provinsi:', error);
+                alert('Gagal memuat daftar provinsi. Silakan coba lagi nanti.');
+            }
+        }
+
+        // Fungsi untuk mengambil data Kabupaten/Kota berdasarkan ID Provinsi
+        async function fetchRegencies(provinceId) {
+            lokasiSelect.disabled = true; // Nonaktifkan dropdown lokasi saat memuat
+            lokasiSelect.innerHTML = `<option value="" disabled selected>Memuat...</option>`;
+            lokasiSelect.classList.remove('valid'); // Reset label state
+
+            try {
+                const response = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const regencies = await response.json();
+                regencies.sort((a, b) => a.name.localeCompare(b.name));
+                populateDropdown(lokasiSelect, regencies, "Kabupaten/Kota"); // Placeholder diisi di sini
+                lokasiSelect.disabled = false; // Aktifkan kembali dropdown lokasi
+            } catch (error) {
+                console.error('Gagal mengambil data kabupaten/kota:', error);
+                alert('Gagal memuat daftar kabupaten/kota. Silakan coba lagi nanti.');
+                lokasiSelect.innerHTML = `<option value="" disabled selected>Gagal memuat</option>`;
+            }
+        }
+
+        // Event Listener untuk dropdown Provinsi
+        provinsiSelect.addEventListener('change', function() {
+            const selectedProvinceId = this.value;
+            if (selectedProvinceId) {
+                fetchRegencies(selectedProvinceId);
+            } else {
+                lokasiSelect.innerHTML = `<option value="" disabled selected>Pilih Kabupaten/Kota</option>`;
+                lokasiSelect.disabled = true;
+                lokasiSelect.classList.remove('valid');
+            }
+            // Trigger floating label logic for provinsi
+            if (this.value !== "") {
+                this.classList.add('valid');
+            } else {
+                this.classList.remove('valid');
+            }
+        });
+
+        // Event Listener untuk dropdown Lokasi (untuk floating label)
+        lokasiSelect.addEventListener('change', function() {
+            if (this.value !== "") {
+                this.classList.add('valid');
+            } else {
+                this.classList.remove('valid');
+            }
+        });
+
+        // Muat daftar provinsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', fetchProvinces);
+
+
+        // Form submission handler
+        document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Contoh pengambilan nilai dari form
+            const nama = document.getElementById('nama').value;
+            const nomor = document.getElementById('nomor').value;
+            const email = document.getElementById('email').value;
+
+            // Untuk mendapatkan nama provinsi/kabupaten/kota
+            const provinsiNama = provinsiSelect.options[provinsiSelect.selectedIndex].text;
+            const lokasiNama = lokasiSelect.options[lokasiSelect.selectedIndex].text;
+
+            const pendidikan = document.getElementById('pendidikan').value;
+            const jurusan = document.getElementById('jurusan').value;
+            const pengalaman = document.getElementById('pengalaman').value;
+            const cvFile = document.getElementById('cv-upload').files[0];
+            const portfolioFile = document.getElementById('portfolio-upload').files[0];
+
+            console.log({
+                nama,
+                nomor,
+                email,
+                provinsi: provinsiNama,
+                lokasi: lokasiNama,
+                pendidikan,
+                jurusan,
+                pengalaman,
+                cvFile: cvFile ? cvFile.name : 'Tidak ada CV',
+                portfolioFile: portfolioFile ? portfolioFile.name : 'Tidak ada Portfolio'
+            });
+
+            alert('Formulir telah dikirim! Terima kasih telah melamar.');
+            // Di sini Anda akan mengirim data ke server (misalnya menggunakan fetch API)
+            // Pastikan untuk mengirimkan ID atau nama yang relevan ke backend Anda
+        });
+
+        // CV upload handler
+        document.getElementById('cv-upload').addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const fileName = this.files[0].name;
+                document.getElementById('cv-text').textContent = fileName;
+            } else {
+                document.getElementById('cv-text').textContent = 'Unggah CV Dalam Bentuk Pdf';
+            }
+        });
+
+        // Portfolio upload handler
+        document.getElementById('portfolio-upload').addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const fileName = this.files[0].name;
+                document.getElementById('portfolio-text').textContent = 'Unggah Portfolio Dalam Bentuk Pdf (Opsional)';
+            } else {
+                document.getElementById('portfolio-text').textContent = 'Unggah Portfolio Dalam Bentuk Pdf';
+            }
+        });
+    </script>
+</body>
+</html>
