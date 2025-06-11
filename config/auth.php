@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins', // USE PROVIDER FROM 'admins'
+        ],
     ],
 
     /*
@@ -65,10 +70,10 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
 
     /*
@@ -97,7 +102,17 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        // Anda bisa menambahkan 'admins' di sini jika butuh fitur reset password untuk admin
+        // 'admins' => [
+        //     'provider' => 'admins',
+        //     'table' => 'admin_password_reset_tokens',
+        //     'expire' => 60,
+        //     'throttle' => 60,
+        // ],
     ],
+
+
 
     /*
     |--------------------------------------------------------------------------
