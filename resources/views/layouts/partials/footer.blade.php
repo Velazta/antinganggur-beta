@@ -120,22 +120,30 @@
                 <p>AntiNganggur adalah perusahaan teknologi yang menyediakan berbagai lowongan kerja di bidang IT dan digital. Kami membuka kesempatan bagi talenta IT Indonesia untuk bergabung dan berkembang bersama kami melalui posisi-posisi yang tersedia di berbagai divisi teknologi.</p>
 
                 <div class="contact-info">
-                    <span class="contact-icon">
-                        <img src="{{ asset('assets/icons/phone.png') }}" alt="Phone Icon" class="w-5 h-5" />
+                     <span class="contact-icon">
+                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3.09 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72c.13.81.37 1.6.72 2.34a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.74.35 1.53.59 2.34.72A2 2 0 0 1 22 16.92z"/>
+                        </svg>
                     </span>
                     <div>08123123123</div>
                 </div>
 
                 <div class="contact-info">
                     <span class="contact-icon">
-                        <img src="{{ asset('assets/icons/email.png') }}" alt="Email Icon" class="w-5 h-5" />
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="3" y="5" width="18" height="14" rx="2"/>
+                            <polyline points="3 7 12 13 21 7"/>
+                        </svg>
                     </span>
                     <div>Antinganggur@Gmail.Com</div>
                 </div>
 
                 <div class="contact-info">
                     <span class="contact-icon">
-                        <img src="{{ asset('assets/icons/address.png') }}" alt="Address Icon" class="w-5 h-5" />
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 21s-6-5.686-6-10A6 6 0 0 1 18 11c0 4.314-6 10-6 10z"/>
+                            <circle cx="12" cy="11" r="2"/>
+                        </svg>
                     </span>
                     <div>Jl. Ir. Sutami 36-A, Kentingan, Jebres, Surakarta, Jawa Tengah.</div>
                 </div>
