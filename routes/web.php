@@ -65,30 +65,30 @@ Route::get('/contact', function() {
 
 
 
-//ROUTE UNTUK ADMIN
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
+// //ROUTE UNTUK ADMIN
+// use App\Http\Controllers\Admin\DashboardController;
+// use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 
-/*
-| Rute untuk admin
-|
-| Semua rute didalam grup ini akan memiliki awalan URL /admin
-*/
+// /*
+// | Rute untuk admin
+// |
+// | Semua rute didalam grup ini akan memiliki awalan URL /admin
+// */
 
-Route::prefix('admin')->name('admin.')->group(function() {
-    //route untuk login admin
-    Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name(('login'));
-    Route::post('/login', [AdminLoginController::class, 'login'])->name('login.submit');
-    Route::post('/logout', [AdminLoginController::class,'logout'])->name('logout');
+// Route::prefix('admin')->name('admin.')->group(function() {
+//     //route untuk login admin
+//     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name(('login'));
+//     Route::post('/login', [AdminLoginController::class, 'login'])->name('login.submit');
+//     Route::post('/logout', [AdminLoginController::class,'logout'])->name('logout');
 
-    //route yang memerlukan login admin
-    Route::middleware(['auth.admin'])->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        // Tambahkan rute lain di sini, contoh:
-        // Route::get('/vacancies', [JobVacancyController::class, 'index'])->name('vacancies.index');
-        // Route::get('/job-seekers', [JobSeekerController::class, 'index'])->name('jobseekers.index');
-    });
-});
+//     //route yang memerlukan login admin
+//     Route::middleware(['auth.admin'])->group(function () {
+//         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//         // Tambahkan rute lain di sini, contoh:
+//         // Route::get('/vacancies', [JobVacancyController::class, 'index'])->name('vacancies.index');
+//         // Route::get('/job-seekers', [JobSeekerController::class, 'index'])->name('jobseekers.index');
+//     });
+// });
 
 
 

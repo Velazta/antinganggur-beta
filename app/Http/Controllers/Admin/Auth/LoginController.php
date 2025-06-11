@@ -14,20 +14,32 @@ class LoginController extends Controller
 
     public function login(Request $request) {
 
-        $request ->validate([
-            'email' => 'requeired|email',
+        $request->validate([
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
         if (Auth::guard('admin')->attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             $request->session()->regenerate();
-            // 3. Jika berhasil, redirect ke dashboard admin
+
+            // ===================================
+            // PERBAIKAN DI SINI
+            // ===================================
+            // Ubah 'admin.dashboard.dashboard' menjadi 'admin.dashboard'
             return redirect()->route('admin.dashboard');
         }
 
-        return back() ->withErrors([
+        return back()->withErrors([
             'email' => 'Kredensial yang diberikan tidak cocok',
         ])->onlyInput('email');
+    }
 
+    // Pastikan method logout juga ada
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('admin.login');
     }
 }
