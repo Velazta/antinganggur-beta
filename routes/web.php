@@ -61,3 +61,15 @@ Route::get('/contact', function() {
     return view('contact');
 });
 
+
+//Route untuk mengirim pesan kontak
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+
+// Jika nanti ada dashboard, bisa diaktifkan kembali bagian ini:
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return "Selamat datang di Dashboard, " . Auth::user()->name;
+//     })->name('dashboard');
+// });
+
