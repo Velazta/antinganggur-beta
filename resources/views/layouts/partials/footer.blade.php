@@ -174,15 +174,33 @@
 
         <div class="footer-column">
             <h3 class="footer-title">Hubungi Kami</h3>
-            @if(session('success'))
-                <div class="bg-green-500 text-white p-3 rounded mb-4">
-                    {{ session('success') }}
+            @if(session('contact_success'))
+                <div style="background-color: #10B981; color: white; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
+                    {{ session('contact_success') }}
                 </div>
             @endif
+
+            @if(session('contact_error'))
+                <div style="background-color: #EF4444; color: white; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
+                    {{ session('contact_error') }}
+                </div>
+            @endif
+
+            @if($errors->has('email') || $errors->has('message'))
+                <div style="background-color: #EF4444; color: white; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
+                    @if($errors->has('email'))
+                        <div>{{ $errors->first('email') }}</div>
+                    @endif
+                    @if($errors->has('message'))
+                        <div>{{ $errors->first('message') }}</div>
+                    @endif
+                </div>
+            @endif
+
             <form class="contact-form" method="POST" action="{{ route('contact.store') }}">
                 @csrf
-                <input type="email" name="email" placeholder="Masukkan Email" required>
-                <textarea name="message" placeholder="Masukkan Pesan" required></textarea>
+                <input type="email" name="email" placeholder="Masukkan Email" value="{{ old('email') }}" required>
+                <textarea name="message" placeholder="Masukkan Pesan" required>{{ old('message') }}</textarea>
                 <button type="submit">Kirim</button>
             </form>
         </div>

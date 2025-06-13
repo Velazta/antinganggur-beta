@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\JobApplicationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -65,6 +66,9 @@ Route::get('/contact', function() {
 //Route untuk mengirim pesan kontak
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::get('/lamar', [JobApplicationController::class, 'create'])->name('lamar.create');
+Route::post('/lamar', [JobApplicationController::class, 'store'])->name('lamar.store');
+Route::get('/api/positions', [JobApplicationController::class, 'getPositions'])->name('lamar.positions');
 
 // Jika nanti ada dashboard, bisa diaktifkan kembali bagian ini:
 // Route::middleware(['auth'])->group(function () {
