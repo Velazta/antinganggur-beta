@@ -173,6 +173,7 @@
             @endif
             <form class="contact-form" method="POST" action="{{ route('contact.store') }}">
                 @csrf
+                <input type="text" name="nama" placeholder="Masukkan Nama" required>
                 <input type="email" name="email" placeholder="Masukkan Email" required>
                 <textarea name="message" placeholder="Masukkan Pesan" required></textarea>
                 <button type="submit">Kirim</button>
