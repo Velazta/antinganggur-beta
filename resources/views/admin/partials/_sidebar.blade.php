@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="sidebar-link flex items-center gap-8 py-3 px-10" data-order="3">
+                    <a href="{{ route('admin.inbox')}}" class="sidebar-link flex items-center gap-8 py-3 px-10" data-order="3">
                         <img src="{{ asset('asset/admin/SpeechBubblewhite.png') }}" alt="Icon Kotak Pesan" class="w-6 h-6 icon-inactive">
                         <img src="{{ asset('asset/admin/SpeechBubbleblue.png') }}" alt="Icon Kotak Pesan Active" class="w-6 h-6 icon-active">
                         <span>Kotak Pesan</span>

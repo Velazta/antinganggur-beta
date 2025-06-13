@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InboxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,6 @@ Route::middleware(['auth.admin'])->group(function () {
         return view('admin.manajemen_lowongan.manajemenlowongan');
     })->name('manajemen.lowongan');
 
+    Route::get('/inbox', [InboxController::class, 'inbox'])->name('inbox');
+    Route::get('/inbox/{id}', [InboxController::class, 'show'])->name('inbox.show');
 });
