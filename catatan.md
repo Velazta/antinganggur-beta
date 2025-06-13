@@ -95,7 +95,7 @@
 │       │   │   └── show.blade.php          // Halaman detail profil seorang pelamar
 │       │   │
 │       │   └── inbox/                      // Folder untuk fitur Kotak Pesan
-│       │       ├── index.blade.php         // Daftar semua pesan
+│       │       ├── inbox.blade.php         // Daftar semua pesan
 │       │       └── show.blade.php          // Halaman untuk membaca satu pesan
 │       │
 │       └── ...                             // <-- View untuk job seeker (tetap di luar)

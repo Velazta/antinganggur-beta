@@ -28,4 +28,5 @@ Route::middleware(['auth.admin'])->group(function () {
     Route::get('/manajemen-lowongan', function() {
         return view('admin.manajemen_lowongan.manajemenlowongan');
     })->name('manajemen.lowongan');
+
 });

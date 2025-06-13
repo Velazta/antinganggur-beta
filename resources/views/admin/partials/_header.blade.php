@@ -1,14 +1,15 @@
 {{-- resources/views/admin/partials/_header.blade.php --}}
 
-<header class="bg-blue p-4 rounded-lg">
+{{-- PERUBAHAN: Padding diubah untuk menurunkan posisi konten & background disesuaikan --}}
+<header class="bg-white px-8 pt-6 pb-4">
     <div class="flex justify-between items-center">
-        {{-- TAMBAHKAN KODE INI --}}
+
         <div class="flex items-center">
-            <h1 id="page-title" class="text-xl md:text-2xl font-bold text-gray-800">
+            {{-- PERUBAHAN: Ukuran font judul diperbesar dari text-2xl menjadi text-3xl --}}
+            <h1 id="page-title" class="text-[40px] font-medium text-gray-800">
                 @yield('page-title', 'Dashboard')
             </h1>
         </div>
-        {{-- BATAS PENAMBAHAN --}}
 
         <div class="flex items-center ml-auto relative">
             <button id="user-profile-button" class="flex items-center gap-3">
