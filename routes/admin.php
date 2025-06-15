@@ -31,5 +31,4 @@ Route::middleware(['auth.admin'])->group(function () {
     })->name('manajemen.lowongan');
 
     Route::get('/inbox', [InboxController::class, 'inbox'])->name('inbox');
-    Route::get('/inbox/{id}', [InboxController::class, 'show'])->name('inbox.show');
 });
