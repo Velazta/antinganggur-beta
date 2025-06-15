@@ -62,87 +62,79 @@
         #user-dropdown { transition: transform 0.2s ease-out, opacity 0.2s ease-out; }
     </style>
 
-    {{-- GANTI DENGAN KODE JAVASCRIPT BARU INI --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Logika untuk Sidebar ---
-            const sidebarLinks = document.querySelectorAll('.sidebar-link');
-            const indicator = document.getElementById('active-menu-indicator');
-            const pageTitle = document.getElementById('page-title');
+    {{-- Ganti keseluruhan <script> di dalam app.blade.php dengan ini --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Logika untuk Sidebar ---
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const indicator = document.getElementById('active-menu-indicator');
+        const pageTitle = document.getElementById('page-title');
 
-            function moveIndicator(element) {
-                if (!element || !indicator) return;
+        // Fungsi ini tetap sama, untuk memindahkan indikator visual
+        function moveIndicator(element) {
+            if (!element || !indicator) return;
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+            indicator.style.top = `${element.offsetTop}px`;
+            indicator.style.height = `${element.offsetHeight}px`;
+        }
 
-                sidebarLinks.forEach(link => link.classList.remove('active'));
-                element.classList.add('active');
-                indicator.style.top = `${element.offsetTop}px`;
-                indicator.style.height = `${element.offsetHeight}px`;
+        // --- Logika Penentuan Link Aktif Saat Halaman Dimuat ---
+        // Ini adalah bagian terpenting
+        let currentActiveLink = null;
+        const currentUrl = window.location.href;
 
-                // Update judul header jika elemennya ada
-                if(pageTitle && element.querySelector('span')) {
-                    pageTitle.textContent = element.querySelector('span').textContent.trim();
-                }
-            }
-
-            // --- LOGIKA BARU: Tentukan link aktif berdasarkan URL saat halaman dimuat ---
-            let currentActiveLink = null;
-            const currentUrl = window.location.href;
-
-            sidebarLinks.forEach(link => {
-                if (link.href === currentUrl) {
-                    currentActiveLink = link;
-                }
-            });
-
-            // Jika tidak ada URL yang cocok, aktifkan menu pertama (Dashboard) sebagai default
-            if (!currentActiveLink) {
-                currentActiveLink = document.querySelector('.sidebar-link[data-order="0"]');
-            }
-
-            // Pindahkan indikator ke link yang aktif saat halaman dimuat
-            if (currentActiveLink) {
-                moveIndicator(currentActiveLink);
-            }
-
-            // --- Logika klik tetap sama, namun dengan navigasi ---
-            sidebarLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const destinationUrl = this.href;
-
-                    moveIndicator(this);
-
-                    // Beri jeda agar animasi terlihat sebelum pindah halaman
-                    setTimeout(() => {
-                        window.location.href = destinationUrl;
-                    }, 150);
-                });
-            });
-
-            // --- Logika untuk Dropdown Header ---
-            const userProfileButton = document.getElementById('user-profile-button');
-            const userDropdown = document.getElementById('user-dropdown');
-
-            if (userProfileButton && userDropdown) {
-                userProfileButton.addEventListener('click', function(event) {
-                    event.stopPropagation();
-                    userDropdown.classList.toggle('hidden');
-                    if(!userDropdown.classList.contains('hidden')) {
-                        setTimeout(() => userDropdown.classList.remove('opacity-0', 'scale-95'), 10);
-                    } else {
-                        userDropdown.classList.add('opacity-0', 'scale-95');
-                        setTimeout(() => userDropdown.classList.add('hidden'), 200); // Waktu untuk transisi hide
-                    }
-                });
-
-                document.addEventListener('click', function() {
-                    if (!userDropdown.classList.contains('hidden')) {
-                        userDropdown.classList.add('opacity-0', 'scale-95');
-                        setTimeout(() => userDropdown.classList.add('hidden'), 200);
-                    }
-                });
+        sidebarLinks.forEach(link => {
+            // Kita cek apakah URL link sama dengan URL halaman saat ini
+            if (link.href === currentUrl.split('?')[0]) { // .split('?')[0] untuk mengabaikan query string
+                currentActiveLink = link;
             }
         });
-    </script>
+
+        // Jika tidak ada URL yang cocok persis (misalnya karena ada parameter),
+        // fallback ke link Dashboard sebagai default
+        if (!currentActiveLink) {
+            const dashboardLink = document.querySelector('.sidebar-link[href*="{{ route('admin.dashboard') }}"]');
+            if (dashboardLink && currentUrl.includes('/dashboard')) {
+                 currentActiveLink = dashboardLink;
+            } else {
+                 // Jika masih tidak ada, coba cari berdasarkan segmen URL
+                 const path = window.location.pathname;
+                 sidebarLinks.forEach(link => {
+                    const linkPath = new URL(link.href).pathname;
+                    if (path.startsWith(linkPath) && linkPath !== '/admin/dashboard') { // Jangan match dashboard lagi jika bukan halamannya
+                        currentActiveLink = link;
+                    }
+                 });
+            }
+        }
+
+        // Pindahkan indikator ke link yang aktif
+        if (currentActiveLink) {
+            moveIndicator(currentActiveLink);
+            if(pageTitle && currentActiveLink.querySelector('span')) {
+                pageTitle.textContent = currentActiveLink.querySelector('span').textContent.trim();
+            }
+        }
+
+
+        // --- Logika untuk Dropdown Header (Tidak berubah) ---
+        const userProfileButton = document.getElementById('user-profile-button');
+        const userDropdown = document.getElementById('user-dropdown');
+
+        if (userProfileButton && userDropdown) {
+            userProfileButton.addEventListener('click', function(event) {
+                event.stopPropagation();
+                userDropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function() {
+                if (!userDropdown.classList.contains('hidden')) {
+                    userDropdown.classList.add('hidden');
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>

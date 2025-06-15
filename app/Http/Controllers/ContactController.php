@@ -13,7 +13,7 @@ class ContactController extends Controller
         // Validasi input
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email',
             'message' => 'required|string|min:5',
         ]);
 
