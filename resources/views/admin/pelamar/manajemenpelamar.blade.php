@@ -1,9 +1,7 @@
-{{-- index.blade.php     // Halaman utama + KODE HTML untuk semua pop-up (Lihat, Edit, Hapus) --}}
-
 @extends('admin.layouts.app')
 
-@section('title', 'Manajemen Lowongan')
-@section('page-title', 'Lowongan')
+@section('title', 'Manajemen Lamaran')
+@section('page-title', 'Pelamar')
 
 @push('style')
 <style>
@@ -17,7 +15,7 @@
 {{-- Konten Utama Halaman --}}
 @section('content')
     <div class="bg-white p-6 rounded-xl shadow">
-        <p>Konten khusus halaman lowongan ada di sini.</p>
+        <p>Konten khusus halaman Pelamar ada di sini.</p>
     </div>
 @endsection
 
