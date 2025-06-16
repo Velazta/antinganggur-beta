@@ -12,7 +12,7 @@ class ContactController extends Controller
     {
 
         // Validate the request
-        $request->validate([
+        $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'message' => 'required|string|max:1000',
@@ -24,17 +24,21 @@ class ContactController extends Controller
             'message.max' => 'Pesan maksimal 1000 karakter.',
         ]);
 
+
         try {
             // Log the contact attempt
             Log::info('Contact form submitted', [
-                'nama' =>  $request->nama,
-                'email' => $request->email,
-                'message' => substr($request->message, 0, 100) . '...'
+                'nama' =>  $validated['nama'],
+                'email' => $validated['email'],
+                'message' => substr($validated['message'], 0, 100) . '...'
             ]);
 
-            // For now, we'll just log the message since there's no Contact model
-            // You can create a Contact model and database table later if needed
-
+            // Simpan ke database jika model Contact tersedia
+             Contact::create([
+                'nama' => $validated['nama'],
+                'email' => $validated['email'],
+                'message' => $validated['message'],
+            ]);
             return back()->with('contact_success', 'Pesan Anda berhasil dikirim! Terima kasih telah menghubungi kami.');
 
         } catch (\Exception $e) {
@@ -42,13 +46,6 @@ class ContactController extends Controller
                 'error' => $e->getMessage(),
                 'email' => $request->email
             ]);
-
-        Contact::create([
-            'nama' => $validated['nama'],
-            'email' => $validated['email'],
-            'message' => $validated['message'],
-        ]);
-
 
             return back()->with('contact_error', 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
         }
