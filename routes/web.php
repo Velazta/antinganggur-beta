@@ -76,3 +76,7 @@ Route::get('/api/positions', [JobApplicationController::class, 'getPositions'])-
 //         return "Selamat datang di Dashboard, " . Auth::user()->name;
 //     })->name('dashboard');
 // });
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/test-merge
