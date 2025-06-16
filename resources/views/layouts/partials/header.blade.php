@@ -55,8 +55,8 @@
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Lowongan</a>
                     <a href="{{ url('/aboutus') }}"
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Tentang</a>
-                    <a href="#"
-                        class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Portfolio</a>
+                    <a href="{{ url('/portofolio') }}"
+                        class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Portofolio</a>
                     <a href="{{ url('/contact') }}"
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Kontak</a>
                 </nav>

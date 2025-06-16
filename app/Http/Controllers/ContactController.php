@@ -10,27 +10,35 @@ class ContactController extends Controller
 {
     public function store(Request $request)
     {
+
         // Validate the request
-        $request->validate([
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'message' => 'required|string|max:1000',
         ], [
+            'nama.required' => 'Nama harus diisi.',
             'email.required' => 'Email harus diisi.',
             'email.email' => 'Format email tidak valid.',
             'message.required' => 'Pesan harus diisi.',
             'message.max' => 'Pesan maksimal 1000 karakter.',
         ]);
 
+
         try {
             // Log the contact attempt
             Log::info('Contact form submitted', [
-                'email' => $request->email,
-                'message' => substr($request->message, 0, 100) . '...'
+                'nama' =>  $validated['nama'],
+                'email' => $validated['email'],
+                'message' => substr($validated['message'], 0, 100) . '...'
             ]);
 
-            // For now, we'll just log the message since there's no Contact model
-            // You can create a Contact model and database table later if needed
-
+            // Simpan ke database jika model Contact tersedia
+             Contact::create([
+                'nama' => $validated['nama'],
+                'email' => $validated['email'],
+                'message' => $validated['message'],
+            ]);
             return back()->with('contact_success', 'Pesan Anda berhasil dikirim! Terima kasih telah menghubungi kami.');
 
         } catch (\Exception $e) {

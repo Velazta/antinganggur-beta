@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - AntiNganggur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/portfolio-hero.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .project-carousel {
+            background-image: url('/placeholder.svg?height=400&width=700');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body class="antialiased font-['Poppins'] bg-[#FFF7F5] text-slate-700">
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg min-h-[70vh] flex items-center justify-center text-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        <span class="text-orange-500">Komitmen Pada Kualitas</span><br>
+                        <span class="text-orange-500">Bukti Nyata Melalui Karya</span><br>
+                        <span class="text-orange-500">Jelajahi Portofolio Kami</span>
+                    </h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Section -->
+        <section class="py-16 bg-[#FFF7F5]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-orange-500 mb-4">Project Kami</h2>
+                    <p class="text-lg text-slate-600 max-w-4xl mx-auto">
+                        The Objective Of AntiNganggur Is To Enable A Large Number Of Youth To Take Up Industry-<br>
+                        Relevant Skill Training That Will Help Them In Securing A Better Livelihood
+                    </p>
+                </div>
+
+                <div class="relative max-w-4xl mx-auto">
+                    <div class="bg-black rounded-lg overflow-hidden shadow-2xl relative project-carousel h-[400px]">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end">
+                            <div class="p-8">
+                                <h3 class="text-3xl font-bold text-white mb-2">Project Web Inovatif</h3>
+                                <p class="text-white text-lg">Solusi teknologi terdepan untuk masa depan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Arrows -->
+                    <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 transition-all duration-200">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 transition-all duration-200">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-orange-500 mb-4">Ulasan Klien</h2>
+                    <p class="text-lg text-slate-600 max-w-4xl mx-auto">
+                        Kami Menyediakan Solusi Yang Tepat Waktu Dan Efektif, Membangun Hubungan Yang Kuat<br>
+                        Dengan Klien
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-gray-100 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-gray-600 font-semibold">BU</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Bahtara Udin</h4>
+                                <p class="text-sm text-slate-600">Executive Assistant</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-700">
+                            Pelayanan Yang Luar Biasa Tim AntiNganggur Mengerjakan Kebutuhan Kami Dan Memberikan Solusi Yang Tepat Kami Sangat Puas.
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="bg-gray-100 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-gray-600 font-semibold">N</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Name</h4>
+                                <p class="text-sm text-slate-600">As Who</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-700">
+                            Pengalaman bekerja dengan tim ini sangat mengesankan! mereka selalu tepat waktu dan berkualitas
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-gray-100 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-gray-600 font-semibold">N</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Name</h4>
+                                <p class="text-sm text-slate-600">As Who</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-700">
+                            Pengalaman bekerja dengan tim ini sangat mengesankan! mereka selalu tepat waktu dan berkualitas
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="bg-gray-100 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-gray-600 font-semibold">HD</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">He Daop Joke Away</h4>
+                                <p class="text-sm text-slate-600">Warga Biasa</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-700">
+                            Pengalaman bekerja dengan tim ini sangat mengesankan! mereka selalu tepat waktu dan berkualitas
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 5 -->
+                    <div class="bg-gray-100 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-gray-600 font-semibold">HD</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">He Daop Joke Away</h4>
+                                <p class="text-sm text-slate-600">Warga Biasa</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-700">
+                            Pengalaman bekerja dengan tim ini sangat mengesankan! mereka selalu tepat waktu dan berkualitas
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 6 -->
+                    <div class="bg-gray-100 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-gray-600 font-semibold">N</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">Name</h4>
+                                <p class="text-sm text-slate-600">As Who</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-700">
+                            Pengalaman bekerja dengan tim ini sangat mengesankan! mereka selalu tepat waktu dan berkualitas
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile menu functionality
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            // Add mobile menu toggle functionality here
+            console.log('Mobile menu clicked');
+        });
+
+        // Project carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const leftArrow = document.querySelector('.absolute.left-4');
+            const rightArrow = document.querySelector('.absolute.right-4');
+
+            leftArrow.addEventListener('click', function() {
+                console.log('Previous project');
+                // Add carousel navigation logic here
+            });
+
+            rightArrow.addEventListener('click', function() {
+                console.log('Next project');
+                // Add carousel navigation logic here
+            });
+        });
+    </script>
+
+</body>
+</html>
