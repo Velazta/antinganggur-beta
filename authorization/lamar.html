@@ -33,7 +33,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Styling for ALL inputs (text, tel, email, etc.) */
         .floating-label-input input {
             width: 100%;
             height: 50px;
@@ -43,10 +42,9 @@
             font-size: 14px;
             outline: none;
             transition: border 0.2s ease;
-            box-sizing: border-box; /* Pastikan padding tidak menambah lebar/tinggi */
+            box-sizing: border-box;
         }
 
-        /* Styling for SELECT elements only */
         .floating-label-input select {
             width: 100%;
             height: 50px;
@@ -56,28 +54,26 @@
             font-size: 14px;
             outline: none;
             transition: border 0.2s ease;
-            -webkit-appearance: none; /* Untuk menyembunyikan panah default select */
-            -moz-appearance: none;    /* Untuk menyembunyikan panah default select */
-            appearance: none;         /* Untuk menyembunyikan panah default select */
-            background-image: url('data:image/svg+xml;utf8,<svg fill="%23999999" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom panah */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23999999" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 16px;
             background-color: white;
             box-sizing: border-box;
-            overflow: hidden; /* NEW: Sembunyikan overflow teks */
-            text-overflow: ellipsis; /* NEW: Tambahkan ellipsis jika teks terpotong */
-            white-space: nowrap; /* NEW: Pastikan teks tidak wrap */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        /* NEW: Aturan untuk menyembunyikan teks opsi default (placeholder) */
         .floating-label-input select option[disabled][selected] {
-            color: transparent; /* Membuat teks transparan */
+            color: transparent;
         }
         .floating-label-input select:focus option[disabled][selected] {
-            color: transparent; /* Pastikan tetap transparan saat fokus */
+            color: transparent;
         }
-
 
         .floating-label-input label {
             position: absolute;
@@ -90,7 +86,7 @@
             transition: all 0.2s ease;
             background-color: white;
             padding: 0 5px;
-            z-index: 2; /* Tingkatkan z-index agar label selalu di atas */
+            z-index: 2;
         }
 
         .floating-label-input input:focus,
@@ -106,7 +102,7 @@
             font-size: 12px;
             color: #FFA98F;
             font-weight: 500;
-            z-index: 3; /* Pastikan label tetap di atas saat floating */
+            z-index: 3;
         }
 
         .floating-label-input input::placeholder {
@@ -114,12 +110,11 @@
         }
 
         .floating-label-input select:invalid {
-            color: #999; /* Warna teks placeholder (opsi default) */
+            color: #999;
         }
         .floating-label-input select:valid {
-            color: #333; /* Warna teks setelah dipilih */
+            color: #333;
         }
-
 
         .form-label {
             display: block;
@@ -201,12 +196,18 @@
             <img src="../public/asset/page/lamar.png" alt="Illustrasi Orang Bergabung" class="w-20 h-auto object-contain">
             <div class="text-center">
                 <h1 class="text-2xl font-bold mb-1">Lamar Pekerjaan</h1>
-                <h2 class="text-lg font-medium">Ke AntiNganggur</h2>
+                <h2 class="text-lg font-medium">Isi Data Lamaran</h2>
             </div>
         </div>
 
-        <div class="p-6">
+        <div class="p-6 pb-8">
             <form id="jobApplicationForm">
+                <div class="floating-label-input">
+                    <select id="posisi" required>
+                        <option value="" disabled selected></option>
+                    </select>
+                    <label for="posisi">Posisi yang Dilamar</label>
+                </div>
                 <div class="floating-label-input">
                     <input type="text" id="nama" placeholder="Nama Lengkap" required>
                     <label for="nama">Nama Lengkap</label>
@@ -235,7 +236,16 @@
                     <label for="lokasi">Pilih Kabupaten/Kota</label> </div>
 
                 <div class="floating-label-input">
-                    <input type="text" id="pendidikan" placeholder="Pendidikan Terakhir" required>
+                    <select id="pendidikan" required>
+                        <option value="" disabled selected></option>
+                        <option value="SMA/SMK">SMA/SMK</option>
+                        <option value="D3">D3</option>
+                        <option value="D4">D4</option>
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
                     <label for="pendidikan">Pendidikan Terakhir</label>
                 </div>
 
@@ -245,7 +255,13 @@
                 </div>
 
                 <div class="floating-label-input">
-                    <input type="text" id="pengalaman" placeholder="Tingkat Pengalaman" required>
+                    <select id="pengalaman" required>
+                        <option value="" disabled selected></option>
+                        <option value="Fresh Graduate">Fresh Graduate</option>
+                        <option value="1-2 Tahun">1-2 Tahun</option>
+                        <option value="3-5 Tahun">3-5 Tahun</option>
+                        <option value="5+ Tahun">5+ Tahun</option>
+                    </select>
                     <label for="pengalaman">Tingkat Pengalaman</label>
                 </div>
 
@@ -268,7 +284,7 @@
                 </div>
 
                 <div class="clearfix">
-                    <button type="submit" class="submit-btn">Lamar</button>
+                    <button type="submit" class="submit-btn" style="margin-bottom:32px;">Lamar</button>
                 </div>
             </form>
         </div>
@@ -277,21 +293,37 @@
     <script>
         const provinsiSelect = document.getElementById('provinsi');
         const lokasiSelect = document.getElementById('lokasi');
+        const posisiSelect = document.getElementById('posisi');
 
-        // Fungsi untuk mengisi dropdown
         function populateDropdown(selectElement, data, placeholderText) {
             selectElement.innerHTML = `<option value="" disabled selected>${placeholderText}</option>`;
             data.forEach(item => {
                 const option = document.createElement('option');
-                option.value = item.id; // API Emsifa menggunakan ID untuk nilai
-                option.textContent = item.name;
+                option.value = item.id || item.value;
+                option.textContent = item.name || item.label;
                 selectElement.appendChild(option);
             });
-            // Reset floating label state
             selectElement.classList.remove('valid');
         }
 
-        // Fungsi untuk mengambil data Provinsi
+        async function fetchPositions() {
+            try {
+                // In a real implementation, this would fetch data from a backend API
+                const positions = [
+                    { id: '1', name: 'Web Developer' },
+                    { id: '2', name: 'UI/UX Designer' },
+                    { id: '3', name: 'Digital Marketing' },
+                    { id: '4', name: 'Content Writer' },
+                    { id: '5', name: 'Project Manager' },
+                    { id: '6', name: 'Customer Service' }
+                ];
+                populateDropdown(posisiSelect, positions, "Pilih Posisi");
+            } catch (error) {
+                console.error('Gagal mengambil data posisi:', error);
+                alert('Gagal memuat daftar posisi. Silakan coba lagi nanti.');
+            }
+        }
+
         async function fetchProvinces() {
             try {
                 const response = await fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
@@ -300,18 +332,17 @@
                 }
                 const provinces = await response.json();
                 provinces.sort((a, b) => a.name.localeCompare(b.name));
-                populateDropdown(provinsiSelect, provinces, "Provinsi"); // Placeholder diisi di sini
+                populateDropdown(provinsiSelect, provinces, "Provinsi");
             } catch (error) {
                 console.error('Gagal mengambil data provinsi:', error);
                 alert('Gagal memuat daftar provinsi. Silakan coba lagi nanti.');
             }
         }
 
-        // Fungsi untuk mengambil data Kabupaten/Kota berdasarkan ID Provinsi
         async function fetchRegencies(provinceId) {
-            lokasiSelect.disabled = true; // Nonaktifkan dropdown lokasi saat memuat
+            lokasiSelect.disabled = true;
             lokasiSelect.innerHTML = `<option value="" disabled selected>Memuat...</option>`;
-            lokasiSelect.classList.remove('valid'); // Reset label state
+            lokasiSelect.classList.remove('valid');
 
             try {
                 const response = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`);
@@ -320,8 +351,8 @@
                 }
                 const regencies = await response.json();
                 regencies.sort((a, b) => a.name.localeCompare(b.name));
-                populateDropdown(lokasiSelect, regencies, "Kabupaten/Kota"); // Placeholder diisi di sini
-                lokasiSelect.disabled = false; // Aktifkan kembali dropdown lokasi
+                populateDropdown(lokasiSelect, regencies, "Kabupaten/Kota");
+                lokasiSelect.disabled = false;
             } catch (error) {
                 console.error('Gagal mengambil data kabupaten/kota:', error);
                 alert('Gagal memuat daftar kabupaten/kota. Silakan coba lagi nanti.');
@@ -329,7 +360,6 @@
             }
         }
 
-        // Event Listener untuk dropdown Provinsi
         provinsiSelect.addEventListener('change', function() {
             const selectedProvinceId = this.value;
             if (selectedProvinceId) {
@@ -339,7 +369,6 @@
                 lokasiSelect.disabled = true;
                 lokasiSelect.classList.remove('valid');
             }
-            // Trigger floating label logic for provinsi
             if (this.value !== "") {
                 this.classList.add('valid');
             } else {
@@ -347,7 +376,6 @@
             }
         });
 
-        // Event Listener untuk dropdown Lokasi (untuk floating label)
         lokasiSelect.addEventListener('change', function() {
             if (this.value !== "") {
                 this.classList.add('valid');
@@ -356,20 +384,28 @@
             }
         });
 
-        // Muat daftar provinsi saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', fetchProvinces);
+        posisiSelect.addEventListener('change', function() {
+            if (this.value !== "") {
+                this.classList.add('valid');
+            } else {
+                this.classList.remove('valid');
+            }
+        });
 
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchProvinces();
+            fetchPositions();
+        });
 
-        // Form submission handler
         document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Contoh pengambilan nilai dari form
+            const posisiId = posisiSelect.value;
+            const posisiNama = posisiSelect.options[posisiSelect.selectedIndex].text;
             const nama = document.getElementById('nama').value;
             const nomor = document.getElementById('nomor').value;
             const email = document.getElementById('email').value;
 
-            // Untuk mendapatkan nama provinsi/kabupaten/kota
             const provinsiNama = provinsiSelect.options[provinsiSelect.selectedIndex].text;
             const lokasiNama = lokasiSelect.options[lokasiSelect.selectedIndex].text;
 
@@ -380,6 +416,8 @@
             const portfolioFile = document.getElementById('portfolio-upload').files[0];
 
             console.log({
+                posisiId,
+                posisiNama,
                 nama,
                 nomor,
                 email,
@@ -393,11 +431,9 @@
             });
 
             alert('Formulir telah dikirim! Terima kasih telah melamar.');
-            // Di sini Anda akan mengirim data ke server (misalnya menggunakan fetch API)
-            // Pastikan untuk mengirimkan ID atau nama yang relevan ke backend Anda
+            // Here, you would send the data to your server using a fetch API call
         });
 
-        // CV upload handler
         document.getElementById('cv-upload').addEventListener('change', function() {
             if (this.files.length > 0) {
                 const fileName = this.files[0].name;
@@ -407,13 +443,12 @@
             }
         });
 
-        // Portfolio upload handler
         document.getElementById('portfolio-upload').addEventListener('change', function() {
             if (this.files.length > 0) {
                 const fileName = this.files[0].name;
-                document.getElementById('portfolio-text').textContent = 'Unggah Portfolio Dalam Bentuk Pdf (Opsional)';
+                document.getElementById('portfolio-text').textContent = fileName;
             } else {
-                document.getElementById('portfolio-text').textContent = 'Unggah Portfolio Dalam Bentuk Pdf';
+                document.getElementById('portfolio-text').textContent = 'Unggah Portfolio Dalam Bentuk Pdf (Opsional)';
             }
         });
     </script>
