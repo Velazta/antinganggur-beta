@@ -51,25 +51,25 @@
                     <a href="{{ route('admin.dashboard') }}" class="sidebar-link flex items-center gap-6 py-4 px-10">
                         {{-- PERUBAHAN: Menggunakan <span> untuk ikon, bukan <img> --}}
                         <span class="menu-icon" style="-webkit-mask-image: url('{{ asset('asset/admin/Dashboardwhite.svg') }}'); mask-image: url('{{ asset('asset/admin/Dashboardwhite.svg') }}');"></span>
-                        <span>Dashboard</span>
+                        <span class="sidebar-link-text">Dashboard</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('admin.manajemen.lowongan') }}" class="sidebar-link flex items-center gap-6 py-4 px-10">
                         <span class="menu-icon" style="-webkit-mask-image: url('{{ asset('asset/admin/Briefcasewhite.svg') }}'); mask-image: url('{{ asset('asset/admin/Briefcasewhite.svg') }}');"></span>
-                        <span>Lowongan</span>
+                        <span class="sidebar-link-text">Lowongan</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="sidebar-link flex items-center gap-6 py-4 px-10">
+                    <a href="{{ route('admin.manajemen.pelamar') }}" class="sidebar-link flex items-center gap-6 py-4 px-10">
                         <span class="menu-icon" style="-webkit-mask-image: url('{{ asset('asset/admin/Userwhite.svg') }}'); mask-image: url('{{ asset('asset/admin/Userwhite.svg') }}');"></span>
-                        <span>Pelamar</span>
+                        <span class="sidebar-link-text">Pelamar</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('admin.inbox') }}" class="sidebar-link flex items-center gap-6 py-4 px-10">
                         <span class="menu-icon" style="-webkit-mask-image: url('{{ asset('asset/admin/Speechbubblewhite.svg') }}'); mask-image: url('{{ asset('asset/admin/Speechbubblewhite.svg') }}');"></span>
-                        <span>Kotak Pesan</span>
+                        <span class="sidebar-link-text">Kotak Pesan</span>
                     </a>
                 </li>
             </ul>

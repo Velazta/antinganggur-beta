@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         indicator.style.transition = 'none';
         moveIndicator(activeLink);
 
+        activeLink = document.querySelector('.sidebar-link-text');
         // Update judul halaman
         if (pageTitle && activeLink.querySelector("span")) {
             pageTitle.textContent = activeLink.querySelector("span").textContent.trim();

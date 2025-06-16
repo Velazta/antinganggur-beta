@@ -30,5 +30,9 @@ Route::middleware(['auth.admin'])->group(function () {
         return view('admin.manajemen_lowongan.manajemenlowongan');
     })->name('manajemen.lowongan');
 
+    Route::get('/manajemen-pelamar', function() {
+        return view('admin.pelamar.manajemenpelamar');
+    })->name('manajemen.pelamar');
+
     Route::get('/inbox', [InboxController::class, 'inbox'])->name('inbox');
 });
