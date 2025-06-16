@@ -17,8 +17,7 @@
 
             {{-- Anda bisa mengubah `space-y-8` ini untuk mengatur jarak antar menu --}}
             <ul class="space-y-8">
-                <li>
-                    {{-- PERBAIKAN: Padding horizontal (px-10) sekarang ada di sini --}}
+                {{-- <li>
                     <a href="{{ route('admin.dashboard') }}" class="sidebar-link flex items-center gap-8 py-3 px-10" data-order="0">
                         <img src="{{ asset('asset/admin/Dashboardwhite.png') }}" alt="Icon Dashboard" class="w-6 h-6 icon-inactive">
                         <img src="{{ asset('asset/admin/Dashboardblue.png') }}" alt="Icon Dashboard Active" class="w-6 h-6 icon-active">
@@ -45,8 +44,36 @@
                         <img src="{{ asset('asset/admin/SpeechBubbleblue.png') }}" alt="Icon Kotak Pesan Active" class="w-6 h-6 icon-active">
                         <span>Kotak Pesan</span>
                     </a>
+                </li> --}}
+
+
+                <li>
+                    <a href="{{ route('admin.dashboard') }}" class="sidebar-link flex items-center gap-6 py-4 px-10">
+                        {{-- PERUBAHAN: Menggunakan <span> untuk ikon, bukan <img> --}}
+                        <span class="menu-icon" style="-webkit-mask-image: url('{{ asset('asset/admin/Dashboardwhite.svg') }}'); mask-image: url('{{ asset('asset/admin/Dashboardwhite.svg') }}');"></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.manajemen.lowongan') }}" class="sidebar-link flex items-center gap-6 py-4 px-10">
+                        <span class="menu-icon" style="-webkit-mask-image: url('{{ asset('asset/admin/Briefcasewhite.svg') }}'); mask-image: url('{{ asset('asset/admin/Briefcasewhite.svg') }}');"></span>
+                        <span>Lowongan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center gap-6 py-4 px-10">
+                        <span class="menu-icon" style="-webkit-mask-image: url('{{ asset('asset/admin/Userwhite.svg') }}'); mask-image: url('{{ asset('asset/admin/Userwhite.svg') }}');"></span>
+                        <span>Pelamar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.inbox') }}" class="sidebar-link flex items-center gap-6 py-4 px-10">
+                        <span class="menu-icon" style="-webkit-mask-image: url('{{ asset('asset/admin/Speechbubblewhite.svg') }}'); mask-image: url('{{ asset('asset/admin/Speechbubblewhite.svg') }}');"></span>
+                        <span>Kotak Pesan</span>
+                    </a>
                 </li>
             </ul>
         </div>
     </nav>
 </aside>
+

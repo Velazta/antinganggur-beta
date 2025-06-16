@@ -25,7 +25,7 @@ class InboxController extends Controller
         }
 
         // 4. Ubah query untuk menggunakan parameter sorting
-        $messages = Contact::orderBy($sortBy, $direction)->paginate(10);
+        $messages = Contact::orderBy($sortBy, $direction)->paginate(5);
 
         // 5. Kirim variabel sorting ke view
         return view('admin.inbox.inbox', [
