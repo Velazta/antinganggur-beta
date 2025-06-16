@@ -40,8 +40,8 @@
         <div class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold text-[#FF7144] mb-4">Project Kami</h2>
             <p class="text-lg text-slate-600 max-w-4xl mx-auto">
-                The Objective Of AntiNganggur Is To Enable A Large Number Of Youth To Take Up Industry-<br>
-                Relevant Skill Training That Will Help Them In Securing A Better Livelihood
+                Tujuan AntiNganggur adalah memberdayakan banyak pemuda untuk mengikuti pelatihan keterampilan yang
+                relevan dengan industri, sehingga dapat membantu mereka mendapatkan pekerjaan yang lebih baik.
             </p>
         </div>
 
