@@ -10,11 +10,14 @@ class ContactController extends Controller
 {
     public function store(Request $request)
     {
+
         // Validate the request
         $request->validate([
+            'nama' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'message' => 'required|string|max:1000',
         ], [
+            'nama.required' => 'Nama harus diisi.',
             'email.required' => 'Email harus diisi.',
             'email.email' => 'Format email tidak valid.',
             'message.required' => 'Pesan harus diisi.',
@@ -24,6 +27,7 @@ class ContactController extends Controller
         try {
             // Log the contact attempt
             Log::info('Contact form submitted', [
+                'nama' =>  $request->nama,
                 'email' => $request->email,
                 'message' => substr($request->message, 0, 100) . '...'
             ]);
@@ -38,6 +42,13 @@ class ContactController extends Controller
                 'error' => $e->getMessage(),
                 'email' => $request->email
             ]);
+
+        Contact::create([
+            'nama' => $validated['nama'],
+            'email' => $validated['email'],
+            'message' => $validated['message'],
+        ]);
+
 
             return back()->with('contact_error', 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
         }
