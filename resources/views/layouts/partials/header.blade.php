@@ -51,7 +51,7 @@
                 <nav class="hidden md:flex items-center space-x-1 lg:space-x-3">
                     <a href="{{ url('/') }}"
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Home</a>
-                    <a href="#"
+                    <a href="{{ url('/lowongan') }}"
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Lowongan</a>
                     <a href="{{ url('/aboutus') }}"
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Tentang</a>
@@ -141,11 +141,11 @@
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="{{ url('/') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="#"
+                <a href="{{ url('/lowongan') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Lowongan</a>
                 <a href="{{ url('/aboutus') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Tentang</a>
-                <a href="#"
+                <a href="{{ url('/portofolio') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
                 <a href="{{ url('/contact') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Kontak</a>

@@ -22,7 +22,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="py-32 bg-[#FFF7F5]" style="background-image: url('{{ asset('asset/page/bannerporto.png') }}'); background-size: cover; background-position: center;">
+<section class=" py-48 bg-[#FFF7F5]" style="background-image: url('{{ asset('asset/page/bannerporto.png') }}'); background-size: cover; background-position: center;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="max-w-4xl mx-auto mt-64">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
