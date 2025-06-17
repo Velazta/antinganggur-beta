@@ -6,7 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>@yield('title', 'Admin Dashboard') - AntiNganggur</title>
+    <link rel="icon" href="{{ asset('asset/admin/whitelogoantinganggur.png') }}" type="image/png">
+
+    {{-- Menggunakan Tailwind CSS --}}
+
 {{--
+
     Ketergantungan (Fonts & Scripts) akan dimuat oleh halaman anak
     @stack('dependencies')
 
