@@ -79,7 +79,7 @@
                                     <input type="text" id="name" name="name"
                                         placeholder="Masukkan nama lengkap Anda"
                                         value="{{ old('name', $user->name) }}"
-                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                        class="w-full border border-gray-300 rounded-lg p-2.5  focus:ring-orange-500 focus:border-orange-500 transition-all">
                                     @error('name')
                                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
@@ -97,7 +97,7 @@
                                         HP</label>
                                     <input type="tel" id="phone_number" name="phone_number"
                                         placeholder="08123456789" value="{{ old('phone_number', $profile->phone_number) }}"
-                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all">
                                     @error('phone_number')
                                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
@@ -107,7 +107,7 @@
                                     <label for="country" class="block text-sm font-medium text-gray-600 mb-1">Negara</label>
                                     <input type="text" id="country" name="country" placeholder="Indonesia"
                                         value="{{ old('country', $profile->country) }}"
-                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all">
                                     @error('country')
                                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
@@ -118,7 +118,7 @@
                                         class="block text-sm font-medium text-gray-600 mb-1">Provinsi</label>
                                     <input type="text" id="province" name="province" placeholder="Jawa Tengah"
                                         value="{{ old('province', $profile->province) }}"
-                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all">
                                     @error('province')
                                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
@@ -128,7 +128,7 @@
                                     <label for="city" class="block text-sm font-medium text-gray-600 mb-1">Kota</label>
                                     <input type="text" id="city" name="city" placeholder="Surakarta"
                                         value="{{ old('city', $profile->city) }}"
-                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2  transition-all">
                                     @error('city')
                                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
@@ -139,7 +139,7 @@
                                         Lahir</label>
                                     <input type="date" id="date_of_birth" name="date_of_birth"
                                         value="{{ old('date_of_birth', $profile->date_of_birth) }}"
-                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-500">
+                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2  transition-all text-gray-500">
                                     @error('date_of_birth')
                                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
@@ -171,7 +171,7 @@
                                     <input type="text" id="address" name="address"
                                         placeholder="Jl. Slamet Riyadi No. 1"
                                         value="{{ old('address', $profile->address) }}"
-                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2  transition-all">
                                     @error('address')
                                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
@@ -181,7 +181,7 @@
                                     <label for="bio" class="block text-sm font-medium text-gray-600 mb-1">Ringkasan
                                         Profil</label>
                                     <textarea id="bio" name="bio" rows="4" placeholder="Tuliskan deskripsi singkat tentang diri Anda..."
-                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all resize-none">{{ old('bio', $profile->bio) }}</textarea>
+                                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all resize-none">{{ old('bio', $profile->bio) }}</textarea>
                                     @error('bio')
                                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
