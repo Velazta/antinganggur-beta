@@ -60,14 +60,15 @@ class JobVacancyController extends Controller
         return redirect()->route('admin.manajemen.lowongan')->with('success', 'Lowongan berhasil ditambahkan!');
     }
 
-    public function show(JobVacancy $jobVacancy)
+     public function show(JobVacancy $jobVacancy)
     {
-        return response()->json($jobVacancy);
+
+        return view('admin.manajemen_lowongan.showlowongan', compact('jobVacancy'));
     }
 
     public function edit(JobVacancy $jobVacancy)
     {
-        return view('admin.manajemen_lowongan.edit', compact('jobVacancy'));
+        return view('admin.manajemen_lowongan.editlowongan', compact('jobVacancy'));
     }
 
     public function update(Request $request, JobVacancy $jobVacancy)

@@ -32,6 +32,7 @@ Route::middleware(['auth.admin'])->group(function () {
     Route::post('/manajemen-lowongan', [JobVacancyController::class, 'store'])->name('manajemen.lowongan.store');
     Route::get('/manajemen-lowongan/{jobVacancy}/edit', [JobVacancyController::class, 'edit'])->name('manajemen.lowongan.edit');
     Route::put('/manajemen-lowongan/{jobVacancy}', [JobVacancyController::class, 'update'])->name('manajemen.lowongan.update');
+    Route::get('/manajemen-lowongan/{jobVacancy}', [JobVacancyController::class, 'show'])->name('manajemen.lowongan.show');
     Route::delete('/manajemen-lowongan/{jobVacancy}', [JobVacancyController::class, 'destroy'])->name('manajemen.lowongan.destroy');
 
 
