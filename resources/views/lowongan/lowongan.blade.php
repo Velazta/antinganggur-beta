@@ -212,6 +212,7 @@
                 </div>
 
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {{-- card lowongan --}}
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                         <div class="p-6">
                             <div class="flex items-start mb-4">
