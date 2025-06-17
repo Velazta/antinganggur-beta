@@ -70,6 +70,8 @@ Route::get('/lamar', [JobApplicationController::class, 'create'])->name('lamar.c
 Route::post('/lamar', [JobApplicationController::class, 'store'])->name('lamar.store');
 Route::get('/api/positions', [JobApplicationController::class, 'getPositions'])->name('lamar.positions');
 
+Route::view('/portofolio','portofolio')->name('portofolio');
+
 // Jika nanti ada dashboard, bisa diaktifkan kembali bagian ini:
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/dashboard', function () {

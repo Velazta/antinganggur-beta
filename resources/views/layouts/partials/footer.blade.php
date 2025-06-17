@@ -156,6 +156,7 @@
                 <a href="{{ url('/') }}">Beranda</a>
                 <a href="{{ url('/lowongan.html') }}">Lowongan</a>
                 <a href="{{ url('/aboutus.html') }}">Tentang Kami</a>
+                <a href="{{ url('/portofolio') }}">Portofolio</a>
                 <a href="{{ url('/contact.html') }}">Hubungi Kami</a>
             </div>
         </div>
