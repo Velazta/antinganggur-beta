@@ -67,7 +67,7 @@ Route::get('/contact', function() {
 //Route untuk mengirim pesan kontak
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::view('/lowongan', 'lowongan.lowongan')->name('lowongan');
+Route::get('/lowongan', [LowonganController::class, 'index'])->name('lowongan');
 
 Route::get('/lamar', [JobApplicationController::class, 'create'])->name('lamar.create');
 Route::post('/lamar', [JobApplicationController::class, 'store'])->name('lamar.store');
