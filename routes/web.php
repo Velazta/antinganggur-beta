@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\LowonganController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
