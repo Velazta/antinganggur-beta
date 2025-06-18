@@ -19,14 +19,19 @@ class JobVacancyController extends Controller
 
     public function create()
     {
-        return view('admin.manajemen_lowongan.createlowongan');
+        $locations = [
+           'Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Semarang',
+            'Makassar', 'Palembang', 'Tangerang', 'Depok', 'Bekasi', 'Surakarta'
+        ];
+
+        return view('admin.manajemen_lowongan.createlowongan', compact('locations'));
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'company_name' => 'required|string|max:255',
+            // 'company_name' => 'required|string|max:255',
             'job_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
             'location' => 'required|string|max:255',
             'type_job' => 'required|string|max:100',
@@ -48,7 +53,7 @@ class JobVacancyController extends Controller
 
         JobVacancy::create([
             'title' => $validatedData['title'],
-            'company_name' => $validatedData['company_name'],
+            'company_name' => 'Anti Nganggur', // Static company name
             'job_logo' => $jobLogoPath,
             'location' => $validatedData['location'],
             'type_job' => $validatedData['type_job'],
@@ -68,14 +73,18 @@ class JobVacancyController extends Controller
 
     public function edit(JobVacancy $jobVacancy)
     {
-        return view('admin.manajemen_lowongan.editlowongan', compact('jobVacancy'));
+        $locations = [
+           'Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Semarang',
+            'Makassar', 'Palembang', 'Tangerang', 'Depok', 'Bekasi', 'Surakarta'
+        ];
+
+        return view('admin.manajemen_lowongan.editlowongan', compact('jobVacancy', 'locations'));
     }
 
     public function update(Request $request, JobVacancy $jobVacancy)
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'company_name' => 'required|string|max:255',
             'job_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
             'location' => 'required|string|max:255',
             'type_job' => 'required|string|max:100',
@@ -91,6 +100,8 @@ class JobVacancyController extends Controller
             }
             $validatedData['job_logo'] = $request->file('job_logo')->store('job_logos', 'public');
         }
+
+        $validatedData['company_name'] = 'Anti Nganggur'; // Static company name
 
         $jobVacancy->update($validatedData);
 

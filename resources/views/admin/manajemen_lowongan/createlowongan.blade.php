@@ -36,17 +36,22 @@
             {{-- Nama Perusahaan --}}
             <div>
                 <label for="company_name" class="block text-sm font-medium text-gray-600 mb-1">Nama Perusahaan</label>
-                <input type="text" name="company_name" id="company_name" value="{{ old('company_name') }}"
-                       class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                       placeholder="Contoh: PT. AntiNganggur">
+                <input type="text" name="company_name" id="company_name" value="Anti Nganggur"
+                       class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all bg-gray-100 cursor-not-allowed"
+                       readonly>
+                <p class="mt-1 text-xs text-gray-500">Nama perusahaan diisi otomatis sebagai "Anti Nganggur".</p>
             </div>
 
             {{-- Lokasi Pekerjaan --}}
-            <div>
+             <div>
                 <label for="location" class="block text-sm font-medium text-gray-600 mb-1">Lokasi</label>
-                <input type="text" name="location" id="location" value="{{ old('location') }}"
-                       class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                       placeholder="Contoh: Surakarta, Jakarta">
+                <select name="location" id="location"
+                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all">
+                    <option value="">Pilih Lokasi</option>
+                    @foreach($locations as $loc)
+                        <option value="{{ $loc }}" {{ old('location') == $loc ? 'selected' : '' }}>{{ $loc }}</option>
+                    @endforeach
+                </select>
             </div>
 
             {{-- Tipe Pekerjaan --}}
@@ -113,13 +118,13 @@
 
         {{-- Tombol Aksi --}}
         <div class="mt-10 flex justify-end gap-4">
-            <button type="reset"
-                    class="py-2.5 px-8 rounded-lg font-semibold border border-gray-400 text-gray-600 hover:bg-gray-100 transition-all duration-300">
-                Batal
-            </button>
+            <a href="{{ route('admin.manajemen.lowongan') }}"
+               class="py-2.5 px-8 rounded-lg font-semibold border border-gray-400 text-gray-600 hover:bg-gray-100 transition-all duration-300 text-center">
+            Batal
+            </a>
             <button type="submit"
-                    class="py-2.5 px-8 rounded-lg font-semibold bg-[#1A73E8] text-white hover:bg-blue-700 shadow-sm hover:shadow-md transition-all duration-300">
-                Tambah Lowongan
+                class="py-2.5 px-8 rounded-lg font-semibold bg-[#1A73E8] text-white hover:bg-blue-700 shadow-sm hover:shadow-md transition-all duration-300">
+            Tambah Lowongan
             </button>
         </div>
     </form>

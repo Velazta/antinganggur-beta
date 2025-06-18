@@ -104,17 +104,22 @@
             {{-- Nama Perusahaan --}}
             <div>
                 <label for="company_name" class="block text-sm font-medium text-gray-600 mb-1">Nama Perusahaan</label>
-                <input type="text" name="company_name" id="company_name" value="{{ old('company_name', $jobVacancy->company_name) }}"
-                       class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                       placeholder="Contoh: PT. AntiNganggur">
+                <input type="text" name="company_name" id="company_name" value="Anti Nganggur"
+                       class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all bg-gray-100 cursor-not-allowed"
+                       readonly>
+                <p class="mt-1 text-xs text-gray-500">Nama perusahaan diisi otomatis sebagai "Anti Nganggur".</p>
             </div>
 
             {{-- Lokasi Pekerjaan --}}
             <div>
                 <label for="location" class="block text-sm font-medium text-gray-600 mb-1">Lokasi</label>
-                <input type="text" name="location" id="location" value="{{ old('location', $jobVacancy->location) }}"
-                       class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                       placeholder="Contoh: Surakarta, Jakarta">
+                <select name="location" id="location"
+                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all">
+                    <option value="">Pilih Lokasi</option>
+                    @foreach($locations as $loc)
+                        <option value="{{ $loc }}" {{ old('location', $jobVacancy->location) == $loc ? 'selected' : '' }}>{{ $loc }}</option>
+                    @endforeach
+                </select>
             </div>
 
             {{-- Tipe Pekerjaan --}}

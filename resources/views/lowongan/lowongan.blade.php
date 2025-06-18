@@ -206,7 +206,7 @@
         <section class="py-16 md:py-20 lg:py-24 bg-[#FFF7F5]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12 md:mb-16">
-                    <h2 class="text-3xl font-extrabold text-slate-700 sm:text-4xl mb-4">
+                    <h2 class="text-6xl font-extrabold text-slate-700 sm:text-6xl mb-4">
                         Lowongan Terbaru
                     </h2>
                 </div>
