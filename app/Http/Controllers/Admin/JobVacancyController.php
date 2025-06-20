@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobVacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class JobVacancyController extends Controller
@@ -34,7 +35,14 @@ class JobVacancyController extends Controller
             // 'company_name' => 'required|string|max:255',
             'job_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
             'location' => 'required|string|max:255',
+            'location_details' => 'required|string|max:255',
             'type_job' => 'required|string|max:100',
+            'work_schedule' => 'nullable|string|max:100',
+            'career_level' => 'nullable|string|max:100',
+            'mobility' => 'nullable|string|max:100',
+            'benefits' => 'nullable|array',
+            'benefits.*' => 'string|max:255', // Validasi untuk setiap item dalam array benefits
+            'open_positions' => 'nullable|integer|min:1',
             'min_salary' => 'nullable|numeric|min:0',
             'max_salary' => 'nullable|numeric|min:0|gte:min_salary',
             'description' => 'required|string',
@@ -51,23 +59,52 @@ class JobVacancyController extends Controller
             $jobLogoPath = $request->file('job_logo')->store('job_logos', 'public');
         }
 
-        JobVacancy::create([
-            'title' => $validatedData['title'],
-            'company_name' => 'Anti Nganggur', // Static company name
-            'job_logo' => $jobLogoPath,
-            'location' => $validatedData['location'],
-            'type_job' => $validatedData['type_job'],
-            'min_salary' => $validatedData['min_salary'] ?? null,
-            'max_salary' => $validatedData['max_salary'] ?? null,
-            'description' => $validatedData['description'],
-        ]);
+        DB::beginTransaction();
+        try {
+            // Pisahkan data benefits dari data utama
+            $benefitNames = $validatedData['benefits'] ?? [];
+            unset($validatedData['benefits']);
 
-        return redirect()->route('admin.manajemen.lowongan')->with('success', 'Lowongan berhasil ditambahkan!');
+            // buat lowongan pekerjaan
+            $jobVacancy = JobVacancy::create([
+                'title' => $validatedData['title'],
+                'company_name' => 'Anti Nganggur', // Static company name
+                'job_logo' => $jobLogoPath,
+                'location' => $validatedData['location'],
+                'location_details' => $validatedData['location_details'],
+                'type_job' => $validatedData['type_job'],
+                'work_schedule' => $validatedData['work_schedule'] ?? null,
+                'career_level' => $validatedData['career_level'] ?? null,
+                'mobility' => $validatedData['mobility'] ?? null,
+                'benefits' => json_encode($benefitNames), // Simpan sebagai JSON
+                'open_positions' => $validatedData['open_positions'] ?? 1,
+                'min_salary' => $validatedData['min_salary'] ?? null,
+                'max_salary' => $validatedData['max_salary'] ?? null,
+                'description' => $validatedData['description'],
+            ]);
+
+            // Simpan setiap benefit ke tabel job_benefits
+            if (!empty($benefitNames)) {
+                foreach ($benefitNames as $name) {
+                    if ($name) { // Pastikan nama benefit tidak kosong
+                        $jobVacancy->benefits()->create(['name' => $name]);
+                    }
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->route('admin.manajemen.lowongan')->with('success', 'Lowongan berhasil ditambahkan!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menambahkan lowongan: ' . $e->getMessage()]);
+        }
     }
 
      public function show(JobVacancy $jobVacancy)
     {
 
+        $jobVacancy->load('benefits'); // Memuat relasi benefits jika ada
         return view('admin.manajemen_lowongan.showlowongan', compact('jobVacancy'));
     }
 
@@ -78,6 +115,7 @@ class JobVacancyController extends Controller
             'Makassar', 'Palembang', 'Tangerang', 'Depok', 'Bekasi', 'Surakarta'
         ];
 
+        $jobVacancy->load('benefits'); // Memuat relasi benefits jika ada
         return view('admin.manajemen_lowongan.editlowongan', compact('jobVacancy', 'locations'));
     }
 
@@ -85,9 +123,17 @@ class JobVacancyController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'job_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
+            // 'company_name' => 'required|string|max:255',
+            'job_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
             'location' => 'required|string|max:255',
+            'location_details' => 'required|string|max:255',
             'type_job' => 'required|string|max:100',
+            'work_schedule' => 'nullable|string|max:100',
+            'career_level' => 'nullable|string|max:100',
+            'mobility' => 'nullable|string|max:100',
+            'benefits' => 'nullable|array',
+            'benefits.*' => 'string|max:255', // Validasi untuk setiap item dalam array benefits
+            'open_positions' => 'nullable|integer|min:1',
             'min_salary' => 'nullable|numeric|min:0',
             'max_salary' => 'nullable|numeric|min:0|gte:min_salary',
             'description' => 'required|string',
@@ -95,27 +141,58 @@ class JobVacancyController extends Controller
 
         if ($request->hasFile('job_logo')) {
             // Hapus logo lama jika ada
-            if ($jobVacancy->job_logo) {
-                Storage::disk('public')->delete($jobVacancy->job_logo);
+            if ($jobVacancy->job_logo && file_exists(storage_path('app/public/job_logos/' . $jobVacancy->job_logo))) {
+                unlink(storage_path('app/public/job_logos/' . $jobVacancy->job_logo));
             }
-            $validatedData['job_logo'] = $request->file('job_logo')->store('job_logos', 'public');
+            $logoName = time().'.'.$request->job_logo->extension();
+            $request->job_logo->storeAs('public/job_logos', $logoName);
+            $validated['job_logo'] = $logoName;
         }
 
-        $validatedData['company_name'] = 'Anti Nganggur'; // Static company name
+        DB::beginTransaction();
+        try {
+            // Pisahkan data benefits dari data utama
+            $benefitNames = $validated['benefits'] ?? [];
+            unset($validated['benefits']);
 
-        $jobVacancy->update($validatedData);
+            // Pastikan $benefitNames adalah array
+            if (!is_array($benefitNames)) {
+                $benefitNames = [$benefitNames];
+            }
 
-        return redirect()->route('admin.manajemen.lowongan')->with('success', 'Lowongan berhasil diperbarui!');
+            $validatedData['company_name'] = 'Anti Nganggur'; // static company name
+            // Update data utama di tabel job_vacancies
+            $jobVacancy->update($validated);
+
+            // 4. Hapus semua benefit lama dan buat ulang dari data form (Cara paling aman)
+            $jobVacancy->benefits()->delete();
+
+            // Simpan kembali benefits yang baru
+            if (!empty($benefitNames)) {
+                foreach ($benefitNames as $name) {
+                     if ($name) {
+                        $jobVacancy->benefits()->create(['name' => $name]);
+                    }
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->route('admin.manajemen.lowongan')->with('success', 'Lowongan berhasil diperbarui!');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data. ' . $e->getMessage())->withInput();
+        }
     }
 
     public function destroy(JobVacancy $jobVacancy)
     {
-        // Hapus logo terkait jika ada
-        if ($jobVacancy->job_logo) {
-            Storage::disk('public')->delete($jobVacancy->job_logo);
+        // Logo akan terhapus, dan benefits akan terhapus otomatis karena 'onDelete('cascade')'
+        if ($jobVacancy->job_logo && file_exists(storage_path('app/public/job_logos/' . $jobVacancy->job_logo))) {
+            unlink(storage_path('app/public/job_logos/' . $jobVacancy->job_logo));
         }
         $jobVacancy->delete();
-
-        return redirect()->route('admin.manajemen.lowongan')->with('success', 'Lowongan berhasil dihapus!');
+        return redirect()->route('admin.manajemenlowongan.lowongan')->with('success', 'Lowongan berhasil dihapus.');
     }
 }

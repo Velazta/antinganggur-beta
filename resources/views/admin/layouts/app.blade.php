@@ -104,5 +104,6 @@
 
     <script src="{{ asset('js/admin-sidebar.js') }}"></script>
     <script src="{{ asset('js/admin-header.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>

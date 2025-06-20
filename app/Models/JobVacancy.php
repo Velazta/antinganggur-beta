@@ -16,7 +16,13 @@ class JobVacancy extends Model
         'company_name',   // Nama perusahaan
         'job_logo',       // Path atau nama file logo pekerjaan
         'location',       // Lokasi pekerjaan
+        'location_details', // Detail lokasi (nama kolom baru yang Anda inginkan)
         'type_job',       // Tipe pekerjaan (nama kolom baru yang Anda inginkan)
+        'work_schedule',  // Jadwal kerja (nama kolom baru yang Anda inginkan)
+        'career_level',   // Tingkat karir (nama kolom baru yang Anda inginkan)
+        'mobility',      // Mobilitas (nama kolom baru yang Anda inginkan)
+        'benefits',       // Manfaat pekerjaan (nama kolom baru yang Anda inginkan)
+        'open_positions', // Jumlah posisi yang dibuka
         'min_salary',     // Gaji minimum
         'max_salary',     // Gaji maksimum
         'description',    // Deskripsi lengkap pekerjaan
@@ -25,5 +31,6 @@ class JobVacancy extends Model
      protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'benefits' => 'array', // Menggunakan cast untuk kolom JSON
     ];
 }
