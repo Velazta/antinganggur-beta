@@ -11,15 +11,32 @@ use Illuminate\Support\Facades\Storage; // Pastikan ini di-import
 
 class JobApplicationController extends Controller
 {
-    public function create()
+    /**
+     * Menampilkan form lamaran pekerjaan.
+     * Menerima job_vacancy_id dan job_title opsional dari URL.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function create(Request $request)
     {
-        // Hanya fokus mengambil lowongan aktif
-        $jobVacancies = JobVacancy::all()->sortBy('id'); // Mengambil semua lowongan pekerjaan dan mengurutkannya berdasarkan ID
+        // Mengambil semua lowongan pekerjaan dan mengurutkannya berdasarkan ID
+        $jobVacancies = JobVacancy::all()->sortBy('id');
 
-        // Mengirim jobVacancies ke view
-        return view('job-application.lamar', compact('jobVacancies'));
+        // Mengambil job_vacancy_id dan job_title dari query parameter jika ada
+        $selectedJobId = $request->query('job_vacancy_id');
+        $selectedJobTitle = $request->query('job_title');
+
+        // Mengirim jobVacancies, selectedJobId, dan selectedJobTitle ke view
+        return view('job-application.lamar', compact('jobVacancies', 'selectedJobId', 'selectedJobTitle'));
     }
 
+    /**
+     * Menyimpan data lamaran pekerjaan yang baru.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -34,83 +51,30 @@ class JobApplicationController extends Controller
             'education_level' => 'required|string|max:100',
             'major' => 'required|string|max:255',
             'experience_level' => 'required|string|max:100',
-            'cv_file' => 'required|file|mimes:pdf|max:5120', // 5MB max
-            'portfolio_file' => 'nullable|file|mimes:pdf|max:5120', // 5MB max
-        ], [
-            'job_vacancy_id.required' => 'Lowongan pekerjaan harus dipilih.',
-            'job_vacancy_id.exists' => 'Lowongan pekerjaan yang dipilih tidak valid.',
-            'position_name.required' => 'Nama posisi tidak boleh kosong.',
-            'full_name.required' => 'Nama lengkap harus diisi.',
-            'phone_number.required' => 'Nomor telepon harus diisi.',
-            'email.required' => 'Email harus diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'province.required' => 'Provinsi harus dipilih.',
-            'city.required' => 'Kabupaten/Kota harus dipilih.',
-            'education_level.required' => 'Pendidikan terakhir harus dipilih.',
-            'major.required' => 'Jurusan harus diisi.',
-            'experience_level.required' => 'Tingkat pengalaman harus dipilih.',
-            'cv_file.required' => 'CV harus diunggah.',
-            'cv_file.mimes' => 'CV harus berformat PDF.',
-            'cv_file.max' => 'Ukuran CV maksimal 5MB.',
-            'portfolio_file.mimes' => 'Portfolio harus berformat PDF.',
-            'portfolio_file.max' => 'Ukuran portfolio maksimal 5MB.',
+            'cv_file' => 'required|file|mimes:pdf|max:2048', // Max 2MB
+            'portfolio_file' => 'nullable|file|mimes:pdf|max:2048', // Opsional, Max 2MB
         ]);
 
         if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            Log::error('Job application validation failed', ['errors' => $validator->errors()->toArray()]);
+            return back()->withErrors($validator)->withInput();
         }
 
         try {
-            // Check if storage directories exist, create if not
-            if (!Storage::disk('public')->exists('job-applications/cv')) {
-                Storage::disk('public')->makeDirectory('job-applications/cv');
-            }
-
-            if (!Storage::disk('public')->exists('job-applications/portfolio')) {
-                Storage::disk('public')->makeDirectory('job-applications/portfolio');
-            }
-
-            // Handle CV file upload
             $cvPath = null;
             if ($request->hasFile('cv_file')) {
-                $cvFile = $request->file('cv_file');
-
-                if (!$cvFile->isValid()) {
-                    throw new \Exception('CV file is not valid');
-                }
-
-                $cvFileName = time() . '_cv_' . $cvFile->getClientOriginalName();
-                $cvPath = $cvFile->storeAs('job-applications/cv', $cvFileName, 'public');
-                Log::info('CV uploaded successfully', ['path' => $cvPath]);
+                $cvPath = $request->file('cv_file')->store('cv_files', 'public');
             }
 
-            // Handle Portfolio file upload (optional)
             $portfolioPath = null;
             if ($request->hasFile('portfolio_file')) {
-                $portfolioFile = $request->file('portfolio_file');
-
-                if (!$portfolioFile->isValid()) {
-                    throw new \Exception('Portfolio file is not valid');
-                }
-
-                $portfolioFileName = time() . '_portfolio_' . $portfolioFile->getClientOriginalName();
-                $portfolioPath = $portfolioFile->storeAs('job-applications/portfolio', $portfolioFileName, 'public');
-                Log::info('Portfolio uploaded successfully', ['path' => $portfolioPath]);
+                $portfolioPath = $request->file('portfolio_file')->store('portfolio_files', 'public');
             }
 
-            // Create job application record
+            // Simpan data lamaran ke database
             $jobApplication = JobApplication::create([
-                // Karena tidak ada Auth::user(), user_id tidak bisa diisi otomatis dari user yang login
-                // Jika user_id di tabel job_applications adalah nullable atau ada cara lain untuk mengisinya,
-                // maka Anda bisa mengosongkannya atau mengisinya sesuai kebutuhan.
-                // Untuk contoh ini, saya akan menghilangkannya. Jika diperlukan,
-                // pastikan Anda memiliki kolom 'user_id' yang nullable di migrasi
-                // atau Anda mengelola autentikasi pengguna secara terpisah.
-                // 'user_id' => $user->id, // Jika Anda tidak menggunakan Auth, baris ini harus dihapus atau diganti
-                'job_vacancy_id' => $request->job_vacancy_id, // Menggunakan job_vacancy_id
-                'position_name' => $request->position_name, // Diambil dari hidden input JS
+                'position_id' => $request->job_vacancy_id, // Menggunakan job_vacancy_id
+                'position_name' => $request->position_name,
                 'full_name' => $request->full_name,
                 'phone_number' => $request->phone_number,
                 'email' => $request->email,

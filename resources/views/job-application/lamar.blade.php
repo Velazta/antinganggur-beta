@@ -48,18 +48,21 @@
                     @csrf
 
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Posisi yang Dilamar:</label>
-                        {{-- Menampilkan job_title secara statis --}}
-                        <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50">
-                            {{-- Cek apakah $jobVacancy ada, jika tidak gunakan old('position_name') --}}
-                            {{ isset($jobVacancy) ? $jobVacancy->job_title : old('position_name', 'Lowongan Tidak Ditemukan') }}
-                        </div>
-                        {{-- Input hidden untuk job_vacancy_id --}}
-                        <input type="hidden" name="job_vacancy_id" id="job_vacancy_id"
-                            value="{{ isset($jobVacancy) ? $jobVacancy->id : old('job_vacancy_id') }}">
-                        {{-- Input hidden untuk position_name --}}
-                        <input type="hidden" name="position_name" id="position_name"
-                            value="{{ isset($jobVacancy) ? $jobVacancy->job_title : old('position_name') }}">
+                        <label for="position-select" class="block text-sm font-medium text-gray-700 mb-1">Posisi Yang Dilamar <span class="text-red-500">*</span></label>
+                        <select id="position-select" name="job_vacancy_id"
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FF7144] focus:border-[#FF7144] sm:text-sm bg-white text-gray-900">
+                            <option value="">Pilih Posisi</option>
+                            @foreach ($jobVacancies as $jobVacancy)
+                                <option value="{{ $jobVacancy->id }}"
+                                    {{ (old('job_vacancy_id', $selectedJobId ?? '') == $jobVacancy->id) ? 'selected' : '' }}>
+                                    {{ $jobVacancy->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <input type="hidden" name="position_name" id="position-name-hidden" value="{{ old('position_name', $selectedJobTitle ?? '') }}">
+                        @error('job_vacancy_id')
+                            <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="floating-label-input">
@@ -313,111 +316,130 @@
 
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const provinsiSelect = document.getElementById('provinsi');
-                const lokasiSelect = document.getElementById('lokasi');
-                // Tidak ada lagi jobVacancySelect karena bukan dropdown.
-                // Tetap ada referensi ke input hidden untuk memastikan mereka ada di DOM.
-                const jobVacancyIdInput = document.getElementById('job_vacancy_id');
-                const positionNameInput = document.getElementById('position_name');
+             const selectedJobId = "{{ $selectedJobId ?? '' }}";
+        const selectedJobTitle = "{{ $selectedJobTitle ?? '' }}";
+        const oldProvince = "{{ old('province') }}"; // Mengambil nilai provinsi lama jika ada error validasi
+        const oldCity = "{{ old('city') }}"; // Mengambil nilai kota lama jika ada error validasi
 
-                function populateDropdown(selectElement, data, placeholderText) {
-                    selectElement.innerHTML = `<option value="" disabled selected>${placeholderText}</option>`;
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.id || item.value;
-                        option.textContent = item.name || item.label;
-                        selectElement.appendChild(option);
-                    });
-                    selectElement.classList.remove('valid');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pre-fill Job Position if parameters are present
+            const positionSelect = document.getElementById('position-select');
+            const positionNameHidden = document.getElementById('position-name-hidden');
+
+            if (selectedJobId && positionSelect) {
+                positionSelect.value = selectedJobId;
+                // Update hidden input with the job title
+                const selectedOption = positionSelect.options[positionSelect.selectedIndex];
+                if (selectedOption) {
+                    positionNameHidden.value = selectedOption.textContent.trim();
                 }
+            } else if (old('job_vacancy_id')) {
+                 // Jika ada old input (misal setelah validasi gagal), gunakan itu
+                positionSelect.value = "{{ old('job_vacancy_id') }}";
+                const selectedOption = positionSelect.options[positionSelect.selectedIndex];
+                if (selectedOption) {
+                    positionNameHidden.value = selectedOption.textContent.trim();
+                }
+            }
 
-                async function fetchProvinces() {
-                    try {
-                        const response = await fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
+
+            // --- Province and City Dropdown Logic ---
+            const provinceSelect = document.getElementById('province-select');
+            const citySelect = document.getElementById('city-select');
+
+            function fetchProvinces() {
+                fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json')
+                    .then(response => response.json())
+                    .then(provinces => {
+                        provinceSelect.innerHTML = '<option value="">Pilih Provinsi</option>';
+                        provinces.forEach(province => {
+                            const option = document.createElement('option');
+                            option.value = province.name;
+                            option.dataset.id = province.id; // Simpan ID untuk fetch kota
+                            option.textContent = province.name;
+                            if (oldProvince && province.name === oldProvince) {
+                                option.selected = true;
+                            }
+                            provinceSelect.appendChild(option);
+                        });
+                        // Jika ada oldProvince, panggil fetchCities untuk mengisi kota
+                        if (oldProvince) {
+                            const selectedProvinceOption = Array.from(provinceSelect.options).find(opt => opt.value === oldProvince);
+                            if (selectedProvinceOption) {
+                                fetchCities(selectedProvinceOption.dataset.id, oldCity);
+                            }
                         }
-                        const provinces = await response.json();
-                        provinces.sort((a, b) => a.name.localeCompare(b.name));
-                        populateDropdown(provinsiSelect, provinces, "Provinsi");
-                    } catch (error) {
-                        console.error('Gagal mengambil data provinsi:', error);
-                        alert('Gagal memuat daftar provinsi. Silakan coba lagi nanti.');
-                    }
+                    })
+                    .catch(error => console.error('Error fetching provinces:', error));
+            }
+
+            function fetchCities(provinceId, initialCity = null) {
+                citySelect.innerHTML = '<option value="">Pilih Kota/Kabupaten</option>';
+                citySelect.disabled = true; // Disable until cities are loaded
+                if (!provinceId) return;
+
+                fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
+                    .then(response => response.json())
+                    .then(cities => {
+                        citySelect.disabled = false;
+                        cities.forEach(city => {
+                            const option = document.createElement('option');
+                            option.value = city.name;
+                            option.textContent = city.name;
+                            if (initialCity && city.name === initialCity) {
+                                option.selected = true;
+                            }
+                            citySelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching cities:', error));
+            }
+
+            provinceSelect.addEventListener('change', function() {
+                const selectedProvinceId = this.options[this.selectedIndex].dataset.id;
+                fetchCities(selectedProvinceId);
+            });
+
+            // Input field 'valid' class logic (remains the same)
+            document.querySelectorAll('.form-group input, .form-group select').forEach(input => {
+                // Initial check on load for existing values (e.g., old() inputs)
+                if (input.value !== "") {
+                    input.classList.add('valid');
+                } else {
+                    input.classList.remove('valid');
                 }
 
-                async function fetchRegencies(provinceId) {
-                    lokasiSelect.disabled = true;
-                    lokasiSelect.innerHTML = `<option value="" disabled selected>Memuat...</option>`;
-                    lokasiSelect.classList.remove('valid');
-
-                    try {
-                        const response = await fetch(
-                            `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`);
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        const regencies = await response.json();
-                        regencies.sort((a, b) => a.name.localeCompare(b.name));
-                        populateDropdown(lokasiSelect, regencies, "Kabupaten/Kota");
-                        lokasiSelect.disabled = false;
-                    } catch (error) {
-                        console.error('Gagal mengambil data kabupaten/kota:', error);
-                        alert('Gagal memuat daftar kabupaten/kota. Silakan coba lagi nanti.');
-                        lokasiSelect.innerHTML = `<option value="" disabled selected>Gagal memuat</option>`;
-                    }
-                }
-
-                // Event Listeners for location dropdowns remain the same
-                provinsiSelect.addEventListener('change', function() {
-                    const selectedProvinceId = this.value;
-                    if (selectedProvinceId) {
-                        fetchRegencies(selectedProvinceId);
-                    } else {
-                        lokasiSelect.innerHTML = `<option value="" disabled selected>Pilih Kabupaten/Kota</option>`;
-                        lokasiSelect.disabled = true;
-                        lokasiSelect.classList.remove('valid');
-                    }
+                input.addEventListener('input', function() {
                     if (this.value !== "") {
                         this.classList.add('valid');
                     } else {
                         this.classList.remove('valid');
                     }
-                });
-
-                lokasiSelect.addEventListener('change', function() {
-                    if (this.value !== "") {
-                        this.classList.add('valid');
-                    } else {
-                        this.classList.remove('valid');
-                    }
-                });
-
-                // File upload handlers (remain the same)
-                document.getElementById('cv-upload').addEventListener('change', function() {
-                    if (this.files.length > 0) {
-                        const fileName = this.files[0].name;
-                        document.getElementById('cv-text').textContent = fileName;
-                    } else {
-                        document.getElementById('cv-text').textContent = 'Unggah CV Dalam Bentuk Pdf';
-                    }
-                });
-
-                document.getElementById('portfolio-upload').addEventListener('change', function() {
-                    if (this.files.length > 0) {
-                        const fileName = this.files[0].name;
-                        document.getElementById('portfolio-text').textContent = fileName;
-                    } else {
-                        document.getElementById('portfolio-text').textContent =
-                            'Unggah Portfolio Dalam Bentuk Pdf (Opsional)';
-                    }
-                });
-
-                // Initialize dropdowns (only for provinces/regencies now)
-                document.addEventListener('DOMContentLoaded', function() {
-                    fetchProvinces();
                 });
             });
+
+            // File upload handlers (remain the same)
+            document.getElementById('cv-upload').addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    const fileName = this.files[0].name;
+                    document.getElementById('cv-text').textContent = fileName;
+                } else {
+                    document.getElementById('cv-text').textContent = 'Unggah CV Dalam Bentuk Pdf';
+                }
+            });
+
+            document.getElementById('portfolio-upload').addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    const fileName = this.files[0].name;
+                    document.getElementById('portfolio-text').textContent = fileName;
+                } else {
+                    document.getElementById('portfolio-text').textContent =
+                        'Unggah Portfolio Dalam Bentuk Pdf (Opsional)';
+                }
+            });
+
+            // Initialize dropdowns (for positions, provinces, and regencies)
+            fetchProvinces(); // Call fetchProvinces to populate on load
+        });
         </script>
     @endpush

@@ -114,7 +114,7 @@
                                 Membutuhkan Frontend Developer Berpengalaman React Js Untuk Membangun Antarmuka Web Yang Responsif, Menarik, Dan Mudah Digunakan.
                             </p>
 
-                            <a href="{{ route('lamar.create') }}" class="w-full bg-[#FF7144] text-white  py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 mt-auto text-center">
+                            <a href="{{ route('lamar.create') }}" class="w-full bg-[#FF7144] text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 mt-auto text-center">
                                 Lamar
                             </a>
                         </div>
@@ -266,8 +266,8 @@
                                 <a href="{{ route('admin.manajemen.lowongan.show', $vacancy->id) }}" class="flex-1 px-4 py-2 border-2 border-[#FF7144] text-sm font-semibold rounded-lg text-[#FF7144] bg-white hover:bg-orange-50 transition-colors duration-150 text-center">
                                     Lihat Detail
                                 </a>
-                                {{-- Link "Lamar" ke halaman formulir lamar --}}
-                                <a href="{{ route('lamar.create') }}" class="flex-1 px-4 py-2 text-sm font-semibold rounded-lg text-white bg-[#FF7144] hover:bg-orange-600 transition-colors duration-150 text-center">
+                                {{-- Link "Lamar" ke halaman formulir lamar, sekarang dengan parameter ID dan Title --}}
+                                <a href="{{ route('lamar.create', ['job_vacancy_id' => $vacancy->id, 'job_title' => $vacancy->title]) }}" class="flex-1 px-4 py-2 text-sm font-semibold rounded-lg text-white bg-[#FF7144] hover:bg-orange-600 transition-colors duration-150 text-center">
                                     Lamar
                                 </a>
                             </div>
