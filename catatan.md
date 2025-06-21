@@ -365,3 +365,82 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 @endpush
+
+
+
+<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    @php
+                                        $statusClasses = [
+                                            'pending' => 'text-yellow-800 bg-yellow-100 border-yellow-300',
+                                            'accepted' => 'text-green-800 bg-green-100 border-green-300',
+                                            'rejected' => 'text-red-800 bg-red-100 border-red-300',
+                                        ];
+                                        $statusLabels = [
+                                            'pending' => 'Menunggu',
+                                            'accepted' => 'Diterima',
+                                            'rejected' => 'Ditolak',
+                                        ];
+                                    @endphp
+
+                                    <div class="relative status-dropdown-group" style="min-width: 140px;">
+                                        <button type="button"
+                                            class="w-full flex justify-between items-center font-semibold leading-tight py-1 px-3 rounded-full border cursor-pointer focus:outline-none transition {{ $statusClasses[$application->status] ?? 'bg-gray-200' }}"
+                                            onclick="toggleDropdown(this)">
+                                            <span>{{ $statusLabels[$application->status] ?? ucfirst($application->status) }}</span>
+                                            <svg class="w-4 h-4 ml-2 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        <div class="absolute left-0 mt-2 w-full rounded-lg shadow-lg bg-white border border-gray-200 z-10 overflow-hidden dropdown-menu"
+                                            style="max-height:0; opacity:0; transition:max-height 0.25s cubic-bezier(.4,0,.2,1),opacity 0.2s;">
+                                            <form action="{{ route('admin.manajemen.pelamar.updateStatus', $application->id) }}" method="POST" class="m-0">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" name="status" value="pending"
+                                                    class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-yellow-50 font-semibold {{ $application->status == 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}">
+                                                    Menunggu
+                                                </button>
+                                                <button type="submit" name="status" value="accepted"
+                                                    class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-green-50 font-semibold {{ $application->status == 'accepted' ? 'bg-green-100 text-green-800' : '' }}">
+                                                    Diterima
+                                                </button>
+                                                <button type="submit" name="status" value="rejected"
+                                                    class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-red-50 font-semibold {{ $application->status == 'rejected' ? 'bg-red-100 text-red-800' : '' }}">
+                                                    Ditolak
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                                @section('scripts')
+                                <script>
+                                    function closeAllDropdowns() {
+                                        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                                            menu.style.maxHeight = '0';
+                                            menu.style.opacity = '0';
+                                            menu.parentElement.querySelector('svg').style.transform = '';
+                                        });
+                                    }
+                                    function toggleDropdown(btn) {
+                                        const menu = btn.parentElement.querySelector('.dropdown-menu');
+                                        const svg = btn.querySelector('svg');
+                                        if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+                                            menu.style.maxHeight = '0';
+                                            menu.style.opacity = '0';
+                                            svg.style.transform = '';
+                                        } else {
+                                            closeAllDropdowns();
+                                            menu.style.maxHeight = menu.scrollHeight + 'px';
+                                            menu.style.opacity = '1';
+                                            svg.style.transform = 'rotate(180deg)';
+                                        }
+                                    }
+                                    document.addEventListener('click', function(e) {
+                                        if (!e.target.closest('.status-dropdown-group')) {
+                                            closeAllDropdowns();
+                                        }
+                                    });
+                                </script>
+                                @endsection

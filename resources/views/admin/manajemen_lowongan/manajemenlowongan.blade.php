@@ -40,7 +40,7 @@
                 <div
                     class="bg-[#1A73E8] rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col">
                     <div class="flex items-start mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
                             @if ($vacancy->job_logo)
                                 <img src="{{ asset('storage/' . $vacancy->job_logo) }}" alt="Logo Perusahaan"
                                     class="w-[30px] h-[30px] object-contain rounded-lg">
@@ -65,7 +65,7 @@
 
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span
-                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white text-blue-700">
                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
@@ -74,7 +74,7 @@
                             {{ $vacancy->location }}
                         </span>
                         <span
-                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white text-blue-700">
                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
@@ -84,7 +84,7 @@
                         </span>
                         @if ($vacancy->min_salary && $vacancy->max_salary)
                             <span
-                                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white text-blue-700">
                                 Rp {{ number_format($vacancy->min_salary, 0, ',', '.') }} -
                                 {{ number_format($vacancy->max_salary, 0, ',', '.') }} jt/bulan
                             </span>

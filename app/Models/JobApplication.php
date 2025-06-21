@@ -12,6 +12,7 @@ class JobApplication extends Model
     protected $fillable = [
         'user_id',
         'job_vacancy_id',
+        'status',
         'position_name',
         'full_name',
         'phone_number',
@@ -34,6 +35,11 @@ class JobApplication extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function jobVacancy()
+    {
+        return $this->belongsTo(JobVacancy::class);
     }
 
 }
