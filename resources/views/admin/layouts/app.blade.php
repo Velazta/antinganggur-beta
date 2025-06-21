@@ -57,10 +57,6 @@
         color: #1A73E8; /* Ubah warna teks menjadi biru */
         font-weight: 300; /* Tebalkan font */
     }
-
-    /* ======================================= */
-    /* === CSS BARU UNTUK IKON DINAMIS === */
-    /* ======================================= */
     .menu-icon {
         display: inline-block;
         width: 1.5rem; /* w-6 */
@@ -74,9 +70,6 @@
         mask-repeat: no-repeat;
         transition: background-color 0.3s ease-in-out; /* Transisi warna yang mulus */
     }
-
-    /* Saat link aktif, ubah warna background ikonnya menjadi biru */
-    /* Saat link aktif ATAU di-hover, ubah warna background ikonnya menjadi biru */
     .sidebar-link.active .menu-icon,
     .sidebar-link:hover .menu-icon {
         background-color: #1A73E8; /* Warna ikon saat aktif/hover (biru) */

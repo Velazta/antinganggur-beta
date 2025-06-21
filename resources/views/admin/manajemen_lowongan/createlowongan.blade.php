@@ -55,11 +55,11 @@
 
                 {{-- Lokasi detail pekerjaan --}}
                 <div class="md:col-span-2">
-                    <label for="location_detail" class="block text-sm font-medium text-gray-600 mb-1">Detail Lokasi (Alamat
+                    <label for="location_details" class="block text-sm font-medium text-gray-600 mb-1">Detail Lokasi (Alamat
                         Lengkap)</label>
-                    <textarea name="location_detail" id="location_detail" rows="3"
+                    <textarea name="location_details" id="location_details" rows="3"
                         class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                        placeholder="Contoh: Jl. Jendral Sudirman No. 5, Gedung ABC Lt. 10">{{ old('location_detail') }}</textarea>
+                        placeholder="Contoh: Jl. Jendral Sudirman No. 5, Gedung ABC Lt. 10">{{ old('location_details') }}</textarea>
                 </div>
 
                 {{-- Tipe Pekerjaan --}}

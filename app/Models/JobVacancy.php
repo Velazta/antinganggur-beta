@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\JobBenefit;
 
 class JobVacancy extends Model
 {
@@ -21,7 +22,6 @@ class JobVacancy extends Model
         'work_schedule',  // Jadwal kerja (nama kolom baru yang Anda inginkan)
         'career_level',   // Tingkat karir (nama kolom baru yang Anda inginkan)
         'mobility',      // Mobilitas (nama kolom baru yang Anda inginkan)
-        'benefits',       // Manfaat pekerjaan (nama kolom baru yang Anda inginkan)
         'open_positions', // Jumlah posisi yang dibuka
         'min_salary',     // Gaji minimum
         'max_salary',     // Gaji maksimum
@@ -31,6 +31,9 @@ class JobVacancy extends Model
      protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'benefits' => 'array', // Menggunakan cast untuk kolom JSON
     ];
+
+    public function benefits() {
+        return $this->hasMany(JobBenefit::class);
+    }
 }

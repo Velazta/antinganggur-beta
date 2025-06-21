@@ -71,7 +71,7 @@ class JobVacancyController extends Controller
                 'company_name' => 'Anti Nganggur', // Static company name
                 'job_logo' => $jobLogoPath,
                 'location' => $validatedData['location'],
-                'location_details' => $validatedData['location_details'],
+                'location_details' => $validatedData['location_details'] ?? null,
                 'type_job' => $validatedData['type_job'],
                 'work_schedule' => $validatedData['work_schedule'] ?? null,
                 'career_level' => $validatedData['career_level'] ?? null,
@@ -87,7 +87,7 @@ class JobVacancyController extends Controller
             if (!empty($benefitNames)) {
                 foreach ($benefitNames as $name) {
                     if ($name) { // Pastikan nama benefit tidak kosong
-                        $jobVacancy->benefits()->create(['name' => $name]);
+                        $jobVacancy->benefits()->create(['benefits_name' => $name]);
                     }
                 }
             }
@@ -126,7 +126,7 @@ class JobVacancyController extends Controller
             // 'company_name' => 'required|string|max:255',
             'job_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
             'location' => 'required|string|max:255',
-            'location_details' => 'required|string|max:255',
+            'location_details' => 'nullable|string|max:255',
             'type_job' => 'required|string|max:100',
             'work_schedule' => 'nullable|string|max:100',
             'career_level' => 'nullable|string|max:100',
@@ -171,7 +171,7 @@ class JobVacancyController extends Controller
             if (!empty($benefitNames)) {
                 foreach ($benefitNames as $name) {
                      if ($name) {
-                        $jobVacancy->benefits()->create(['name' => $name]);
+                        $jobVacancy->benefits()->create(['benefits_name' => $name]);
                     }
                 }
             }
