@@ -1,104 +1,105 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Detail Form Lamaran')
+@section('title', 'Detail Lamaran')
+@section('page-title')
+    <div class="flex items-center">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Detail Lamaran
+        </h2>
+        <span class="ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+            {{ $application->full_name }}
+        </span>
+    </div>
+@endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-title-box">
-                    <h4 class="page-title">Detail Form Lamaran</h4>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('manajemen.pelamar.index') }}">Manajemen Pelamar</a>
-                        </li>
-                        <li class="breadcrumb-item active">Detail Form Lamaran</li>
-                    </ol>
+<main class="w-full flex-grow p-6">
+    <div class="bg-white rounded-lg shadow-md border border-gray-200 p-8 mx-auto">
+
+        {{-- Header Lamaran --}}
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <h3 class="text-2xl font-bold text-gray-900">Lamaran untuk Posisi Front End</h3>
+                <p class="text-sm text-gray-500 mt-1">
+                    Tanggal Melamar: {{ optional($application->created_at)->isoFormat('D MMMM YYYY, HH:mm') }}
+                </p>
+            </div>
+            <a href="{{ route('admin.manajemen.pelamar') }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Kembali
+            </a>
+        </div>
+        <hr class="mb-6">
+
+        {{-- Detail Informasi Pelamar --}}
+        <div>
+            <h4 class="text-lg font-bold text-gray-800 mb-4">Informasi Pribadi</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-500">Nama Lengkap</label>
+                    <p class="mt-1 text-md text-gray-900 font-semibold">{{ $application->full_name }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-500">Nomor Telepon</label>
+                    <p class="mt-1 text-md text-gray-900">{{ $application->phone_number }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-500">Email</label>
+                    <p class="mt-1 text-md text-gray-900">{{ $application->email }}</p>
+                </div>
+                 <div>
+                    <label class="block text-sm font-medium text-gray-500">Kota</label>
+                    <p class="mt-1 text-md text-gray-900">{{ $application->city.', '.$application->province }}</p>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="mt-0 header-title">Informasi Pelamar dan Lamaran</h4>
-                        <p class="text-muted m-b-30">Berikut adalah detail data yang dikirimkan oleh pelamar.</p>
+        <hr class="my-6">
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="applicant_name" class="form-label">Nama Pelamar</label>
-                                    <input type="text" class="form-control" id="applicant_name"
-                                        value="{{ $application->user->name }}" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="applicant_email" class="form-label">Email Pelamar</label>
-                                    <input type="text" class="form-control" id="applicant_email"
-                                        value="{{ $application->user->email }}" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="job_title" class="form-label">Posisi yang Dilamar</label>
-                                    <input type="text" class="form-control" id="job_title"
-                                        value="{{ $application->jobVacancy->title }}" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="company_name" class="form-label">Perusahaan</label>
-                                    <input type="text" class="form-control" id="company_name"
-                                        value="{{ $application->jobVacancy->company_name }}" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="application_date" class="form-label">Tanggal Melamar</label>
-                                    <input type="text" class="form-control" id="application_date"
-                                        value="{{ $application->created_at->format('d F Y, H:i') }}" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="application_status" class="form-label">Status Lamaran</label>
-                                    <input type="text" class="form-control" id="application_status"
-                                        value="{{ ucfirst($application->status) }}" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="resume" class="form-label">Resume/CV Pelamar</label>
-                            <br>
-                            @if ($application->resume_path)
-                                <a href="{{ asset('storage/' . $application->resume_path) }}" class="btn btn-primary"
-                                    target="_blank"><i class="bi bi-download me-2"></i> Unduh CV</a>
-                            @else
-                                <span class="badge bg-warning">CV tidak dilampirkan</span>
-                            @endif
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="cover_letter" class="form-label">Surat Lamaran (Cover Letter)</label>
-                            <textarea class="form-control" id="cover_letter" rows="8" readonly>{{ $application->cover_letter }}</textarea>
-                        </div>
-
-                        <div class="mt-4">
-                            <a href="{{ route('manajemen.pelamar.index') }}" class="btn btn-secondary"><i
-                                    class="bi bi-arrow-left"></i> Kembali</a>
-                        </div>
-                    </div>
+        {{-- Detail Pendidikan & Pengalaman --}}
+        <div>
+            <h4 class="text-lg font-bold text-gray-800 mb-4">Pendidikan dan Pengalaman</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-500">Tingkat Pendidikan</label>
+                    <p class="mt-1 text-md text-gray-900">{{ $application->education_level }}</p>
                 </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-500">Jurusan</label>
+                    <p class="mt-1 text-md text-gray-900">{{ $application->major }}</p>
+                </div>
+                <div class="col-span-2">
+                    <label class="block text-sm font-medium text-gray-500">Tingkat Pengalaman</label>
+                    <p class="mt-1 text-md text-gray-900">{{ $application->experience_level }}</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-6">
+
+        {{-- Dokumen Terlampir --}}
+        <div>
+            <h4 class="text-lg font-bold text-gray-800 mb-4">Dokumen Terlampir</h4>
+            <div class="flex items-center space-x-4">
+                @if ($application->cv_file)
+                    <a href="{{ asset('storage/' . $application->cv_file) }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Unduh CV
+                    </a>
+                @else
+                    <p class="text-sm text-gray-500">CV tidak dilampirkan.</p>
+                @endif
+
+                @if ($application->portfolio_file)
+                    <a href="{{ asset('storage/' . $application->portfolio_file) }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                        Lihat Portofolio
+                    </a>
+                @else
+                     <p class="text-sm text-gray-500">Portofolio tidak dilampirkan.</p>
+                @endif
             </div>
         </div>
     </div>
+</main>
 @endsection

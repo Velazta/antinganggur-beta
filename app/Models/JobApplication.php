@@ -42,4 +42,8 @@ class JobApplication extends Model
         return $this->belongsTo(JobVacancy::class);
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

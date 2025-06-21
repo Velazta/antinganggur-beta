@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- ===== Section 1: Selamat Datang (Hero) Mulai ===== -->
-    <section class="pt-12 pb-16 md:pt-20 md:pb-24 lg:pt-24 lg:pb-28 overflow-hidden bg-gradient-to-bl from-orange-200 to-white">
+    <section class="pt-12 pb-16 md:pt-20 md:pb-24 lg:pt-24 lg:pb-48 overflow-hidden bg-gradient-to-bl from-orange-200 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16 lg:items-center">
                 <div class="lg:col-span-6 xl:col-span-6 text-center lg:text-left">
@@ -206,7 +206,7 @@
             </div>
 
             <div class="mt-12 md:mt-16 text-center">
-                <a href="{{ asset('asset/page/lowongan') }}" class="inline-flex items-center justify-center px-8 py-3.5 border-2 border-[#FF7144] text-base font-semibold rounded-lg text-[#FF7144] bg-white hover:bg-orange-50 hover:border-orange-600 hover:text-orange-600 md:text-lg md:px-10 shadow-sm hover:shadow transition-all duration-200">
+                <a href="{{ url('/lowongan') }}" class="inline-flex items-center justify-center px-8 py-3.5 border-2 border-[#FF7144] text-base font-semibold rounded-lg text-[#FF7144] bg-white hover:bg-orange-50 hover:border-orange-600 hover:text-orange-600 md:text-lg md:px-10 shadow-sm hover:shadow transition-all duration-200">
                     Lihat Semua Lowongan
                 </a>
             </div>

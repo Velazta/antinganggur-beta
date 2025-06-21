@@ -37,8 +37,10 @@ Route::middleware(['auth.admin'])->group(function () {
     Route::delete('/manajemen-lowongan/{jobVacancy}', [JobVacancyController::class, 'destroy'])->name('manajemen.lowongan.destroy');
 
     Route::get('/manajemen-pelamar', [ApplicantController::class, 'index'])->name('manajemen.pelamar');
-    Route::get('/manajemen-pelamar/{application}/show', [ApplicantController::class, 'showApplication'])->name('manajemen.pelamar.show');
+    Route::get('/manajemen-pelamar/{application}', [ApplicantController::class, 'showApplication'])->name('manajemen.pelamar.show');
     Route::patch('/manajemen-pelamar/{application}/status', [ApplicantController::class, 'updateStatus'])->name('manajemen.pelamar.updateStatus');
+    Route::get('/manajemen-pelamar/{application}/hubungi', [ApplicantController::class, 'showContactForm'])->name('manajemen.pelamar.contact');
+    Route::post('/manajemen-pelamar/{application}/kirim-pesan', [ApplicantController::class, 'sendMessage'])->name('manajemen.pelamar.sendMessage');
     // Route::get('/manajemen-pelamar', function() {
     //     return view('admin.pelamar.manajemenpelamar');
     // })->name('manajemen.pelamar');

@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JobApplication;
+use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicantController extends Controller
 {
@@ -17,7 +20,7 @@ class ApplicantController extends Controller
             'pending' => JobApplication::where('status', 'pending')->count(),
         ];
         // Mengambil semua data lamaran kerja
-        $applications = JobApplication::with('user', 'jobVacancy')->latest()->paginate(10);
+        $applications = JobApplication::with('user.profile', 'jobVacancy')->latest()->paginate(10);
 
         return view('admin.pelamar.manajemenpelamar', compact('applications', 'stats'));
     }
@@ -39,7 +42,31 @@ class ApplicantController extends Controller
 
     public function showApplication(JobApplication $application)
     {
+        return view('admin.pelamar.showlamaran', compact('application'));
+    }
 
+    public function showContactForm(JobApplication $application)
+    {
+        $application->load('user', 'jobVacancy');
+        return view('admin.pelamar.menghubungi', compact('application'));
+    }
+
+    public function sendMessage(Request $request, JobApplication $application)
+    {
+        $request->validate([
+            'subject' => 'required|string|max:255',
+            'body' => 'required|string',
+        ]);
+
+        Message::create([
+            'admin_id' => Auth::guard('admin')->id(), // Mengambil ID admin yang sedang login
+            'user_id' => $application->user_id,
+            'job_application_id' => $application->id,
+            'subject' => $request->subject,
+            'body' => $request->body,
+        ]);
+
+        return redirect()->route('admin.manajemen.pelamar.index')
+            ->with('success', 'Pesan berhasil dikirim kepada ' . $application->user->name);
     }
 }
-
