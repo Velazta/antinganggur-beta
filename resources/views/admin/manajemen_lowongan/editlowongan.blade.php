@@ -136,10 +136,10 @@
 
                 {{-- Detail Lokasi --}}
                 <div class="md:col-span-2">
-                    <label for="location_detail" class="block text-sm font-medium text-gray-600 mb-1">Detail Lokasi (Alamat
+                    <label for="location_details" class="block text-sm font-medium text-gray-600 mb-1">Detail Lokasi (Alamat
                         Lengkap)</label>
-                    <textarea name="location_detail" id="location_detail" rows="3"
-                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all">{{ old('location_detail', $jobVacancy->location_detail) }}</textarea>
+                    <textarea name="location_details" id="location_details" rows="3"
+                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all">{{ old('location_details', $jobVacancy->location_details) }}</textarea>
                 </div>
 
                 {{-- Tipe Pekerjaan --}}
@@ -274,16 +274,32 @@
             <div class="mt-8 border-t border-gray-200 pt-6">
                 <label class="block text-xl font-semibold text-gray-700 mb-4">Benefit yang Ditawarkan</label>
                 <div id="benefits-container" class="space-y-4">
-                    {{-- Loop through existing benefits --}}
-                    @foreach ($jobVacancy->benefits as $benefit)
+
+                    {{-- Tampilkan benefit yang sudah ada dari database --}}
+                    @foreach ($jobVacancy->jobBenefits as $benefit)
                         <div class="flex items-center gap-x-3">
                             <input type="text" name="benefits[]"
                                 class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                                placeholder="Contoh: Asuransi Kesehatan" value="{{ $benefit->name }}">
+                                placeholder="Contoh: Asuransi Kesehatan"
+                                value="{{ old('benefit', $benefit->benefits_name) }}">
                             <button type="button"
                                 class="remove-benefit-btn py-2 px-4 rounded-lg font-semibold bg-red-500 text-white hover:bg-red-600 transition-all">Hapus</button>
                         </div>
                     @endforeach
+
+                    {{-- Jika ada error validasi, tampilkan input lama yang baru ditambahkan --}}
+                    @if (old('benefits') && !$errors->isEmpty())
+                        @foreach (array_slice(old('benefits'), count($jobVacancy->benefits)) as $old_benefit)
+                            <div class="flex items-center gap-x-3">
+                                <input type="text" name="benefits[]"
+                                    class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
+                                    placeholder="Contoh: Asuransi Kesehatan" value="{{ $old_benefit }}">
+                                <button type="button"
+                                    class="remove-benefit-btn py-2 px-4 rounded-lg font-semibold bg-red-500 text-white hover:bg-red-600 transition-all">Hapus</button>
+                            </div>
+                        @endforeach
+                    @endif
+
                 </div>
                 <button type="button" id="add-benefit-btn"
                     class="mt-4 py-2 px-4 rounded-lg font-semibold border border-gray-400 text-gray-600 hover:bg-gray-100 transition-all">

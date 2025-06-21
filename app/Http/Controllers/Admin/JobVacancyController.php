@@ -104,7 +104,7 @@ class JobVacancyController extends Controller
      public function show(JobVacancy $jobVacancy)
     {
 
-        $jobVacancy->load('benefits'); // Memuat relasi benefits jika ada
+        $jobVacancy->load('jobBenefits'); // Memuat relasi benefits jika ada
         return view('admin.manajemen_lowongan.showlowongan', compact('jobVacancy'));
     }
 
@@ -115,7 +115,7 @@ class JobVacancyController extends Controller
             'Makassar', 'Palembang', 'Tangerang', 'Depok', 'Bekasi', 'Surakarta'
         ];
 
-        $jobVacancy->load('benefits'); // Memuat relasi benefits jika ada
+        $jobVacancy->load('jobBenefits'); // Memuat relasi benefits jika ada
         return view('admin.manajemen_lowongan.editlowongan', compact('jobVacancy', 'locations'));
     }
 
@@ -124,7 +124,7 @@ class JobVacancyController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             // 'company_name' => 'required|string|max:255',
-            'job_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
+            'job_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'location' => 'required|string|max:255',
             'location_details' => 'nullable|string|max:255',
             'type_job' => 'required|string|max:100',
@@ -146,14 +146,14 @@ class JobVacancyController extends Controller
             }
             $logoName = time().'.'.$request->job_logo->extension();
             $request->job_logo->storeAs('public/job_logos', $logoName);
-            $validated['job_logo'] = $logoName;
+            $validatedData['job_logo'] = $logoName;
         }
 
         DB::beginTransaction();
         try {
             // Pisahkan data benefits dari data utama
-            $benefitNames = $validated['benefits'] ?? [];
-            unset($validated['benefits']);
+            $benefitNames = $validatedData['benefits'] ?? [];
+            unset($validatedData['benefits']);
 
             // Pastikan $benefitNames adalah array
             if (!is_array($benefitNames)) {
@@ -162,16 +162,16 @@ class JobVacancyController extends Controller
 
             $validatedData['company_name'] = 'Anti Nganggur'; // static company name
             // Update data utama di tabel job_vacancies
-            $jobVacancy->update($validated);
+            $jobVacancy->update($validatedData);
 
             // 4. Hapus semua benefit lama dan buat ulang dari data form (Cara paling aman)
-            $jobVacancy->benefits()->delete();
+            $jobVacancy->jobBenefits()->delete();
 
             // Simpan kembali benefits yang baru
             if (!empty($benefitNames)) {
                 foreach ($benefitNames as $name) {
                      if ($name) {
-                        $jobVacancy->benefits()->create(['benefits_name' => $name]);
+                        $jobVacancy->jobBenefits()->create(['benefits_name' => $name]);
                     }
                 }
             }
