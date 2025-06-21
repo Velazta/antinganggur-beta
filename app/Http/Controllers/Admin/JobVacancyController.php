@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\JobVacancy;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class JobVacancyController extends Controller
 {
@@ -63,7 +61,7 @@ class JobVacancyController extends Controller
         try {
             // Pisahkan data benefits dari data utama
             $benefitNames = $validatedData['benefits'] ?? [];
-            unset($validatedData['benefits']);
+            // unset($validatedData['benefits']);
 
             // buat lowongan pekerjaan
             $jobVacancy = JobVacancy::create([
@@ -87,7 +85,7 @@ class JobVacancyController extends Controller
             if (!empty($benefitNames)) {
                 foreach ($benefitNames as $name) {
                     if ($name) { // Pastikan nama benefit tidak kosong
-                        $jobVacancy->benefits()->create(['benefits_name' => $name]);
+                        $jobVacancy->jobBenefits()->create(['benefits_name' => $name]);
                     }
                 }
             }
@@ -153,7 +151,6 @@ class JobVacancyController extends Controller
         try {
             // Pisahkan data benefits dari data utama
             $benefitNames = $validatedData['benefits'] ?? [];
-            unset($validatedData['benefits']);
 
             // Pastikan $benefitNames adalah array
             if (!is_array($benefitNames)) {

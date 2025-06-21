@@ -21,7 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let bestMatchLength = 0;
 
     sidebarLinks.forEach(link => {
-        const linkPath = new URL(link.href).pathname;
+        let linkPath;
+        try {
+            linkPath = new URL(link.href, window.location.origin).pathname;
+        } catch (e) {
+            // Fallback for invalid URLs
+            linkPath = link.getAttribute('href') || '';
+        }
         if (currentPath.startsWith(linkPath) && linkPath.length > bestMatchLength) {
             activeLink = link;
             bestMatchLength = linkPath.length;
@@ -42,10 +48,13 @@ document.addEventListener("DOMContentLoaded", function () {
         indicator.style.transition = 'none';
         moveIndicator(activeLink);
 
-        activeLink = document.querySelector('.sidebar-link-text');
         // Update judul halaman
-        if (pageTitle && activeLink.querySelector("span")) {
-            pageTitle.textContent = activeLink.querySelector("span").textContent.trim();
+        let linkText = null;
+        if (activeLink) {
+            linkText = activeLink.querySelector('.sidebar-link-text span');
+        }
+        if (pageTitle && linkText) {
+            pageTitle.textContent = linkText.textContent.trim();
         }
 
         // Aktifkan kembali transisi setelah posisi awal diatur
