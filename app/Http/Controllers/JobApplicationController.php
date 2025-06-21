@@ -34,7 +34,7 @@ class JobApplicationController extends Controller
 {
     // Gunakan $request->validate() yang lebih ringkas dan otomatis.
     $validatedData = $request->validate([
-        'job_vacancy_id'   => 'required|exists:job_vacancies,id',
+        'job_vacancy_id'   => 'required|exists:job_vacancies,id,deleted_at,NULL',
         'full_name'        => 'required|string|max:255',
         'phone_number'     => 'required|string|max:20',
         'email'            => 'required|email|max:255',

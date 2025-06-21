@@ -185,11 +185,17 @@ class JobVacancyController extends Controller
 
     public function destroy(JobVacancy $jobVacancy)
     {
-        // Logo akan terhapus, dan benefits akan terhapus otomatis karena 'onDelete('cascade')'
-        if ($jobVacancy->job_logo && file_exists(storage_path('app/public/job_logos/' . $jobVacancy->job_logo))) {
-            unlink(storage_path('app/public/job_logos/' . $jobVacancy->job_logo));
+        // Hapus logo jika ada
+        if ($jobVacancy->job_logo) {
+            $logoPath = storage_path('app/public/' . $jobVacancy->job_logo);
+            if (file_exists($logoPath)) {
+                unlink($logoPath);
+            }
         }
+
+        // Hapus data jobVacancy (relasi benefits akan terhapus otomatis jika onDelete cascade)
         $jobVacancy->delete();
-        return redirect()->route('admin.manajemenlowongan.lowongan')->with('success', 'Lowongan berhasil dihapus.');
+
+        return redirect()->route('admin.manajemen.lowongan')->with('success', 'Lowongan berhasil dihapus.');
     }
 }
