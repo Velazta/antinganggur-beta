@@ -35,6 +35,10 @@ class ApplicantController extends Controller
         $application->status = $request->status;
         $application->save();
         return redirect()->back()->with('success', 'Status lamaran berhasil diperbarui.');
+    }
+
+    public function showApplication(JobApplication $application)
+    {
 
     }
 }
