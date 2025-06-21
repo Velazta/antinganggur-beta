@@ -69,9 +69,23 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 Route::get('/lowongan', [LowonganController::class, 'index'])->name('lowongan');
 
-Route::get('/lamar', [JobApplicationController::class, 'create'])->name('lamar.create');
-Route::post('/lamar', [JobApplicationController::class, 'store'])->name('lamar.store');
-Route::get('/api/positions', [JobApplicationController::class, 'getPositions'])->name('lamar.positions');
+Route::middleware(['auth'])->group(function () {
+    // Rute untuk menampilkan detail lowongan berdasarkan ID
+    // Kita tambahkan rute ini agar ada halaman detail
+    // Route::get('/lowongan/{jobVacancy}', [LowonganController::class, 'show'])->name('lowongan.show');
+
+    // Rute untuk menampilkan form lamaran
+    Route::get('/lamar', [JobApplicationController::class, 'create'])->name('lamar.create');
+
+    // Rute untuk menyimpan data lamaran
+    Route::post('/lamar', [JobApplicationController::class, 'store'])->name('lamar.store');
+
+    Route::get('/api/positions', [JobApplicationController::class, 'getPositions'])->name('lamar.positions');
+});
+
+// Route::get('/lamar', [JobApplicationController::class, 'create'])->name('lamar.create');
+// Route::post('/lamar', [JobApplicationController::class, 'store'])->name('lamar.store');
+// Route::get('/api/positions', [JobApplicationController::class, 'getPositions'])->name('lamar.positions');
 
 Route::view('/portofolio','portofolio')->name('portofolio');
 

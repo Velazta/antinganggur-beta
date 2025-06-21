@@ -26,7 +26,7 @@
                     </p>
                     <div class="mt-8 sm:flex sm:justify-center lg:justify-start sm:space-x-4 space-y-4 sm:space-y-0">
                         {{-- Ganti # dengan route yang sesuai jika ada --}}
-                        <a href="{{ asset('asset/page/lowongan') }}" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-semibold rounded-lg text-white bg-[#FF7144] hover:bg-orange-600 md:text-lg md:px-10 shadow-md hover:shadow-lg transition-all duration-200">
+                        <a href="{{ url('/lowongan') }}" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-semibold rounded-lg text-white bg-[#FF7144] hover:bg-orange-600 md:text-lg md:px-10 shadow-md hover:shadow-lg transition-all duration-200">
                             Lihat Lowongan
                         </a>
                         <a href="{{ asset('asset/page/lamar') }}" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border-2 border-[#FF7144] text-base font-semibold rounded-lg text-[#FF7144] bg-white hover:bg-orange-50 hover:border-orange-600 hover:text-orange-600 md:text-lg md:px-10 shadow-sm hover:shadow transition-all duration-200">

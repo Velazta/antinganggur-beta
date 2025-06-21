@@ -10,7 +10,8 @@ class JobApplication extends Model
     use HasFactory;
 
     protected $fillable = [
-        'position_id',
+        'user_id',
+        'job_vacancy_id',
         'position_name',
         'full_name',
         'phone_number',
@@ -20,12 +21,19 @@ class JobApplication extends Model
         'education_level',
         'major',
         'experience_level',
-        'cv_path',
-        'portfolio_path'
+        'cv_file',
+        'portfolio_file'
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    // Definisikan bahwa lamaran ini milik satu User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

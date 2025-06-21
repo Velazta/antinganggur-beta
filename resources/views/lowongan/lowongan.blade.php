@@ -250,7 +250,7 @@
                                     </span>
                                     @if($vacancy->min_salary && $vacancy->max_salary)
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                            Rp {{ number_format($vacancy->min_salary, 0, ',', '.') }} - Rp {{ number_format($vacancy->max_salary, 0, ',', '.') }} jt/bulan
+                                            Rp {{ number_format($vacancy->min_salary, 0, ',', '.') }} - {{ number_format($vacancy->max_salary, 0, ',', '.') }} jt/bulan
                                         </span>
                                     @endif
                                 </div>
