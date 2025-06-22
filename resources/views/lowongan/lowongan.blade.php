@@ -43,7 +43,7 @@
                             {{-- Input untuk Posisi Pekerjaan --}}
                             <div class="flex-1">
                                 <input type="text" name="search" placeholder="Posisi Pekerjaan"
-                                  value="{{ request('search') }}"
+                                    value="{{ request('search') }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7144] focus:border-transparent text-gray-700 placeholder-gray-500">
                             </div>
 
@@ -51,7 +51,8 @@
                             <div class="flex-1">
                                 <select id="lokasi" name="location" title="Pilih lokasi"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7144] focus:border-transparent bg-white text-gray-700">
-                                    <option value="" {{ request('location') == '' ? 'selected' : '' }}>Semua Lokasi</option>
+                                    <option value="" {{ request('location') == '' ? 'selected' : '' }}>Semua Lokasi
+                                    </option>
                                     @foreach ($locations as $loc)
                                         <option value="{{ $loc }}"
                                             {{ request('location') == $loc ? 'selected' : '' }}>
@@ -90,165 +91,60 @@
 
                 <div class="lg:col-span-8">
                     <div class="grid gap-6 md:grid-cols-3">
-                        <div
-                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                            <div class="flex items-start mb-4">
-                                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                                    <svg class="w-6 h-6 text-[#FF7144]" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
-                                    </svg>
+                        {{-- === PERBAIKAN: Looping data lowongan trending dari controller === --}}
+                        @forelse ($trendingVacancies as $vacancy)
+                            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                                <div class="flex items-start mb-4">
+                                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                                        @if ($vacancy->job_logo)
+                                            <img src="{{ asset('storage/' . $vacancy->job_logo) }}" alt="Logo {{ $vacancy->company_name }}" class="w-[30px] h-[30px] object-contain rounded-lg">
+                                        @else
+                                            <svg class="w-6 h-6 text-[#FF7144]" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                                            </svg>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-slate-900">{{ $vacancy->title }}</h3>
+                                        <p class="text-sm text-slate-500">{{ $vacancy->company_name }}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 class="text-lg font-semibold text-slate-900">Frontend Developer</h3>
-                                    <p class="text-sm text-slate-500">Anti Nganggur</p>
+
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                        </svg>
+                                        {{ $vacancy->location }}
+                                    </span>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                        </svg>
+                                        {{ $vacancy->type_job }}
+                                    </span>
+                                    @if ($vacancy->min_salary && $vacancy->max_salary)
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
+                                            Rp {{ number_format($vacancy->min_salary, 0, ',', '.') }} - {{ number_format($vacancy->max_salary, 0, ',', '.') }}
+                                        </span>
+                                    @endif
                                 </div>
+
+                                <p class="text-sm text-slate-600 mb-4 leading-relaxed flex-grow">
+                                    {{ Str::limit($vacancy->description, 100) }}
+                                </p>
+
+                                <a href="{{ route('lamar.create', ['job_vacancy_id' => $vacancy->id, 'job_title' => $vacancy->title]) }}" class="w-full bg-[#FF7144] text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 mt-auto text-center">
+                                    Lamar
+                                </a>
                             </div>
-
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    Surabaya
-                                </span>
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    Full-Time
-                                </span>
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                    Rp 20-30 jt/bulan
-                                </span>
-                            </div>
-
-                            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
-                                Membutuhkan Frontend Developer Berpengalaman React Js Untuk Membangun Antarmuka Web Yang
-                                Responsif, Menarik, Dan Mudah Digunakan.
-                            </p>
-
-                            <a href="{{ route('lamar.create') }}"
-                                class="w-full bg-[#FF7144] text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 mt-auto text-center">
-                                Lamar
-                            </a>
-                        </div>
-
-                        <div
-                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                            <div class="flex items-start mb-4">
-                                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                                    <svg class="w-6 h-6 text-[#FF7144]" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3v-1.5m-3 0h3m-3 18.75h3" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-semibold text-slate-900">Mobile Developer</h3>
-                                    <p class="text-sm text-slate-500">Anti Nganggur</p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    Surakarta
-                                </span>
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    Full-Time
-                                </span>
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                    Rp 10-15 jt/bulan
-                                </span>
-                            </div>
-
-                            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
-                                Mengembangkan dan memelihara aplikasi mobile (Android/iOS), termasuk merancang antarmuka
-                                pengguna yang responsif, mengintegrasikan API, serta memastikan performa dan kestabilan
-                                aplikasi secara berkelanjutan.
-                            </p>
-
-                            <a href="{{ route('lamar.create') }}"
-                                class="w-full bg-[#FF7144] text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 mt-auto text-center">
-                                Lamar
-                            </a>
-                        </div>
-
-                        <div
-                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                            <div class="flex items-start mb-4">
-                                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                                    <svg class="w-6 h-6 text-[#FF7144]" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-semibold text-slate-900">Cloud Architect</h3>
-                                    <p class="text-sm text-slate-500">Anti Nganggur</p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    Jakarta
-                                </span>
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    Full-Time
-                                </span>
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                    Rp 30-45 jt/bulan
-                                </span>
-                            </div>
-
-                            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
-                                Merancang dan mengimplementasikan solusi cloud scalable di platform seperti AWS, Azure, atau
-                                GCP. Memastikan keamanan dan performa infrastruktur cloud.
-                            </p>
-
-                            <a href="{{ route('lamar.create') }}"
-                                class="w-full bg-[#FF7144] text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 mt-auto text-center">
-                                Lamar
-                            </a>
-                        </div>
+                        @empty
+                            <p class="text-slate-500 col-span-3">Lowongan trending belum tersedia.</p>
+                        @endforelse
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     {{-- SECTION 3 : LIST LOWONGAN --}}
     <section class="py-16 md:py-20 lg:py-24 bg-[#FFF7F5]">
@@ -262,7 +158,7 @@
             <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {{-- card lowongan --}}
                 {{-- Iterasi setiap lowongan dari database --}}
-                @forelse ($jobVacancies as $vacancy)
+                @forelse ($lowongan as $vacancy)
                     <div
                         class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                         <div class="p-6">
@@ -341,6 +237,12 @@
                         Belum ada lowongan pekerjaan terbaru saat ini.
                     </div>
                 @endforelse
+            </div>
+
+            {{-- Pagination --}}
+            <div class="mt-12 flex justify-center">
+                {{-- Custom pagination dari Laravel --}}
+                 {{ $lowongan->withQueryString()->links('vendor.pagination.custom-pagination') }}
             </div>
         </div>
     </section>

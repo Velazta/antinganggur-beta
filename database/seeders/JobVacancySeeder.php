@@ -2,108 +2,103 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\JobVacancy;
-use Carbon\Carbon; // Menambahkan Carbon untuk penanganan tanggal
+use App\Models\JobBenefit;
+use Carbon\Carbon;
 
 class JobVacancySeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
-        // Daftar lokasi yang tersedia
-        $locations = [
-            'Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Semarang',
-            'Makassar', 'Palembang', 'Tangerang', 'Depok', 'Bekasi', 'Surakarta'
+        // Data lowongan pekerjaan yang lebih detail
+        $vacancies = [
+            [
+                'title' => 'Senior Software Engineer (Backend)',
+                'company_name' => 'Anti Nganggur',
+                'job_logo' => 'job_logos/c9XrERzT03JmBiA8tJGYxW4gKd0m03qqCMVM6KDL.png',
+                'location' => 'Jakarta',
+                'location_details' => 'Jalan Jenderal Sudirman Kav. 52-53, Jakarta Selatan',
+                'type_job' => 'Full-time',
+                'work_schedule' => 'Senin - Jumat',
+                'career_level' => 'Senior',
+                'mobility' => 'Hybrid',
+                'min_salary' => 15000000.00,
+                'max_salary' => 25000000.00,
+                'description' => 'Kami mencari Backend Engineer berpengalaman untuk membangun dan memelihara arsitektur inti dari platform kami. Anda akan bekerja dengan teknologi modern untuk menghadirkan solusi yang skalabel dan andal.',
+                'open_positions' => 2,
+                'benefits' => ['Asuransi Kesehatan Penuh', 'Makan Siang Gratis', 'Dana Pensiun', 'Cuti Tidak Terbatas']
+            ],
+            [
+                'title' => 'UI/UX Designer',
+                'company_name' => 'Anti Nganggur',
+                'job_logo' => 'job_logos/c9XrERzT03JmBiA8tJGYxW4gKd0m03qqCMVM6KDL.png',
+                'location' => 'Bandung',
+                'location_details' => 'Jl. Dago No. 123, Coblong, Bandung',
+                'type_job' => 'Full-time',
+                'work_schedule' => 'Fleksibel',
+                'career_level' => 'Menengah (Mid-level)',
+                'mobility' => 'Remote',
+                'min_salary' => 8000000.00,
+                'max_salary' => 14000000.00,
+                'description' => 'Rancang antarmuka yang intuitif dan menarik untuk aplikasi web dan seluler kami. Anda akan berkolaborasi dengan manajer produk dan pengembang untuk menciptakan pengalaman pengguna yang luar biasa.',
+                'open_positions' => 1,
+                'benefits' => ['Tunjangan Kerja Remote', 'Budget untuk Pengembangan Diri', 'Asuransi Kesehatan']
+            ],
+            [
+                'title' => 'Digital Marketing Intern',
+                'company_name' => 'Anti Nganggur',
+                'job_logo' => 'job_logos/c9XrERzT03JmBiA8tJGYxW4gKd0m03qqCMVM6KDL.png',
+                'location' => 'Surabaya',
+                'location_details' => 'Gedung Graha Pena, Jl. Ahmad Yani No. 88',
+                'type_job' => 'Internship',
+                'work_schedule' => 'Senin - Jumat',
+                'career_level' => 'Magang/Intern',
+                'mobility' => 'On-site',
+                'min_salary' => 2000000.00,
+                'max_salary' => 3500000.00,
+                'description' => 'Kesempatan magang bagi mahasiswa tingkat akhir untuk belajar dan berkontribusi dalam kampanye pemasaran digital kami. Anda akan terlibat dalam SEO, SEM, dan manajemen media sosial.',
+                'open_positions' => 3,
+                'benefits' => ['Uang Saku Bulanan', 'Sertifikat Magang', 'Makan Siang']
+            ],
+             [
+                'title' => 'Lead Data Scientist',
+                'company_name' => 'Anti Nganggur',
+                'job_logo' => 'job_logos/c9XrERzT03JmBiA8tJGYxW4gKd0m03qqCMVM6KDL.png',
+                'location' => 'Yogyakarta',
+                'location_details' => 'Jl. Kaliurang KM 5, Sleman',
+                'type_job' => 'Full-time',
+                'work_schedule' => 'Senin - Jumat',
+                'career_level' => 'Lead/Manajer',
+                'mobility' => 'Hybrid',
+                'min_salary' => 20000000.00,
+                'max_salary' => 35000000.00,
+                'description' => 'Pimpin tim data scientist kami untuk menggali wawasan dari data yang kompleks. Kembangkan model machine learning dan presentasikan temuan kepada para pemangku kepentingan.',
+                'open_positions' => 1,
+                'benefits' => ['Bonus Kinerja', 'Saham Perusahaan (ESOP)', 'Asuransi Keluarga', 'Gym Membership']
+            ]
         ];
 
-        // Indeks untuk mengambil lokasi dari array
-        $locationIndex = 0;
+       foreach ($vacancies as $vacancyData) {
+            // Salin data benefit sebelum dikirim ke JobVacancy
+            $benefitNames = $vacancyData['benefits'];
 
-        // Fungsi bantu untuk mendapatkan lokasi berikutnya dari daftar
-        $getNextLocation = function () use (&$locationIndex, $locations) {
-            $location = $locations[$locationIndex % count($locations)];
-            $locationIndex++;
-            return $location;
-        };
+            // **PERBAIKAN**: Mengubah array benefit menjadi format JSON untuk disimpan
+            $vacancyData['benefits'] = json_encode($benefitNames);
 
-        JobVacancy::create([
-            'title' => 'Software Engineer',
-            'company_name' => 'Anti Nganggur',
-            'job_logo' => 'https://via.placeholder.com/150/0000FF/FFFFFF?text=TechSol', // Contoh URL logo, sesuaikan jika perlu
-            'location' => $getNextLocation(),
-            'type_job' => 'Full-time',
-            'min_salary' => 8000000.00, // Disarankan menggunakan nilai Rupiah, sesuaikan jika perlu
-            'max_salary' => 12000000.00, // Disarankan menggunakan nilai Rupiah, sesuaikan jika perlu
-            'description' => 'Kami mencari Software Engineer terampil untuk bergabung dengan tim kami. Bertanggung jawab untuk mengembangkan, menguji, dan memelihara perangkat lunak.',
-            // Anda bisa menambahkan 'application_deadline' dan 'status' di sini jika diperlukan.
-            // Contoh: 'application_deadline' => Carbon::now()->addMonths(1),
-            // Contoh: 'status' => 'active',
-        ]);
+            // Membuat entri lowongan baru
+            $jobVacancy = JobVacancy::create($vacancyData);
 
-        JobVacancy::create([
-            'title' => 'Data Analyst',
-            'company_name' => 'Anti Nganggur',
-            'job_logo' => 'https://via.placeholder.com/150/FF0000/FFFFFF?text=DataIns', // Contoh URL logo
-            'location' => $getNextLocation(),
-            'type_job' => 'Part-time',
-            'min_salary' => 6000000.00,
-            'max_salary' => 9000000.00,
-            'description' => 'Bergabunglah dengan kami sebagai Data Analyst untuk membantu kami membuat keputusan berbasis data. Menganalisis set data besar dan membuat laporan yang dapat ditindaklanjuti.',
-            // Contoh: 'application_deadline' => Carbon::now()->addMonths(1),
-            // Contoh: 'status' => 'active',
-        ]);
-
-        JobVacancy::create([
-            'title' => 'Project Manager',
-            'company_name' => 'Anti Nganggur',
-            'job_logo' => 'https://via.placeholder.com/150/00FF00/FFFFFF?text=ProjMgt', // Contoh URL logo
-            'location' => $getNextLocation(),
-            'type_job' => 'Contract',
-            'min_salary' => 7000000.00,
-            'max_salary' => 11000000.00,
-            'description' => 'Kami mencari Project Manager untuk mengawasi proyek-proyek kami dan memastikan pengiriman tepat waktu. Memimpin tim lintas fungsi dan mengelola sumber daya.',
-            // Contoh: 'application_deadline' => Carbon::now()->addMonths(1),
-            // Contoh: 'status' => 'active',
-        ]);
-
-        JobVacancy::create([
-            'title' => 'UX/UI Designer',
-            'company_name' => 'Anti Nganggur',
-            'job_logo' => 'https://via.placeholder.com/150/FFFF00/000000?text=DesignSt', // Contoh URL logo
-            'location' => $getNextLocation(),
-            'type_job' => 'Internship',
-            'min_salary' => 3000000.00,
-            'max_salary' => 5000000.00,
-            'description' => 'Mencari UX/UI Designer yang kreatif untuk bergabung dengan tim desain kami. Membuat wireframe, prototipe, dan antarmuka pengguna.',
-            // Contoh: 'application_deadline' => Carbon::now()->addMonths(1),
-            // Contoh: 'status' => 'active',
-        ]);
-
-        JobVacancy::create([
-            'title' => 'Marketing Specialist',
-            'company_name' => 'Anti Nganggur',
-            'job_logo' => 'https://via.placeholder.com/150/00FFFF/000000?text=MktgSpc', // Contoh URL logo
-            'location' => $getNextLocation(),
-            'type_job' => 'Full-time',
-            'min_salary' => 5000000.00,
-            'max_salary' => 8000000.00,
-            'description' => 'Bergabunglah dengan tim pemasaran kami sebagai Marketing Specialist untuk mendorong kampanye kami. Mengembangkan dan melaksanakan strategi pemasaran digital.',
-            // Contoh: 'application_deadline' => Carbon::now()->addMonths(1),
-            // Contoh: 'status' => 'active',
-        ]);
-
-        JobVacancy::create([
-            'title' => 'DevOps Engineer',
-            'company_name' => 'Anti Nganggur',
-            'job_logo' => 'https://via.placeholder.com/150/FF00FF/FFFFFF?text=DevOps', // Contoh URL logo
-            'location' => $getNextLocation(),
-            'type_job' => 'Full-time',
-            'min_salary' => 9000000.00,
-            'max_salary' => 13000000.00,
-            'description' => 'Kami mencari DevOps Engineer untuk mengelola infrastruktur cloud kami. Bertanggung jawab untuk deployment, otomatisasi, dan pemeliharaan sistem.',
-            // Contoh: 'application_deadline' => Carbon::now()->addMonths(1),
-            // Contoh: 'status' => 'active',
-        ]);
+            // Menambahkan benefit yang terkait ke tabel job_benefits
+            foreach ($benefitNames as $benefitName) {
+                JobBenefit::create([
+                    'job_vacancy_id' => $jobVacancy->id,
+                    'benefits_name' => $benefitName
+                ]);
+            }
+        }
     }
 }
