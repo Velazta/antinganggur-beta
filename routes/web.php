@@ -70,6 +70,8 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 Route::get('/lowongan', [LowonganController::class, 'index'])->name('lowongan');
 
+Route::get('/lowongan/{vacancy}', [LowonganController::class, 'show'])->name('lowongan.show');
+
 Route::middleware(['auth'])->group(function () {
     // Rute untuk menampilkan detail lowongan berdasarkan ID
     // Kita tambahkan rute ini agar ada halaman detail

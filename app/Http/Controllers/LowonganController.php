@@ -45,4 +45,12 @@ class LowonganController extends Controller
             // 'jobVacancies' => $jobVacancies,
         ]);
     }
+
+    public function show(JobVacancy $vacancy)
+    {
+        // Memuat relasi benefits untuk ditampilkan di view
+        $vacancy->load('jobBenefits');
+
+        return view('lowongan.detaillowongan', compact('vacancy'));
+    }
 }

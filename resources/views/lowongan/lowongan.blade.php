@@ -125,7 +125,7 @@
                                     </span>
                                     @if ($vacancy->min_salary && $vacancy->max_salary)
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                                            Rp {{ number_format($vacancy->min_salary, 0, ',', '.') }} - {{ number_format($vacancy->max_salary, 0, ',', '.') }}
+                                            Rp {{ number_format($vacancy->min_salary, 0, ',', '.') }} - {{ number_format($vacancy->max_salary, 0, ',', '.') }} jt/bulan
                                         </span>
                                     @endif
                                 </div>
@@ -220,7 +220,7 @@
                         <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex space-x-3">
                             {{-- Link "Lihat Detail" akan mengarah ke halaman detail admin (bisa diubah nanti untuk user) --}}
                             {{-- Atau jika Anda ingin modal, Anda bisa membuat fungsi JS seperti di admin manajemen lowongan --}}
-                            <a href="{{ route('admin.manajemen.lowongan.show', $vacancy->id) }}"
+                            <a href="{{ route('lowongan.show', $vacancy->id) }}"
                                 class="flex-1 px-4 py-2 border-2 border-[#FF7144] text-sm font-semibold rounded-lg text-[#FF7144] bg-white hover:bg-orange-50 transition-colors duration-150 text-center">
                                 Lihat Detail
                             </a>

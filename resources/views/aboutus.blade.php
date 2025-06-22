@@ -454,8 +454,8 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-16 mt-[100px]">
 
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[240px] h-[260px]">
-                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+                        <div class="relative w-[240px] h-[260px] group cursor-pointer transform transition-transform duration-300 hover:-translate-y-[30px]">
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full transition-all duration-300 group-hover:shadow-2xl"></div>
 
                             <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
                                 class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
@@ -481,8 +481,8 @@
                     </div>
 
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[240px] h-[260px]">
-                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+                        <div class="relative w-[240px] h-[260px] group cursor-pointer transform transition-transform duration-300 hover:-translate-y-[30px]">
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full transition-all duration-300 group-hover:shadow-2xl"></div>
 
                             <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
                                 class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
@@ -508,8 +508,8 @@
                     </div>
 
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[240px] h-[260px]">
-                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+                        <div class="relative w-[240px] h-[260px] group cursor-pointer transform transition-transform duration-300 hover:-translate-y-[30px]">
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full transition-all duration-300 group-hover:shadow-2xl"></div>
 
                             <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
                                 class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
@@ -536,8 +536,8 @@
                     </div>
 
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[240px] h-[260px]">
-                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+                        <div class="relative w-[240px] h-[260px] group cursor-pointer transform transition-transform duration-300 hover:-translate-y-[30px]">
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full transition-all duration-300 group-hover:shadow-2xl"></div>
 
                             <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
                                 class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />

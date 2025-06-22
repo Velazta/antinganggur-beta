@@ -18,12 +18,7 @@
             <h1 class="text-3xl font-bold text-gray-800">{{ $jobVacancy->title }}</h1>
             <p class="text-xl text-gray-600">{{ $jobVacancy->company_name }}</p>
         </div>
-        <div class="mt-4 sm:mt-0">
-             <a href="{{ route('admin.manajemen.lowongan.edit', $jobVacancy) }}"
-               class="py-2.5 px-6 rounded-lg font-semibold bg-yellow-500 text-white hover:bg-yellow-600 shadow-sm hover:shadow-md transition-all duration-300 whitespace-nowrap">
-                Edit Lowongan
-            </a>
-        </div>
+
     </div>
 
     {{-- BAGIAN DETAIL UTAMA --}}

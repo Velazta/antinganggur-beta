@@ -5,7 +5,7 @@
 @section('content')
 <main class="w-full flex-grow py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl font-bold text-slate-800 mb-8">Pemberitahuan</h1>
+        <h1 class="text-4xl font-bold text-slate-800 mb-8">Notifikasi</h1>
 
         <div class="bg-white rounded-lg shadow-md border border-gray-200">
             <div class="space-y-2">

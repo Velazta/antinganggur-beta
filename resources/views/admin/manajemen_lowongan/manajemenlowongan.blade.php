@@ -37,17 +37,14 @@
         {{-- Grid untuk menampilkan card lowongan --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             @forelse ($jobVacancies as $vacancy)
-                <div
-                    class="bg-[#1A73E8] rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                <div class="bg-[#1A73E8] rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 flex flex-col transform hover:translate-y-(-2px) stat-card">
+                    {{-- Logo Perusahaan --}}
                     <div class="flex items-start mb-4">
                         <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
                             @if ($vacancy->job_logo)
                                 <img src="{{ asset('storage/' . $vacancy->job_logo) }}" alt="Logo Perusahaan"
                                     class="w-[30px] h-[30px] object-contain rounded-lg">
-                            @else
-                                {{-- Menghapus SVG fallback. Div akan tetap ada sebagai placeholder dengan background. --}}
-                                {{-- Anda bisa menambahkan gambar placeholder default di sini jika diinginkan, contoh: --}}
-                                {{-- <img src="{{ asset('path/to/default-logo.png') }}" alt="Logo Default" class="w-full h-full object-contain rounded-lg"> --}}
+
                             @endif
                         </div>
                         <div class="flex-grow"> {{-- Tambahkan flex-grow agar konten mengambil ruang yang tersedia --}}
