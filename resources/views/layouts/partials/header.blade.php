@@ -71,7 +71,15 @@
                 @endguest
 
                 @auth
+
+
                     <div class="hidden md:flex items-center ml-6 relative">
+
+                        {{-- === IKON NOTIFIKASI === --}}
+                    <a href="{{ route('user.notification') }}" class="relative mr-5 text-slate-600 hover:text-orange-500 transition-colors duration-150">
+                        <span class="sr-only">Buka Notifikasi</span>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    </a>
                         <span class="text-sm font-medium text-slate-700">{{ Auth::user()->name }}</span>
                         <button type="button"
                             class="ml-3 flex-shrink-0 bg-orange-500 rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 items-center justify-center h-10 w-10 overflow-hidden"

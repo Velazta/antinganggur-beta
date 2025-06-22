@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\LowonganController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -81,6 +82,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/lamar', [JobApplicationController::class, 'store'])->name('lamar.store');
 
     Route::get('/api/positions', [JobApplicationController::class, 'getPositions'])->name('lamar.positions');
+
+    Route::get('/notification', [NotificationController::class, 'index'])->name('user.notification');
 });
 
 // Route::get('/lamar', [JobApplicationController::class, 'create'])->name('lamar.create');

@@ -66,7 +66,7 @@ class ApplicantController extends Controller
             'body' => $request->body,
         ]);
 
-        return redirect()->route('admin.manajemen.pelamar.index')
+        return redirect()->route('admin.manajemen.pelamar')
             ->with('success', 'Pesan berhasil dikirim kepada ' . $application->user->name);
     }
 }
