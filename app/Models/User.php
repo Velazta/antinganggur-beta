@@ -9,13 +9,14 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Profile; // Ini sudah benar
 use Illuminate\Database\Eloquent\Relations\HasOne; // Ini sudah benar
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @mixin IdeHelperUser
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
