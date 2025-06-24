@@ -54,25 +54,25 @@
     }
     .sidebar-link.active,
     .sidebar-link:hover {
-        color: #1A73E8; /* Ubah warna teks menjadi biru */
-        font-weight: 300; /* Tebalkan font */
+        color: #1A73E8;
+        font-weight: 300;
     }
     .menu-icon {
         display: inline-block;
-        width: 1.5rem; /* w-6 */
-        height: 1.5rem; /* h-6 */
-        background-color: white; /* Warna ikon default (putih) */
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: white;
         -webkit-mask-size: contain;
         mask-size: contain;
         -webkit-mask-position: center;
         mask-position: center;
         -webkit-mask-repeat: no-repeat;
         mask-repeat: no-repeat;
-        transition: background-color 0.3s ease-in-out; /* Transisi warna yang mulus */
+        transition: background-color 0.3s ease-in-out;
     }
     .sidebar-link.active .menu-icon,
     .sidebar-link:hover .menu-icon {
-        background-color: #1A73E8; /* Warna ikon saat aktif/hover (biru) */
+        background-color: #1A73E8;
     }
         #user-dropdown { transition: transform 0.2s ease-out, opacity 0.2s ease-out; }
     </style>
@@ -81,12 +81,12 @@
 <body>
 
     <div class="flex min-h-screen">
-        {{-- Memanggil komponen sidebar (hanya HTML) --}}
+
         @include('admin.partials._sidebar')
 
         {{-- Wrapper untuk Konten Utama --}}
         <div class="ml-64 flex-1 flex flex-col">
-            {{-- Memanggil komponen header (hanya HTML) --}}
+
             @include('admin.partials._header')
 
             <main class="p-8">

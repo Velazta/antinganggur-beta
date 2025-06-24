@@ -12,8 +12,6 @@ use App\Http\Controllers\Admin\ApplicantController;
 |--------------------------------------------------------------------------
 | Rute Admin
 |--------------------------------------------------------------------------
-| Rute ini dimuat oleh AppServiceProvider dan secara otomatis
-| akan diberi prefix 'admin' dan nama 'admin.'.
 */
 
 // Rute untuk login admin
@@ -26,7 +24,6 @@ Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth.admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
-    // Tambahkan rute admin lainnya di sini...
 
     Route::get('/manajemen-lowongan', [JobVacancyController::class, 'index'])->name('manajemen.lowongan');
     Route::get('/manajemen-lowongan/create', [JobVacancyController::class, 'create'])->name('manajemen.lowongan.create');

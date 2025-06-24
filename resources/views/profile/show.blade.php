@@ -4,7 +4,6 @@
 
 @push('styles')
     <style>
-        /* CSS Tambahan untuk menyembunyikan input file asli dan gaya lainnya */
         #photoUpload {
             display: none;
         }

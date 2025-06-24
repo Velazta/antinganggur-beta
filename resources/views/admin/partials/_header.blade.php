@@ -1,14 +1,10 @@
 {{-- resources/views/admin/partials/_header.blade.php --}}
 
-{{-- PERUBAHAN: Padding diubah untuk menurunkan posisi konten & background disesuaikan --}}
 <header class="bg-white px-8 pt-6 pb-4 shadow-sm">
     <div class="flex justify-between items-center">
 
         <div class="flex items-center">
-            {{-- PERUBAHAN: Ukuran font judul diperbesar dari text-2xl menjadi text-3xl --}}
             <h1 id="page-title" class="text-[40px] font-medium text-black">
-                {{-- PERUBAHAN: Menggunakan @yield untuk judul halaman dinamis --}}
-                {{-- Jika tidak ada judul yang diberikan, akan menampilkan 'Dashboard' sebagai default --}}
                 @yield('page-title', 'Dashboard')
             </h1>
         </div>

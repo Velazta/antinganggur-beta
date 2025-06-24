@@ -86,13 +86,12 @@ class JobVacancySeeder extends Seeder
             // Salin data benefit sebelum dikirim ke JobVacancy
             $benefitNames = $vacancyData['benefits'];
 
-            // **PERBAIKAN**: Mengubah array benefit menjadi format JSON untuk disimpan
             $vacancyData['benefits'] = json_encode($benefitNames);
 
             // Membuat entri lowongan baru
             $jobVacancy = JobVacancy::create($vacancyData);
 
-            // Menambahkan benefit yang terkait ke tabel job_benefits
+            // benefit yang terkait ke tabel job_benefits
             foreach ($benefitNames as $benefitName) {
                 JobBenefit::create([
                     'job_vacancy_id' => $jobVacancy->id,

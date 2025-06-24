@@ -21,13 +21,11 @@
 
         .testimonial-scrollbar::-webkit-scrollbar-thumb {
             background: #FDBA74;
-            /* orange-300 */
             border-radius: 10px;
         }
 
         .testimonial-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #FB923C;
-            /* orange-400 */
         }
     </style>
 </head>
@@ -218,9 +216,9 @@
         </div>
     </header>
 
-    {{-- Skrip yang dibutuhkan secara global (misalnya header-menu.js) --}}
-    <script src="{{ asset('js/header-menu.js') }}" defer></script> {{-- Ini mungkin sudah ada di header.blade.php Anda --}}
-    {{-- <script src="{{ asset('js/header-menu.js') }}" defer></script> --}}
+    {{-- Skrip yang dibutuhkan secara global --}}
+    <script src="{{ asset('js/header-menu.js') }}" defer></script>
+
 
 </body>
 

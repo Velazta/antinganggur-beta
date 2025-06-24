@@ -3,9 +3,9 @@
 @section('title', 'Edit Pengalaman Kerja - Profil Jobseeker')
 
 @push('styles')
-    {{-- Salin semua style dari experience.blade.php --}}
+
     <style>
-        /* Mengatasi warna background aneh saat autofill di browser berbasis WebKit */
+
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus,
@@ -17,7 +17,7 @@
             caret-color: #4a5568;
         }
 
-        /* Gaya untuk select agar terlihat konsisten */
+
         select {
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -181,7 +181,6 @@
 @endsection
 
 @push('scripts')
-    {{-- Salin script yang sama dari experience.blade.php untuk checkbox --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const currentJobCheckbox = document.getElementById('current_job');

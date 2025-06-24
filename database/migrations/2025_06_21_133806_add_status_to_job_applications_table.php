@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::table('job_applications', function (Blueprint $table) {
             Schema::table('job_applications', function (Blueprint $table) {
-                // Menambahkan kolom 'status' dengan tipe enum (hanya bisa diisi oleh nilai yang ditentukan)
-                // Defaultnya adalah 'pending' saat data baru dibuat.
-                // diletakkan setelah kolom 'job_vacancy_id' agar rapi.
                 $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending')->after('job_vacancy_id');
             });
         });
@@ -28,7 +25,6 @@ return new class extends Migration
     {
         Schema::table('job_applications', function (Blueprint $table) {
             Schema::table('job_applications', function (Blueprint $table) {
-                // Perintah untuk menghapus kolom 'status' jika migrasi di-rollback
                 $table->dropColumn('status');
             });
         });

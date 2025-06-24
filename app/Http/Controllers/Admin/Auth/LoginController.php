@@ -22,10 +22,6 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            // ===================================
-            // PERBAIKAN DI SINI
-            // ===================================
-            // Ubah 'admin.dashboard.dashboard' menjadi 'admin.dashboard'
             return redirect()->route('admin.dashboard');
         }
 
@@ -34,7 +30,7 @@ class LoginController extends Controller
         ])->onlyInput('email');
     }
 
-    // Pastikan method logout juga ada
+    // method logout
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();

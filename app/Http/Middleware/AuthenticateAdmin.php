@@ -16,13 +16,10 @@ class AuthenticateAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // 1. Periksa apakah pengguna sudah login menggunakan guard 'admin'
         if (! Auth::guard('admin')->check()) {
-            // 2. Jika tidak, alihkan (redirect) ke halaman login admin
             return redirect()->route('admin.login');
         }
 
-        // 3. Jika sudah login, lanjutkan request ke tujuan berikutnya
         return $next($request);
     }
 }

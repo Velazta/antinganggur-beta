@@ -4,7 +4,6 @@
 
 @push('styles')
     <style>
-        /* Mengatasi warna background aneh saat autofill di browser berbasis WebKit */
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus,
@@ -16,7 +15,6 @@
             caret-color: #4a5568;
         }
 
-        /* Gaya untuk select agar terlihat konsisten */
         select {
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -34,7 +32,6 @@
     <div class="bg-[#FFF5F2] flex items-center justify-center min-h-screen p-4 sm:p-6 md:p-8 font-sans">
         <div class="flex w-full max-w-6xl mx-auto space-x-8">
 
-            {{-- Panggil sidebar yang sudah terpisah --}}
             @include('profile.partials.sidebar')
 
             {{-- Area Konten Utama --}}

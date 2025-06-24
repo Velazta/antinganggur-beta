@@ -87,7 +87,6 @@
 
                     {{-- Alamat --}}
                     <div class="floating-label-input">
-                        {{-- PERBAIKAN ID DI SINI --}}
                         <select name="province" id="province-select" required>
                             <option value="" disabled selected></option>
                         </select>
@@ -95,7 +94,6 @@
                     </div>
 
                     <div class="floating-label-input">
-                        {{-- PERBAIKAN ID DI SINI --}}
                         <select name="city" id="city-select" required disabled>
                             <option value="" disabled selected></option>
                         </select>

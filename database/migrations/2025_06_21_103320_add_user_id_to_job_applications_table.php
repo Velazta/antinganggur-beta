@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('job_applications', function (Blueprint $table) {
-            // Tambahkan kolom user_id setelah kolom id
+
             $table->foreignId('user_id')
-                  ->after('id') // Opsional, agar rapi
-                  ->constrained('users') // Terhubung ke tabel 'users'
-                  ->onDelete('cascade'); // Jika user dihapus, lamarannya juga ikut terhapus
+                  ->after('id')
+                  ->constrained('users')
+                  ->onDelete('cascade');
         });
     }
 
@@ -26,7 +26,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('job_applications', function (Blueprint $table) {
-            // Hapus foreign key dan kolomnya jika migrasi di-rollback
             $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });

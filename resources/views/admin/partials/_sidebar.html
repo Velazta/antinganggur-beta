@@ -28,20 +28,14 @@
             position: relative;
         }
 
-        /* --- PERBAIKAN --- */
         #active-menu-indicator {
             position: absolute;
-            /* 1. Beri jarak 1rem (16px) dari kiri */
             left: 20px;
-            /* 2. Kurangi lebarnya sebesar 1rem agar sisi kanan tetap menempel */
             width: calc(100% - 1rem);
             height: 100%;
-            /* Pastikan tingginya sesuai */
             background-color: white;
-            /* 3. Buat semua sudut membulat untuk bentuk "pill" */
             border-top-left-radius: 25px;
             border-bottom-left-radius: 25px;
-            /* rounded-xl */
             z-index: 0;
             transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }

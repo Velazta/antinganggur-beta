@@ -12,7 +12,7 @@ class NotificationController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // Mengambil semua pesan (notifikasi) untuk user ini
+        // Mengambil semua pesan (notifikasi) untuk user
         $notifications = Message::where('user_id', $user->id)
                            ->with('admin') // Memuat nama pengirim
                            ->latest()

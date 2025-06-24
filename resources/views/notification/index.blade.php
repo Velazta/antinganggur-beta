@@ -9,7 +9,6 @@
 
         <div class="bg-white rounded-lg shadow-md border border-gray-200">
             <div class="space-y-2">
-                {{-- PERBAIKAN: Menggunakan variabel $notifications yang dikirim dari controller --}}
                 @forelse ($notifications as $notification)
                     <div class="p-5 border-b border-gray-200 hover:bg-gray-50 transition-colors duration-150">
                         <div class="flex justify-between items-center mb-2">
@@ -38,7 +37,6 @@
 
             @if($notifications->hasPages())
                 <div class="p-4 bg-gray-50 border-t">
-                    {{-- PERBAIKAN: Menggunakan variabel $notifications untuk pagination --}}
                     {{ $notifications->links('vendor.pagination.custom-pagination') }}
                 </div>
             @endif

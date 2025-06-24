@@ -47,10 +47,9 @@
 
                             @endif
                         </div>
-                        <div class="flex-grow"> {{-- Tambahkan flex-grow agar konten mengambil ruang yang tersedia --}}
+                        <div class="flex-grow">
                             <div class="flex justify-between items-center w-full">
                                 <h3 class="text-lg font-semibold text-white">{{ $vacancy->title }}</h3>
-                                {{-- ID Lowongan di sini --}}
                                 <div
                                     class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#1A73E8] text-sm font-bold ml-2">
                                     {{ $vacancy->id }}
@@ -95,7 +94,7 @@
                             class="flex-1 px-4 py-2 text-sm font-semibold rounded-lg text-white bg-yellow-500 hover:bg-yellow-600 transition-colors duration-150 text-center">
                             Edit
                         </a>
-                        {{-- Tombol Lihat (bisa jadi modal atau halaman detail terpisah) --}}
+
                         <a href="{{ route('admin.manajemen.lowongan.show', $vacancy) }}"
                             class="flex-1 px-4 py-2 text-sm font-semibold rounded-lg text-white bg-green-500 hover:bg-green-600 transition-colors duration-150 text-center">
                         Lihat
@@ -140,7 +139,6 @@
             <p class="text-gray-600 mb-2" id="modalJobType"></p>
             <p class="text-gray-600 mb-4" id="modalJobSalary"></p>
             <p class="text-gray-800" id="modalJobDescription"></p>
-            {{-- Tambahkan gambar logo di modal jika ada --}}
             <div class="mt-4" id="modalJobLogoContainer">
                 <img id="modalJobLogo" src="" alt="Logo Perusahaan" class="max-w-[100px] h-auto hidden">
             </div>

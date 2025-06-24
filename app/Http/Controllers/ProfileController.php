@@ -20,7 +20,6 @@ class ProfileController extends Controller
         $user = Auth::user();
         $profile = $user->profile ?? new Profile();
 
-        // Menggunakan array asosiatif untuk mengirim data
         return view('profile.show', [
             'user' => $user,
             'profile' => $profile
@@ -33,7 +32,6 @@ class ProfileController extends Controller
         $profile = $user->profile ?? new Profile();
         $experiences = $user->experiences;
 
-        // Menggunakan array asosiatif untuk mengirim data
         return view('profile.experience', [
             'user' => $user,
             'profile' => $profile,
@@ -79,7 +77,6 @@ class ProfileController extends Controller
             abort(403, 'Akses Ditolak');
         }
 
-        // Menggunakan array asosiatif untuk mengirim data
         return view('profile.experience.edit', [
             'user' => Auth::user(),
             'profile' => Auth::user()->profile ?? new Profile(),
@@ -93,7 +90,6 @@ class ProfileController extends Controller
             abort(403, 'Akses Ditolak');
         }
 
-        // PERBAIKAN: Mengganti 'job_description' menjadi 'description' agar sesuai dengan form
         $validated = $request->validate([
             'job_title' => 'required|string|max:255',
             'company_name' => 'required|string|max:255',
@@ -104,7 +100,7 @@ class ProfileController extends Controller
             'current_job' => 'nullable|boolean',
             'end_month' => 'required_unless:current_job,1|nullable|integer|between:1,12',
             'end_year' => 'required_unless:current_job,1|nullable|integer|digits:4|gte:start_year',
-            'description' => 'nullable|string', // <-- INI PERBAIKANNYA
+            'description' => 'nullable|string',
         ]);
 
         $validated['current_job'] = $request->has('current_job');
@@ -120,7 +116,6 @@ class ProfileController extends Controller
         $profile = $user->profile ?? new Profile();
         $educations = $user->educations;
 
-        // Menggunakan array asosiatif untuk mengirim data
         return view('profile.education', [
             'user' => $user,
             'profile' => $profile,
@@ -170,7 +165,6 @@ class ProfileController extends Controller
             abort(403, 'Akses Ditolak');
         }
 
-        // Menggunakan array asosiatif untuk mengirim data
         return view('profile.education.edit', [
             'user' => Auth::user(),
             'profile' => Auth::user()->profile ?? new Profile(),
@@ -184,7 +178,6 @@ class ProfileController extends Controller
             abort(403, 'Akses Ditolak');
         }
 
-        // PERBAIKAN: Mengganti 'job_description' menjadi 'description' agar sesuai dengan form
         $validated = $request->validate([
             'university_name' => 'required|string|max:255',
             'degree' => 'required|string|max:255',

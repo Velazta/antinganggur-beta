@@ -10,8 +10,8 @@ class JobBenefit extends Model
     protected $table = 'job_benefits';
 
     protected $fillable = [
-        'job_vacancy_id', // ID lowongan pekerjaan yang terkait
-        'benefits_name',   // Nama benefit, misalnya "Asuransi Kesehatan", "Cuti Tahunan", dll.
+        'job_vacancy_id',
+        'benefits_name',
     ];
 
     public function jobVacancy()

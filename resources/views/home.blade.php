@@ -1,6 +1,6 @@
-@extends('layouts.app') {{-- Menggunakan layout utama --}}
+@extends('layouts.app')
 
-@section('title', 'AntiNganggur - Beranda') {{-- Mengganti title default jika perlu --}}
+@section('title', 'AntiNganggur - Beranda')
 
 @section('content')
     <!-- ===== Section 1: Selamat Datang (Hero) Mulai ===== -->
@@ -279,7 +279,6 @@
                     Apa Kata Profesional Tentang AntiNganggur
                 </h2>
             </div>
-            <!-- Jika ingin slider, Anda perlu JS. Ini adalah tampilan statis satu testimoni -->
             <div class="relative">
                 <div class="max-w-xl mx-auto lg:max-w-2xl xl:max-w-3xl">
                     <div class="bg-white p-6 py-8 md:p-10 rounded-xl shadow-2xl relative border border-gray-100">
@@ -299,7 +298,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Dots Paginasi (Simulasi, perlu JS untuk fungsionalitas) -->
+
                 <div class="flex justify-center space-x-3 mt-8 md:mt-10">
                     <button aria-label="Testimonial 1" class="h-3 w-3 bg-[#FF7144] rounded-full focus:outline-none ring-2 ring-[#FF7144] ring-offset-2 ring-offset-white"></button>
                     <button aria-label="Testimonial 2" class="h-3 w-3 bg-gray-300 hover:bg-gray-400 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400 ring-offset-2 ring-offset-white"></button>

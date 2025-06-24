@@ -8,9 +8,7 @@
         body {
             font-family: "Poppins", sans-serif;
             background-color: #fff7f5;
-            /* Warna latar belakang utama halaman (soft peach/pink) */
             color: #374151;
-            /* Default text color (gray-700) */
         }
 
         input[type="text"],

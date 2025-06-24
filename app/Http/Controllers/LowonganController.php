@@ -24,8 +24,8 @@ class LowonganController extends Controller
 
         }
 
-        // --- Query baru untuk lowongan trending (Section 2) ---
-        $trendingIds = [1, 2, 3]; // Tentukan ID lowongan favorit Anda di sini
+        //set trending Section 2
+        $trendingIds = [1, 2, 3]; // ID Job Vacancy yang mau diinput
         $trendingVacancies = JobVacancy::whereIn('id', $trendingIds)
                                       ->orderBy(DB::raw('FIELD(id, ' . implode(',', $trendingIds) . ')'))
                                       ->get();
@@ -48,7 +48,6 @@ class LowonganController extends Controller
 
     public function show(JobVacancy $vacancy)
     {
-        // Memuat relasi benefits untuk ditampilkan di view
         $vacancy->load('jobBenefits');
 
         return view('lowongan.detaillowongan', compact('vacancy'));

@@ -1,17 +1,15 @@
 @extends('layouts.app')
 
-{{-- Menetapkan judul khusus untuk halaman ini --}}
 @section('title', 'Profil - Rafi Amirudin')
 
-{{-- Mendorong style khusus ke dalam stack 'styles' di layout utama --}}
 @push('styles')
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <style>
-        /* Anda bisa memindahkan ini ke file CSS utama jika diinginkan */
+
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc; /* Menyesuaikan dengan gaya umum Anda */
+            background-color: #f8fafc;
         }
     </style>
 @endpush

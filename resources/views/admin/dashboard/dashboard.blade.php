@@ -14,7 +14,7 @@
 
 @section('content')
     {{-- Grid untuk konten utama --}}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 py-10 mx-auto"> <!-- Center content with px-6 and mx-auto -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 py-10 mx-auto">
 
         {{-- Kolom Kiri dan Tengah (Statistik Cards) --}}
         <div class="lg:col-span-2">

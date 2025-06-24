@@ -100,7 +100,7 @@
         <form action="{{ route('admin.manajemen.lowongan.update', $jobVacancy->id) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
-            @method('PUT') {{-- Pastikan ini ada untuk mengirim sebagai PUT request --}}
+            @method('PUT')
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                 {{-- Judul Lowongan --}}

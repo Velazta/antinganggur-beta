@@ -10,19 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class JobApplicationController extends Controller
 {
-    /**
-     * Menampilkan form lamaran pekerjaan.s
-     * Menerima job_vacancy_id dan job_title opsional dari URL.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
-     */
+
     public function create(Request $request)
     {
         // Mengambil semua lowongan pekerjaan dan mengurutkannya berdasarkan ID
         $jobVacancies = JobVacancy::all()->sortBy('id');
 
-        // Mengambil job_vacancy_id dan job_title dari query parameter jika ada
+        // Mengambil job_vacancy_id dan job_title dari query parameter
         $selectedJobId = $request->query('job_vacancy_id');
         $selectedJobTitle = $request->query('job_title');
 
@@ -32,7 +26,6 @@ class JobApplicationController extends Controller
 
      public function store(Request $request)
 {
-    // Gunakan $request->validate() yang lebih ringkas dan otomatis.
     $validatedData = $request->validate([
         'job_vacancy_id'   => 'required|exists:job_vacancies,id',
         'full_name'        => 'required|string|max:255',
@@ -59,11 +52,8 @@ class JobApplicationController extends Controller
     }
 
     try {
-        // == INI BAGIAN KUNCINYA ==
-        // 1. Tambahkan ID pengguna yang sedang login ke data.
         $validatedData['user_id'] = Auth::id();
 
-        // 2. Handle upload file dan simpan path-nya ke data.
         if ($request->hasFile('cv_file')) {
             $validatedData['cv_file'] = $request->file('cv_file')->store('cv_files', 'public');
         }
@@ -72,7 +62,6 @@ class JobApplicationController extends Controller
             $validatedData['portfolio_file'] = $request->file('portfolio_file')->store('portfolio_files', 'public');
         }
 
-        // 3. Simpan semua data yang sudah lengkap ke database.
         $jobApplication = JobApplication::create($validatedData);
 
         Log::info('Job application created successfully', ['application_id' => $jobApplication->id, 'user_id' => Auth::id()]);
@@ -92,14 +81,8 @@ class JobApplicationController extends Controller
     }
 }
 
-    /**
-     * Fungsi ini sekarang tidak relevan jika data lowongan diambil langsung di create()
-     * dan tidak ada AJAX request untuk posisi lagi.
-     * Anda bisa menghapusnya jika memang tidak ada rute yang memanggilnya.
-     */
     public function getPositions()
     {
-        // Contoh jika Anda ingin getPositions() mengembalikan data lowongan dari database:
         $positions = JobVacancy::select('id', 'job_title as name')->get();
         return response()->json($positions);
 

@@ -16,9 +16,9 @@ return new class extends Migration
 
             $table->foreignId('job_vacancy_id')
                 ->constrained('job_vacancies')
-                ->onDelete('cascade'); // Mengaitkan dengan tabel job_vacancies
+                ->onDelete('cascade');
 
-            $table->string('benefits_name'); // Nama benefit, misalnya "Asuransi Kesehatan", "Cuti Tahunan", dll.
+            $table->string('benefits_name');
             $table->timestamps();
         });
     }

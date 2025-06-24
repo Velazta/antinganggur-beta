@@ -5,19 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Login - AntiNganggur</title>
 
-    {{-- Memuat aset dari Vite (jika Anda menggunakannya di file layout lain) --}}
-    {{-- atau bisa juga menggunakan CDN Tailwind secara langsung --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* Semua CSS kustom dari prototipe dipindahkan ke sini atau ke app.css */
         body {
             font-family: "Inter", sans-serif;
             background-color: #0c0a1a;
-            background-image: url("{{ asset('asset/admin/bgloginadmin.png') }}"); /* Menggunakan helper asset() */
+            background-image: url("{{ asset('asset/admin/bgloginadmin.png') }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -56,12 +53,9 @@
                 <p class="text-white mt-2">Welcome Back, Admin</p>
             </div>
 
-            {{-- === PERUBAHAN UTAMA DI SINI === --}}
-
             <form action="{{ route('admin.login.submit') }}" method="POST">
                 @csrf
 
-                {{-- Menampilkan pesan error jika ada --}}
                 @if($errors->any())
                     <div class="bg-red-500/20 border border-red-500/30 text-red-300 text-sm rounded-lg p-3 mb-6" role="alert">
                         <ul>
@@ -87,7 +81,6 @@
                         <input type="checkbox" name="remember" id="remember" class="custom-checkbox" />
                         <span class="ml-2">Remember me</span>
                     </label>
-                    {{-- <a href="#" class="font-medium text-white hover:text-violet-300 transition">Forgot Password?</a> --}}
                 </div>
 
                 <button type="submit" class="w-full font-semibold text-white py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-500/50 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300 transform hover:scale-105">
@@ -105,7 +98,7 @@
                 let particles = [];
                 let mouse = { x: null, y: null };
 
-                // Atur ukuran canvas dan sesuaikan saat window di-resize
+                // ukuran canvas dan sesuaikan saat window di-resize
                 function resizeCanvas() {
                     canvas.width = window.innerWidth;
                     canvas.height = window.innerHeight;

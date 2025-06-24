@@ -3,11 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// 1. Ganti 'Model' dengan 'Authenticatable'
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
-// 2. Buat class Admin meng-extend Authenticatable
 class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;

@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         $jumlahPendaftar = User::count();
 
-        // // Data prototype untuk jumlah lowongan aktif
+        // Data prototype untuk jumlah lowongan aktif
         $jumlahLowonganAktif = \App\Models\JobVacancy::count();
 
         $aktifitasTerbaru = collect([
