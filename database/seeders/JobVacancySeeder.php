@@ -19,7 +19,7 @@ class JobVacancySeeder extends Seeder
             [
                 'title' => 'Senior Software Engineer (Backend)',
                 'company_name' => 'Anti Nganggur',
-                'job_logo' => 'job_logos/c9XrERzT03JmBiA8tJGYxW4gKd0m03qqCMVM6KDL.png',
+                'job_logo' => 'job_logos/46kdvaarTKC2PkpMOJcoX44BFLMJIqYLMDNVkl6I.png',
                 'location' => 'Jakarta',
                 'location_details' => 'Jalan Jenderal Sudirman Kav. 52-53, Jakarta Selatan',
                 'type_job' => 'Full-time',
@@ -35,7 +35,7 @@ class JobVacancySeeder extends Seeder
             [
                 'title' => 'UI/UX Designer',
                 'company_name' => 'Anti Nganggur',
-                'job_logo' => 'job_logos/c9XrERzT03JmBiA8tJGYxW4gKd0m03qqCMVM6KDL.png',
+                'job_logo' => 'job_logos/46kdvaarTKC2PkpMOJcoX44BFLMJIqYLMDNVkl6I.png',
                 'location' => 'Bandung',
                 'location_details' => 'Jl. Dago No. 123, Coblong, Bandung',
                 'type_job' => 'Full-time',

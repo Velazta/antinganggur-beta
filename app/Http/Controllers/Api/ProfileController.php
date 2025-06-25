@@ -11,11 +11,11 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     public function show(Request $request) {
-        $user = $request->user();
+        $user = $request->user()->loadMissing('profile');
 
-        $profile = $user->profile ?? new Profile();
+        // $profile = $user->profile ?? new Profile();
 
-        return new ProfileResource($profile);
+        return new ProfileResource($user->profile);
     }
 
     public function store(Request $request) {
@@ -34,14 +34,13 @@ class ProfileController extends Controller
         ]);
 
 
-        if ($request->has('name')) {
+        if (isset($validatedData['name'])) {
             $user->update(['name' => $validatedData['name']]);
         }
 
-
         $profile = $user->profile()->updateOrCreate(
             ['user_id' => $user->id],
-            $validatedData
+            collect($validatedData)->except('name')->all()
         );
 
         return new ProfileResource($profile->fresh());
