@@ -14,7 +14,6 @@ class JobVacancyController extends Controller
     {
         $jobVacancies = JobVacancy::orderby('id', 'asc')->paginate(10);
         return view('admin.manajemen_lowongan.manajemenlowongan', compact('jobVacancies'));
-
     }
 
 
@@ -141,6 +140,7 @@ class JobVacancyController extends Controller
 
     public function update(Request $request, JobVacancy $jobVacancy)
     {
+
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             // 'company_name' => 'required|string|max:255',
@@ -159,37 +159,26 @@ class JobVacancyController extends Controller
             'description' => 'required|string',
         ]);
 
-        if ($request->hasFile('job_logo')) {
-            if ($jobVacancy->job_logo && file_exists(storage_path('app/public/job_logos/' . $jobVacancy->job_logo))) {
-                unlink(storage_path('app/public/job_logos/' . $jobVacancy->job_logo));
-            }
-            $logoName = time() . '.' . $request->job_logo->extension();
-            $request->job_logo->storeAs('public/job_logos', $logoName);
-            $validatedData['job_logo'] = $logoName;
-        }
 
         DB::beginTransaction();
         try {
-            $benefitNames = $validatedData['benefits'] ?? [];
 
-            $jobVacancy = JobVacancy::create(
-                Arr::except($validatedData, ['benefits'])
-            );
-
-            // $benefitNames cek array
-            if (!is_array($benefitNames)) {
-                $benefitNames = [$benefitNames];
+            if ($request->hasFile('job_logo')) {
+                if ($jobVacancy->job_logo && file_exists(storage_path('app/public/job_logos/' . $jobVacancy->job_logo))) {
+                    unlink(storage_path('app/public/job_logos/' . $jobVacancy->job_logo));
+                }
+                $logoName = time() . '.' . $request->job_logo->extension();
+                $request->job_logo->storeAs('public/job_logos', $logoName);
+                $validatedData['job_logo'] = $logoName;
             }
 
-            $validatedData['company_name'] = 'Anti Nganggur'; // static company name
-
-            $jobVacancy->update($validatedData);
+            $jobVacancy->update(Arr::except($validatedData, ['benefits']));
 
             $jobVacancy->jobBenefits()->delete();
 
-            // Simpan kembali benefits yang baru
-            if (!empty($benefitNames)) {
-                foreach ($benefitNames as $name) {
+            if (!empty($validatedData['benefits'])) {
+                foreach ($validatedData['benefits'] as $name) {
+                    // Hanya buat jika nama benefit tidak kosong
                     if ($name) {
                         $jobVacancy->jobBenefits()->create(['benefits_name' => $name]);
                     }
