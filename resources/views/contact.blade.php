@@ -8,9 +8,7 @@
         body {
             font-family: "Poppins", sans-serif;
             background-color: #fff7f5;
-            /* Warna latar belakang utama halaman (soft peach/pink) */
             color: #374151;
-            /* Default text color (gray-700) */
         }
 
         input[type="text"],
@@ -130,23 +128,35 @@
                         Kami senang membantu Anda dengan pertanyaan Anda! Silahkan isi formulir di bawah ini dan kami
                         akan segera menghubungi Anda kembali.
                     </p>
-                    <form>
+
+                    {{-- MODIFIKASI UNTUK POST PESAN KONTAK --}}
+                    <form method="POST" action="{{ route('contact.store') }}">
+                        @csrf
                         <div class="mb-5">
-                            <label for="name" class="block text-slate-700 font-semibold mb-1.5 text-sm">Nama</label>
-                            <input type="text" id="name" name="name" placeholder="Nama Anda"
+                            <label for="nama" class="block text-slate-700 font-semibold mb-1.5 text-sm">Nama</label>
+                            <input type="text" id="nama" name="nama" placeholder="Nama Anda"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-sm" />
+                            @error('nama')
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="mb-5">
                             <label for="email" class="block text-slate-700 font-semibold mb-1.5 text-sm">Email</label>
                             <input type="email" id="email" name="email" placeholder="Email Anda"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-sm" />
+                            @error('email')
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="mb-6 sm:mb-8">
                             <label for="message" class="block text-slate-700 font-semibold mb-1.5 text-sm">Pesan</label>
                             <textarea id="message" name="message" rows="4" placeholder="Tulis pesan anda disini..."
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400 text-sm"></textarea>
+                            @error('message')
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <button type="submit"

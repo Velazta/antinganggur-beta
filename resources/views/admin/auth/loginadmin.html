@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Login - AntiNganggur</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                font-family: "Inter", sans-serif;
+                background-color: #0c0a1a;
+                background-image: url("../../../../public/asset/admin/bgloginadmin.png");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            /* Canvas untuk animasi partikel */
+            #constellation-canvas {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            .content-wrapper {
+                position: relative;
+                z-index: 1;
+            }
+
+            .text-glow {
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.3),
+                    0 0 10px rgba(255, 255, 255, 0.3);
+            }
+            .input-container {
+                position: relative;
+            }
+            .input-field {
+                border: 2px solid transparent;
+                background-color: rgba(23, 22, 40, 0.5);
+                transition: border-color 0.2s;
+            }
+            .input-field:focus {
+                border-color: #8b5cf6;
+            }
+            .input-label {
+                position: absolute;
+                left: 1rem;
+                top: 0.85rem;
+                color: #9ca3af;
+                pointer-events: none;
+                transition: all 0.2s ease-out;
+            }
+            .input-field:focus + .input-label,
+            .input-field:not(:placeholder-shown) + .input-label {
+                top: -0.65rem;
+                left: 0.75rem;
+                font-size: 0.75rem;
+                color: #c4b5fd;
+                background-color: #111827;
+                padding: 0 0.25rem;
+            }
+            .custom-checkbox {
+                appearance: none;
+                -webkit-appearance: none;
+                width: 1.15rem;
+                height: 1.15rem;
+                border: 2px solid white;
+                border-radius: 0.25rem;
+                background-color: transparent;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.2s;
+                flex-shrink: 0;
+            }
+            .custom-checkbox:checked {
+                background-color: #a78bfa;
+                border-color: #a78bfa;
+                background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+                background-size: 100% 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        </style>
+    </head>
+
+    <body>
+        <canvas id="constellation-canvas"></canvas>
+
+        <div
+            class="content-wrapper flex items-center justify-center min-h-screen p-4"
+        >
+            <div
+                class="w-full max-w-md mx-auto bg-black/30 backdrop-blur-sm rounded-2xl shadow-2xl p-8 sm:p-10 border border-white/10"
+            >
+                <div class="text-center mb-10">
+                    <h1
+                        class="text-5xl font-black text-white tracking-wider text-glow"
+                    >
+                        LOGIN
+                    </h1>
+                    <p class="text-white mt-2">Welcome Back, Admin</p>
+                </div>
+                <form action="{{ route('admin.login.submit') }}" method="POST">
+                    <!-- @csrf -->
+                    <div class="input-container mb-6">
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder=" "
+                            class="input-field w-full rounded-lg px-4 py-3 text-white focus:outline-none"
+                            required
+                        />
+                        <label for="email" class="input-label">Email</label>
+                    </div>
+                    <div class="input-container mb-6">
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder=" "
+                            class="input-field w-full rounded-lg px-4 py-3 text-white focus:outline-none"
+                            required
+                        />
+                        <label for="password" class="input-label"
+                            >Password</label
+                        >
+                    </div>
+                    <div class="flex items-center justify-between mb-8 text-sm">
+                        <label
+                            for="remember"
+                            class="flex items-center cursor-pointer text-slate-300 hover:text-white transition"
+                        >
+                            <input
+                                type="checkbox"
+                                name="remember"
+                                id="remember"
+                                class="custom-checkbox"
+                            />
+                            <span class="ml-2">Remember me</span>
+                        </label>
+                        <a
+                            href="#"
+                            class="font-medium text-white hover:text-violet-300 transition"
+                            >Forgot Password?</a
+                        >
+                    </div>
+                    <button
+                        type="submit"
+                        class="w-full font-semibold text-white py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-500/50 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300 transform hover:scale-105"
+                    >
+                        Sign In
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const canvas = document.getElementById("constellation-canvas");
+                const ctx = canvas.getContext("2d");
+                let particles = [];
+                let mouse = { x: null, y: null };
+
+                // Atur ukuran canvas dan sesuaikan saat window di-resize
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                window.addEventListener("resize", resizeCanvas);
+                resizeCanvas();
+
+                // Lacak posisi mouse untuk interaksi parallax
+                window.addEventListener("mousemove", function (event) {
+                    mouse.x = event.x;
+                    mouse.y = event.y;
+                });
+                window.addEventListener("mouseout", function () {
+                    mouse.x = null;
+                    mouse.y = null;
+                });
+
+                // Class untuk merepresentasikan satu bintang/partikel
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.size = Math.random() * 2 + 0.5; // Ukuran bintang
+                        this.speedX = (Math.random() - 0.5) * 0.3; // Kecepatan gerak
+                        this.speedY = (Math.random() - 0.5) * 0.3;
+                        this.opacity = Math.random() * 0.5 + 0.4; // Opasitas untuk efek kelip
+                    }
+
+                    // Perbarui posisi partikel
+                    update() {
+                        // Buat partikel bergerak
+                        this.x += this.speedX;
+                        this.y += this.speedY;
+
+                        // Buat partikel kembali jika keluar layar
+                        if (this.x < 0) this.x = canvas.width;
+                        if (this.x > canvas.width) this.x = 0;
+                        if (this.y < 0) this.y = canvas.height;
+                        if (this.y > canvas.height) this.y = 0;
+                    }
+
+                    // Gambar partikel di canvas
+                    draw() {
+                        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                // Inisialisasi partikel
+                function init() {
+                    particles = [];
+                    let numberOfParticles =
+                        (canvas.width * canvas.height) / 9000;
+                    for (let i = 0; i < numberOfParticles; i++) {
+                        particles.push(new Particle());
+                    }
+                }
+                init();
+
+                // Fungsi untuk menghubungkan partikel dengan garis
+                function connectParticles() {
+                    const maxDistance = 100; // Jarak maksimum untuk membuat garis
+                    for (let a = 0; a < particles.length; a++) {
+                        for (let b = a; b < particles.length; b++) {
+                            let dx = particles[a].x - particles[b].x;
+                            let dy = particles[a].y - particles[b].y;
+                            let distance = Math.sqrt(dx * dx + dy * dy);
+
+                            if (distance < maxDistance) {
+                                let opacity = 1 - distance / maxDistance;
+                                ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                                ctx.lineWidth = 0.5;
+                                ctx.beginPath();
+                                ctx.moveTo(particles[a].x, particles[a].y);
+                                ctx.lineTo(particles[b].x, particles[b].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    // Interaksi dengan mouse
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mouseInteractionRadius = 150;
+                        for (let i = 0; i < particles.length; i++) {
+                            let dx = mouse.x - particles[i].x;
+                            let dy = mouse.y - particles[i].y;
+                            let distance = Math.sqrt(dx * dx + dy * dy);
+
+                            if (distance < mouseInteractionRadius) {
+                                let opacity =
+                                    1 - distance / mouseInteractionRadius;
+                                ctx.strokeStyle = `rgba(255, 255, 255, ${
+                                    opacity * 0.8
+                                })`; // Garis ke mouse sedikit lebih tebal/terang
+                                ctx.lineWidth = 1;
+                                ctx.beginPath();
+                                ctx.moveTo(mouse.x, mouse.y);
+                                ctx.lineTo(particles[i].x, particles[i].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+
+                // Loop animasi utama
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach((particle) => {
+                        particle.update();
+                        particle.draw();
+                    });
+                    connectParticles();
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            });
+        </script>
+    </body>
+</html>

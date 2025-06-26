@@ -4,7 +4,6 @@
 
 @push('styles')
     <style>
-        /* Mengatasi warna background aneh saat autofill di browser berbasis WebKit */
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus,
@@ -16,7 +15,6 @@
             caret-color: #4a5568;
         }
 
-        /* Gaya untuk select agar terlihat konsisten */
         select {
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -34,7 +32,6 @@
     <div class="bg-[#FFF5F2] flex items-center justify-center min-h-screen p-4 sm:p-6 md:p-8 font-sans">
         <div class="flex w-full max-w-6xl mx-auto space-x-8">
 
-            {{-- Panggil sidebar yang sudah terpisah --}}
             @include('profile.partials.sidebar')
 
             {{-- Area Konten Utama --}}
@@ -124,7 +121,7 @@
                         <div>
                             <label for="job_title" class="block text-sm font-medium text-gray-600 mb-1">Posisi Kerja</label>
                             <input type="text" name="job_title" id="job_title" value="{{ old('job_title') }}"
-                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500  transition-all"
                                 placeholder="Contoh: Software Engineer">
                             @error('job_title')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -136,7 +133,7 @@
                             <label for="company_name" class="block text-sm font-medium text-gray-600 mb-1">Nama
                                 Perusahaan</label>
                             <input type="text" name="company_name" id="company_name" value="{{ old('company_name') }}"
-                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all"
                                 placeholder="Contoh: PT Teknologi Maju">
                             @error('company_name')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -147,7 +144,7 @@
                         <div>
                             <label for="country" class="block text-sm font-medium text-gray-600 mb-1">Negara</label>
                             <input type="text" name="country" id="country" value="{{ old('country') }}"
-                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all"
                                 placeholder="Contoh: Indonesia">
                             @error('country')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -158,7 +155,7 @@
                         <div>
                             <label for="city" class="block text-sm font-medium text-gray-600 mb-1">Kota</label>
                             <input type="text" name="city" id="city" value="{{ old('city') }}"
-                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2  transition-all"
                                 placeholder="Contoh: Jakarta">
                             @error('city')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -170,7 +167,7 @@
                             <label class="block text-sm font-medium text-gray-600 mb-1">Tanggal Mulai</label>
                             <div class="flex space-x-3 mt-1">
                                 <select name="start_month" id="start_month"
-                                    class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                    class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all">
                                     <option value="">Bulan</option>
                                     @php $months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]; @endphp
                                     @foreach ($months as $index => $month)
@@ -180,7 +177,7 @@
                                     @endforeach
                                 </select>
                                 <select name="start_year" id="start_year"
-                                    class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                    class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all">
                                     <option value="">Tahun</option>
                                     @for ($year = date('Y'); $year >= date('Y') - 50; $year--)
                                         <option value="{{ $year }}"
@@ -202,7 +199,7 @@
                             <label class="block text-sm font-medium text-gray-600 mb-1">Tanggal Berakhir</label>
                             <div class="flex space-x-3 mt-1">
                                 <select name="end_month" id="end_month"
-                                    class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                    class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all">
                                     <option value="">Bulan</option>
                                     @foreach ($months as $index => $month)
                                         <option value="{{ $index + 1 }}"
@@ -211,7 +208,7 @@
                                     @endforeach
                                 </select>
                                 <select name="end_year" id="end_year"
-                                    class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                                    class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all">
                                     <option value="">Tahun</option>
                                     @for ($year = date('Y'); $year >= date('Y') - 50; $year--)
                                         <option value="{{ $year }}"
@@ -240,7 +237,7 @@
                             <label for="description" class="block text-sm font-medium text-gray-600 mb-1">Deskripsi
                                 Pekerjaan</label>
                             <textarea name="description" id="description" rows="5"
-                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-all resize-y"
+                                class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-orange-500 focus:ring-2 transition-all resize-y"
                                 placeholder="Jelaskan tanggung jawab dan pencapaian Anda">{{ old('description') }}</textarea>
                             @error('description')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

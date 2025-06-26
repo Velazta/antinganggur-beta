@@ -9,15 +9,12 @@
     {{-- Favicon --}}
     <link rel="icon" href="{{ asset('asset/page/Vector.png') }}" type="image/png">
 
-    {{-- Tailwind CSS CDN --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
-    {{-- Google Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    {{-- Style global minimal yang mungkin masih dibutuhkan (seperti scrollbar, jika tidak di CSS terpisah) --}}
     <style>
-        /* Custom scrollbar untuk testimoni (jika digunakan dan tidak bisa di-inline) */
+
         .testimonial-scrollbar::-webkit-scrollbar {
             height: 8px;
         }
@@ -26,27 +23,31 @@
             border-radius: 10px;
         }
         .testimonial-scrollbar::-webkit-scrollbar-thumb {
-            background: #FDBA74; /* orange-300 */
+            background: #FDBA74;
             border-radius: 10px;
         }
         .testimonial-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #FB923C; /* orange-400 */
+            background: #FB923C;
         }
     </style>
-    @stack('styles') {{-- Ini sudah benar untuk CSS spesifik per halaman --}}
+    @stack('styles')
 </head>
 
 <body class="antialiased font-['Poppins'] bg-[#FFF7F5] text-slate-700">
 
     {{-- Include Header --}}
-    @include('layouts.partials.header') {{-- Pastikan path ini benar jika header di dalam folder partials --}}
+    @include('layouts.partials.header')
 
     <main>
         {{-- Konten utama halaman akan di-inject di sini --}}
         @yield('content')
     </main>
 
-    @stack('scripts') {{-- Tambahkan ini untuk JavaScript spesifik per halaman --}}
+    @include('layouts.partials.footer')
+
+    {{-- JavaScript --}}
+
+    @stack('scripts')
 
 </body>
 </html>

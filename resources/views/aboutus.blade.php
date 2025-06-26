@@ -2,31 +2,24 @@
 
 @section('title', 'Tentang Kami')
 
-@push('styles') {{-- Ganti @section('styles') menjadi @push('styles') --}}
-    {{-- CSS Kustom Khusus Halaman Tentang Kami --}}
+@push('styles')
     <style>
         body {
             font-family: "Poppins", sans-serif;
             background-color: #fff7f5;
-            /* Warna latar belakang utama halaman (soft peach/pink) */
             color: #374151;
-            /* Default text color (gray-700) */
         }
 
         .bg-orange-custom {
             background-color: #FF6B35;
-            /* Main orange color */
         }
 
-        /* This wrapper ensures all content inside the section is above the ::after pseudo-element */
         .content-wrapper {
             position: relative;
             z-index: 1;
         }
 
-        /* Responsive adjustments for the curve */
         @media (max-width: 1024px) {
-            /* lg breakpoint */
             .custom-curved-container {
                 border-bottom-right-radius: 150px;
             }
@@ -38,7 +31,6 @@
         }
 
         @media (max-width: 768px) {
-            /* md breakpoint */
             .custom-curved-container {
                 border-bottom-right-radius: 100px;
             }
@@ -51,67 +43,46 @@
 
         .title-what-we-do {
             background-color: #FF7144;
-            /* [#FF7144] */
             color: white;
             padding: 0.5rem 2.5rem 0.5rem 1.5rem;
-            /* Tambah padding kanan agar teks tidak terlalu dekat */
             display: inline-block;
             position: relative;
             border-radius: 0.375rem 0 0 0.375rem;
-            /* rounded kiri */
         }
 
-        /* Membuat panah lancip miring ke kanan */
         .title-what-we-do {
             position: relative;
             display: inline-block;
             background-color: #FF7144;
-            /* Warna oranye */
             color: white;
             font-weight: 800;
-            /* sesuaikan dengan bold/extrabold */
             font-size: 2.5rem;
-            /* contoh ukuran, sesuaikan */
             padding: 0.75rem 2rem 0.75rem 2rem;
-            /* ruang dalam teks */
             border-radius: 8px;
-            /* sudut membulat pada kotak */
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Ekor lancip di bawah */
         .title-what-we-do::after {
             content: "";
             position: absolute;
             bottom: -20px;
-            /* sesuaikan jarak ke bawah */
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 20px solid transparent;
-            /* lebar sisi miring kiri */
             border-right: 20px solid transparent;
-            /* lebar sisi miring kanan */
             border-top: 20px solid #FF7144;
-            /* warna panah */
             filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.15));
-            /* shadow lembut */
         }
-
-        /* Garis bawah dekoratif untuk Visi & Misi */
         .underline-decorator {
             display: block;
             width: 50px;
             height: 3px;
             background-color: #FF7144;
-            /* [#FF7144] */
             margin-top: 0.75rem;
-            /* mb-3 */
             margin-left: auto;
-            /* Untuk Visi jika teksnya rata kanan */
             margin-right: auto;
-            /* Untuk Visi jika teksnya rata tengah */
         }
 
         .visi-card .underline-decorator {
@@ -119,17 +90,13 @@
             margin-right: auto;
         }
 
-        /* Rata kiri untuk Visi */
         .misi-card .underline-decorator {
             margin-left: 0;
             margin-right: auto;
         }
-
-        /* Header Left */
         .team-header-left {
             font-weight: 900;
             font-size: 2.25rem;
-            /* text-4xl */
             background-color: #FF7144;
             color: white;
             padding: 0 0.5rem 0 0.25rem;
@@ -137,12 +104,10 @@
             user-select: none;
         }
 
-        /* Header Right */
         .team-header-right {
             background-color: #FF7144;
             color: white;
             font-size: 0.875rem;
-            /* text-sm */
             padding: 0.5rem 0.75rem;
             line-height: 1.2;
             user-select: none;
@@ -150,12 +115,10 @@
             text-align: right;
         }
 
-        /* Overlay untuk background */
         .overlay-dark {
             background-color: rgba(20, 20, 40, 0.7);
         }
 
-        /* Animasi fadeIn saat scroll */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -167,19 +130,15 @@
             transform: translateY(0);
         }
 
-        /* Number box diper kecilkan */
         .number-box {
             width: 2.5rem;
-            /* lebih kecil */
             height: 2.5rem;
             font-size: 1rem;
-            /* teks lebih kecil */
         }
 
         .content-item .number-box,
         .content-item .title-left {
             transition: transform 0.5s ease;
-            /* slow 1 detik */
         }
 
         .content-item:hover .number-box,
@@ -454,8 +413,8 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-16 mt-[100px]">
 
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[240px] h-[260px]">
-                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+                        <div class="relative w-[240px] h-[260px] group cursor-pointer transform transition-transform duration-300 hover:-translate-y-[30px]">
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full transition-all duration-300 group-hover:shadow-2xl"></div>
 
                             <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
                                 class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
@@ -481,8 +440,8 @@
                     </div>
 
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[240px] h-[260px]">
-                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+                        <div class="relative w-[240px] h-[260px] group cursor-pointer transform transition-transform duration-300 hover:-translate-y-[30px]">
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full transition-all duration-300 group-hover:shadow-2xl"></div>
 
                             <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
                                 class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
@@ -508,8 +467,8 @@
                     </div>
 
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[240px] h-[260px]">
-                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+                        <div class="relative w-[240px] h-[260px] group cursor-pointer transform transition-transform duration-300 hover:-translate-y-[30px]">
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full transition-all duration-300 group-hover:shadow-2xl"></div>
 
                             <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
                                 class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
@@ -536,8 +495,8 @@
                     </div>
 
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[240px] h-[260px]">
-                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full"></div>
+                        <div class="relative w-[240px] h-[260px] group cursor-pointer transform transition-transform duration-300 hover:-translate-y-[30px]">
+                            <div class="bg-[#FF7144] rounded-3xl shadow-lg w-full h-full transition-all duration-300 group-hover:shadow-2xl"></div>
 
                             <img src="{{ asset('asset/page/FotoMember.png') }}" alt="Team Member"
                                 class="absolute left-1/2 bottom-0 w-auto h-[320px] object-cover rounded-3xl drop-shadow-lg transform -translate-x-1/2" />
@@ -647,15 +606,14 @@
     </main>
 @endsection
 
-@push('scripts') {{-- Ganti @section('scripts') menjadi @push('scripts') --}}
+@push('scripts')
     {{-- JavaScript Kustom Khusus Halaman Tentang Kami --}}
     <script>
         // Fade in saat scroll
         const faders = document.querySelectorAll('.fade-in');
 
         const appearOptions = {
-            threshold: 0.1, // Persentase elemen yang harus terlihat sebelum callback dipicu
-            // rootMargin: "0px 0px -50px 0px" // Anda bisa sesuaikan ini jika perlu
+            threshold: 0.1,
         };
 
         const appearOnScroll = new IntersectionObserver(function (entries, observer) {
@@ -666,7 +624,6 @@
                 } else {
                     // Elemen keluar dari viewport
                     entry.target.classList.remove('visible');
-                    // Tidak perlu unobserve jika ingin animasi berulang
                 }
             });
         }, appearOptions);

@@ -90,8 +90,8 @@
                 </div>
             @endif
 
-            <form action="{{ route('register.submit') }}" method="POST"> {{-- Perbaikan di sini --}}
-                @csrf {{-- Penting untuk keamanan Laravel --}}
+            <form action="{{ route('register.submit') }}" method="POST">
+                @csrf
                 <div class="mb-4 sm:mb-5">
                     <input type="text" name="fullname" id="fullname" placeholder="Enter your full name"
                         class="input-field @error('fullname') border-red-500 @enderror" value="{{ old('fullname') }}" required />
@@ -125,7 +125,7 @@
 
                 <p class="mt-8 text-center text-sm text-gray-600">
                     Already have account?
-                    <a href="{{ route('login') }}" {{-- Perbaikan di sini --}}
+                    <a href="{{ route('login') }}"
                         class="font-semibold text-[#FF7144] hover:text-[#FF4B8D] transition-colors duration-200">Login</a>
                 </p>
             </form>

@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         /* Custom scrollbar untuk testimoni jika menggunakan overflow (tidak bisa di-inline dengan Tailwind) */
         .testimonial-scrollbar::-webkit-scrollbar {
@@ -21,13 +22,11 @@
 
         .testimonial-scrollbar::-webkit-scrollbar-thumb {
             background: #FDBA74;
-            /* orange-300 */
             border-radius: 10px;
         }
 
         .testimonial-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #FB923C;
-            /* orange-400 */
         }
     </style>
 </head>
@@ -51,12 +50,12 @@
                 <nav class="hidden md:flex items-center space-x-1 lg:space-x-3">
                     <a href="{{ url('/') }}"
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Home</a>
-                    <a href="#"
+                    <a href="{{ url('/lowongan') }}"
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Lowongan</a>
                     <a href="{{ url('/aboutus') }}"
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Tentang</a>
-                    <a href="#"
-                        class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Portfolio</a>
+                    <a href="{{ url('/portofolio') }}"
+                        class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Portofolio</a>
                     <a href="{{ url('/contact') }}"
                         class="text-slate-700 hover:text-orange-500 px-3 py-2 rounded-md text-[15px] md:text-sm font-medium transition-colors duration-150">Kontak</a>
                 </nav>
@@ -71,7 +70,15 @@
                 @endguest
 
                 @auth
+
+
                     <div class="hidden md:flex items-center ml-6 relative">
+
+                        {{-- === IKON NOTIFIKASI === --}}
+                    <a href="{{ route('user.notification') }}" class="relative mr-5 text-slate-600 hover:text-orange-500 transition-colors duration-150">
+                        <span class="sr-only">Buka Notifikasi</span>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    </a>
                         <span class="text-sm font-medium text-slate-700">{{ Auth::user()->name }}</span>
                         <button type="button"
                             class="ml-3 flex-shrink-0 bg-orange-500 rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 items-center justify-center h-10 w-10 overflow-hidden"
@@ -141,11 +148,11 @@
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="{{ url('/') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="#"
+                <a href="{{ url('/lowongan') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Lowongan</a>
                 <a href="{{ url('/aboutus') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Tentang</a>
-                <a href="#"
+                <a href="{{ url('/portofolio') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
                 <a href="{{ url('/contact') }}"
                     class="text-slate-700 hover:bg-orange-50 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium">Kontak</a>
@@ -210,9 +217,10 @@
         </div>
     </header>
 
-    {{-- Skrip yang dibutuhkan secara global (misalnya header-menu.js) --}}
-    <script src="{{ asset('js/header-menu.js') }}" defer></script> {{-- Ini mungkin sudah ada di header.blade.php Anda --}}
-    {{-- <script src="{{ asset('js/header-menu.js') }}" defer></script> --}}
+    {{-- Skrip yang dibutuhkan secara global --}}
+    <script src="{{ asset('js/header-menu.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 
 </body>
 

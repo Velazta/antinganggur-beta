@@ -106,15 +106,15 @@
             @enderror
 
 
-            <form action="{{ route('login.submit') }}" method="POST"> {{-- Perbaikan di sini --}}
-                @csrf {{-- Penting untuk keamanan Laravel --}}
+            <form action="{{ route('login.submit') }}" method="POST">
+                @csrf
                 <div class="mb-6">
                     <input type="email" name="email" id="email" placeholder="Enter your email"
-                        class="input-field @error('email') border-red-500 @enderror" value="{{ old('email') }}" required /> {{-- old() untuk nilai input --}}
+                        class="input-field @error('email') border-red-500 @enderror" value="{{ old('email') }}" required />
                 </div>
                 <div class="mb-6">
                     <input type="password" name="password" id="password" placeholder="Enter your password"
-                        class="input-field @error('password') border-red-500 @enderror" required /> {{-- old() tidak disarankan untuk password --}}
+                        class="input-field @error('password') border-red-500 @enderror" required />
                 </div>
 
                 <div class="flex items-center justify-between mb-8 text-sm">
@@ -136,7 +136,7 @@
 
             <p class="mt-8 text-center text-sm text-gray-600">
                 Don't have an account?
-                <a href="{{ route('register') }}" {{-- Perbaikan di sini --}}
+                <a href="{{ route('register') }}"
                     class="font-semibold text-[#FF7144] hover:text-[#FF4B8D] transition-colors duration-200">Sign Up</a>
             </p>
         </div>
