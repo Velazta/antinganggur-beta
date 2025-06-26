@@ -14,6 +14,7 @@ class JobVacancyController extends Controller
     {
         $jobVacancies = JobVacancy::orderby('id', 'asc')->paginate(10);
         return view('admin.manajemen_lowongan.manajemenlowongan', compact('jobVacancies'));
+
     }
 
 

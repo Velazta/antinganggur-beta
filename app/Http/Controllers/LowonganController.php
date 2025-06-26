@@ -44,6 +44,8 @@ class LowonganController extends Controller
             'trendingVacancies' => $trendingVacancies,
             // 'jobVacancies' => $jobVacancies,
         ]);
+
+
     }
 
     public function show(JobVacancy $vacancy)
@@ -52,4 +54,15 @@ class LowonganController extends Controller
 
         return view('lowongan.detaillowongan', compact('vacancy'));
     }
+
+    public function showHomePage() {
+        $trendingJobs = JobVacancy::latest()->take(3)->get();
+
+        // Kirim data 'trendingJobs' ke view 'home'
+        return view('home', [
+            'trendingJobs' => $trendingJobs
+        ]);
+    }
+
+
 }

@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         /* Custom scrollbar untuk testimoni jika menggunakan overflow (tidak bisa di-inline dengan Tailwind) */
         .testimonial-scrollbar::-webkit-scrollbar {
@@ -218,6 +219,7 @@
 
     {{-- Skrip yang dibutuhkan secara global --}}
     <script src="{{ asset('js/header-menu.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 
 </body>

@@ -8,9 +8,8 @@ use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+
+Route::get('/', [LowonganController::class, 'showHomePage'])->name('home');
 
 
 // Route untuk menampilkan form registrasi
