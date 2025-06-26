@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobVacancy;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,8 +20,17 @@ class JobVacancyController extends Controller
     public function create()
     {
         $locations = [
-           'Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Semarang',
-            'Makassar', 'Palembang', 'Tangerang', 'Depok', 'Bekasi', 'Surakarta'
+            'Jakarta',
+            'Surabaya',
+            'Bandung',
+            'Medan',
+            'Semarang',
+            'Makassar',
+            'Palembang',
+            'Tangerang',
+            'Depok',
+            'Bekasi',
+            'Surakarta'
         ];
 
         return view('admin.manajemen_lowongan.createlowongan', compact('locations'));
@@ -28,29 +38,31 @@ class JobVacancyController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            // 'company_name' => 'required|string|max:255',
-            'job_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'location' => 'required|string|max:255',
-            'location_details' => 'required|string|max:255',
-            'type_job' => 'required|string|max:100',
-            'work_schedule' => 'nullable|string|max:100',
-            'career_level' => 'nullable|string|max:100',
-            'mobility' => 'nullable|string|max:100',
-            'benefits' => 'nullable|array',
-            'benefits.*' => 'string|max:255',
-            'open_positions' => 'nullable|integer|min:1',
-            'min_salary' => 'nullable|numeric|min:0',
-            'max_salary' => 'nullable|numeric|min:0|gte:min_salary',
-            'description' => 'required|string',
-        ],
-        [
-            'job_logo.required' => 'Logo perusahaan wajib diunggah.',
-            'job_logo.image' => 'File harus berupa gambar.',
-            'job_logo.mimes' => 'Format gambar yang diizinkan adalah JPEG, PNG, JPG, GIF, SVG.',
-            'job_logo.max' => 'Ukuran gambar maksimal 2MB.',
-        ]);
+        $validatedData = $request->validate(
+            [
+                'title' => 'required|string|max:255',
+                // 'company_name' => 'required|string|max:255',
+                'job_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'location' => 'required|string|max:255',
+                'location_details' => 'required|string|max:255',
+                'type_job' => 'required|string|max:100',
+                'work_schedule' => 'nullable|string|max:100',
+                'career_level' => 'nullable|string|max:100',
+                'mobility' => 'nullable|string|max:100',
+                'benefits' => 'nullable|array',
+                'benefits.*' => 'nullable|string|max:255',
+                'open_positions' => 'nullable|integer|min:1',
+                'min_salary' => 'nullable|numeric|min:0',
+                'max_salary' => 'nullable|numeric|min:0|gte:min_salary',
+                'description' => 'required|string',
+            ],
+            [
+                'job_logo.required' => 'Logo perusahaan wajib diunggah.',
+                'job_logo.image' => 'File harus berupa gambar.',
+                'job_logo.mimes' => 'Format gambar yang diizinkan adalah JPEG, PNG, JPG, GIF, SVG.',
+                'job_logo.max' => 'Ukuran gambar maksimal 2MB.',
+            ]
+        );
 
         $jobLogoPath = null;
         if ($request->hasFile('job_logo')) {
@@ -99,7 +111,7 @@ class JobVacancyController extends Controller
         }
     }
 
-     public function show(JobVacancy $jobVacancy)
+    public function show(JobVacancy $jobVacancy)
     {
 
         $jobVacancy->load('jobBenefits');
@@ -109,8 +121,17 @@ class JobVacancyController extends Controller
     public function edit(JobVacancy $jobVacancy)
     {
         $locations = [
-           'Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Semarang',
-            'Makassar', 'Palembang', 'Tangerang', 'Depok', 'Bekasi', 'Surakarta'
+            'Jakarta',
+            'Surabaya',
+            'Bandung',
+            'Medan',
+            'Semarang',
+            'Makassar',
+            'Palembang',
+            'Tangerang',
+            'Depok',
+            'Bekasi',
+            'Surakarta'
         ];
 
         $jobVacancy->load('jobBenefits');
@@ -130,7 +151,7 @@ class JobVacancyController extends Controller
             'career_level' => 'nullable|string|max:100',
             'mobility' => 'nullable|string|max:100',
             'benefits' => 'nullable|array',
-            'benefits.*' => 'string|max:255',
+            'benefits.*' => 'nullable|string|max:255',
             'open_positions' => 'nullable|integer|min:1',
             'min_salary' => 'nullable|numeric|min:0',
             'max_salary' => 'nullable|numeric|min:0|gte:min_salary',
@@ -141,7 +162,7 @@ class JobVacancyController extends Controller
             if ($jobVacancy->job_logo && file_exists(storage_path('app/public/job_logos/' . $jobVacancy->job_logo))) {
                 unlink(storage_path('app/public/job_logos/' . $jobVacancy->job_logo));
             }
-            $logoName = time().'.'.$request->job_logo->extension();
+            $logoName = time() . '.' . $request->job_logo->extension();
             $request->job_logo->storeAs('public/job_logos', $logoName);
             $validatedData['job_logo'] = $logoName;
         }
@@ -149,6 +170,10 @@ class JobVacancyController extends Controller
         DB::beginTransaction();
         try {
             $benefitNames = $validatedData['benefits'] ?? [];
+
+            $jobVacancy = JobVacancy::create(
+                Arr::except($validatedData, ['benefits'])
+            );
 
             // $benefitNames cek array
             if (!is_array($benefitNames)) {
@@ -164,7 +189,7 @@ class JobVacancyController extends Controller
             // Simpan kembali benefits yang baru
             if (!empty($benefitNames)) {
                 foreach ($benefitNames as $name) {
-                     if ($name) {
+                    if ($name) {
                         $jobVacancy->jobBenefits()->create(['benefits_name' => $name]);
                     }
                 }
@@ -173,7 +198,6 @@ class JobVacancyController extends Controller
             DB::commit();
 
             return redirect()->route('admin.manajemen.lowongan')->with('success', 'Lowongan berhasil diperbarui!');
-
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data. ' . $e->getMessage())->withInput();

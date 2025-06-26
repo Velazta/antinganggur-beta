@@ -30,7 +30,6 @@ class JobVacancy extends Model
     ];
 
      protected $casts = [
-        'benefits' => 'array', // menyimpan benefit sebagai array
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
