@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ExperienceController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\EducationController;
+use App\Http\Controllers\Api\CvController;
 use App\Http\Controllers\GuestAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/educations', [EducationController::class, 'store']);
     Route::put('/user/educations/{education}', [EducationController::class, 'update']);
     Route::delete('/user/educations/{education}', [EducationController::class, 'destroy']);
+
+    Route::get('/user/cvs', [CvController::class, 'index']);
+    Route::post('/user/cv', [CvController::class, 'store']); // Upload CV baru
+    Route::delete('/user/cv/{cv}', [CvController::class, 'destroy']); // Hapus CV
+    Route::get('/user/cv/download/{cv}', [CvController::class, 'download']);
     // Nanti tambahkan rute untuk experience, education, dan cv di sini...
     // Contoh:
     // Route::get('/user/experiences', [ExperienceController::class, 'index']);
