@@ -141,9 +141,9 @@
                         class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all">
                 </div>
 
-                {{-- Logo Perusahaan (Wajib) --}}
+                {{-- Logo Lowongan (Wajib) --}}
                 <div class="md:col-span-2">
-                    <label for="job_logo" class="block text-sm font-medium text-gray-600 mb-1">Logo Perusahaan</label>
+                    <label for="job_logo" class="block text-sm font-medium text-gray-600 mb-1">Logo Lowongan</label>
                     <div class="relative w-full inline-block">
                         <button type="button"
                             class="flex items-center justify-between w-full bg-gray-100 text-gray-700 py-2.5 px-4 border border-gray-300 rounded-lg cursor-pointer transition-all hover:bg-gray-200"
