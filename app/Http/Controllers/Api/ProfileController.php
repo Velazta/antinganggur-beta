@@ -14,8 +14,6 @@ class ProfileController extends Controller
     public function show(Request $request) {
         $user = $request->user()->loadMissing('profile');
 
-        // $profile = $user->profile ?? new Profile();
-
         return new ProfileResource($user->profile);
     }
 
