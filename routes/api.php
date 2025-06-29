@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Endpoint untuk menyimpan/update data profil
     Route::post('/user/profile', [ProfileController::class, 'store']);
+    Route::post('/user/profile/photo', [ProfileController::class, 'updatePhoto']);
 
     Route::get('/user/experiences', [ExperienceController::class, 'index']);
     Route::post('/user/experiences', [ExperienceController::class, 'store']);
